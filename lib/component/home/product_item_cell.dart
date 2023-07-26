@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/home/product_item_data.dart';
+import 'package:rupee_elf/component/home/product_item_data.dart';
 import 'package:rupee_elf/util/global.dart';
 
 class ProductItemCell extends StatelessWidget {

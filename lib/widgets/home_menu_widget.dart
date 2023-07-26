@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 
 class HomeMenuWidget extends StatefulWidget {
@@ -43,34 +44,34 @@ class _HomeMenuWidgetState extends State<HomeMenuWidget> {
                         _createMenuItem(
                           'Change Bank Info',
                           'static/icons/home_bank_card_icon.png',
-                          '/changeBankInfo',
+                          Global.isLogin ? '/changeBankInfo' : '/login',
                         ),
                         _createMenuItem(
                           'My Orders',
                           'static/icons/home_order_icon.png',
-                          '/orderList',
+                          Global.isLogin ? '/orderList' : '/login',
                         ),
                         _createMenuItem(
                           'Personal center',
                           'static/icons/home_profile_icon.png',
-                          '/orderList',
+                          '/profile',
                         ),
                       ]
                     : [
                         _createMenuItem(
                           'Change Bank Info',
                           'static/icons/home_bank_card_icon.png',
-                          '/changeBankInfo',
+                          Global.isLogin ? '/orderList' : '/login',
                         ),
                         _createMenuItem(
                           'My Orders',
                           'static/icons/home_order_icon.png',
-                          '/orderList',
+                          Global.isLogin ? '/orderList' : '/login',
                         ),
                         _createMenuItem(
                           'Personal center',
                           'static/icons/home_profile_icon.png',
-                          '/orderList',
+                          '/profile',
                         ),
                         _createBackGesture(
                             'static/icons/home_menu_arrow_left.png'),
