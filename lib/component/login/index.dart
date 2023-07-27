@@ -7,6 +7,7 @@ import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/common/iconfont.dart';
 import 'package:rupee_elf/widgets/count_down_button.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
+import 'package:rupee_elf/widgets/theme_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -269,21 +270,11 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             width: 252.0,
             height: 52.0,
-            child: ElevatedButton(
+            child: ThemeButton(
+                title: 'Login now',
                 onPressed: () {
-                  debugPrint('DEBUG: 立即登录动作');
-                },
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-                child: const Text(
-                  'Login now',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
-                )),
+                  debugPrint('DEBUG: 立即登录操作');
+                }),
           )
         ],
       ),
