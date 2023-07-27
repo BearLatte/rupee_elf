@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/util/global.dart';
-import 'package:rupee_elf/widgets/iconfont.dart';
+import 'package:rupee_elf/common/iconfont.dart';
+import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 
 class BaseViewWidget extends StatelessWidget {
   final String title;
@@ -24,15 +25,17 @@ class BaseViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: backButton(context),
+    return HiddenKeyboardWrapper(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: backButton(context),
+        ),
+        body: child,
+        backgroundColor: Global.themeColor,
       ),
-      body: child,
-      backgroundColor: Global.themeColor,
     );
   }
 }
