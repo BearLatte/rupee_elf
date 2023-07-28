@@ -24,7 +24,7 @@ List<ProductItem> productItemData = [
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第一个',
-    score: _scores[Random().nextInt(2) + 0],
+    score: _scores[Random().nextInt(3) + 0],
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
@@ -32,7 +32,7 @@ List<ProductItem> productItemData = [
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第二个',
-    score: _scores[Random().nextInt(2) + 0],
+    score: _scores[Random().nextInt(3) + 0],
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
@@ -40,7 +40,7 @@ List<ProductItem> productItemData = [
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第三个',
-    score: _scores[Random().nextInt(2) + 0],
+    score: _scores[Random().nextInt(3) + 0],
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
@@ -48,7 +48,7 @@ List<ProductItem> productItemData = [
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第四个',
-    score: _scores[Random().nextInt(2) + 0],
+    score: _scores[Random().nextInt(3) + 0],
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
@@ -56,7 +56,7 @@ List<ProductItem> productItemData = [
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第五个',
-    score: _scores[Random().nextInt(2) + 0],
+    score: _scores[Random().nextInt(3) + 0],
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
@@ -64,7 +64,7 @@ List<ProductItem> productItemData = [
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第六个',
-    score: _scores[Random().nextInt(2) + 0],
+    score: _scores[Random().nextInt(3) + 0],
     loanAmount: '₹ 20,000',
   )
 ];
