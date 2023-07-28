@@ -8,14 +8,14 @@ import 'package:rupee_elf/widgets/gender_selector.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
 
-class KYCAuthPage extends StatefulWidget {
-  const KYCAuthPage({super.key});
+class AuthFirstPage extends StatefulWidget {
+  const AuthFirstPage({super.key});
 
   @override
-  State<KYCAuthPage> createState() => _KYCAuthPageState();
+  State<AuthFirstPage> createState() => _AuthFirstPageState();
 }
 
-class _KYCAuthPageState extends State<KYCAuthPage> {
+class _AuthFirstPageState extends State<AuthFirstPage> {
   String? _selectedFrontImage;
   String? _selectedBackImage;
   String? _selectedPanImage;
@@ -37,11 +37,14 @@ class _KYCAuthPageState extends State<KYCAuthPage> {
                   children: [
                     const CommonImage(src: 'static/icons/auth_horn_icon.png'),
                     const Padding(padding: EdgeInsets.only(right: 10.0)),
-                    Text(
-                      'Please upload clear and original documents',
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: Global.seconaryTextColor,
+                    Expanded(
+                      child: Text(
+                        'Please upload clear and original documents.',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Global.seconaryTextColor,
+                        ),
+                        maxLines: null,
                       ),
                     )
                   ],
@@ -164,7 +167,7 @@ class _KYCAuthPageState extends State<KYCAuthPage> {
                   title: 'Next',
                   onPressed: () {
                     debugPrint('DEBUG: Next 按钮 点击，此处要做埋点');
-                    Navigator.of(context).pushNamed('routeName');
+                    Navigator.of(context).pushNamed('authSecond');
                   },
                 ),
               ],

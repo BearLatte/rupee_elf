@@ -1,7 +1,10 @@
 import 'package:fluro/fluro.dart';
+import 'package:rupee_elf/component/auth/auth_fourth_page.dart';
+import 'package:rupee_elf/component/auth/auth_second_page.dart';
+import 'package:rupee_elf/component/auth/auth_third_page.dart';
 import 'package:rupee_elf/component/auth/simple_toast_page.dart';
 import 'package:rupee_elf/widgets/not_found_page.dart';
-import 'package:rupee_elf/component/auth/kyc_auth_page.dart';
+import 'package:rupee_elf/component/auth/auth_first_page.dart';
 import 'package:rupee_elf/component/home/index.dart';
 import 'package:rupee_elf/component/login/index.dart';
 import 'package:rupee_elf/component/product/product_detail.dart';
@@ -10,8 +13,14 @@ class RouterManager {
   // 定义路由名称
   static String home = '/';
   static String login = '/login';
-  static String kycAuth = '/authKyc';
+
+  // 身份认证
+  static String authFirst = '/authFirst';
+  static String authSecond = '/authSecond';
+  static String authThird = '/authThird';
+  static String authFourth = '/authFourth';
   static String authSimple = '/authSimple';
+
   static String productDetail = '/productDetail/:productId';
 
   // 定义路由处理函数
@@ -27,9 +36,24 @@ class RouterManager {
     return const LoginPage();
   });
 
-  static final Handler _authKycHandler =
+  static final Handler _authFirstHandler =
       Handler(handlerFunc: (context, parametes) {
-    return const KYCAuthPage();
+    return const AuthFirstPage();
+  });
+
+  static final Handler _authSecondHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return const AuthSecondPage();
+  });
+
+  static final Handler _authThirdHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return const AuthThirdPage();
+  });
+
+  static final Handler _authFourthHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return const AuthFourthPage();
   });
 
   static final Handler _authSimpleHandler =
@@ -55,8 +79,14 @@ class RouterManager {
     router.define(home,
         handler: _homeHandler, transitionType: TransitionType.cupertino);
     router.define(login, handler: _loginHandler);
-    router.define(kycAuth, handler: _authKycHandler);
+    router.define(authFirst, handler: _authFirstHandler);
     router.define(authSimple, handler: _authSimpleHandler);
+    router.define(authSecond,
+        handler: _authSecondHandler, transitionType: TransitionType.cupertino);
+    router.define(authThird,
+        handler: _authThirdHandler, transitionType: TransitionType.cupertino);
+    router.define(authFourth,
+        handler: _authFourthHandler, transitionType: TransitionType.cupertino);
     router.define(productDetail,
         handler: _productDetailHandler,
         transitionType: TransitionType.cupertino);

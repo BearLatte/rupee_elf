@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/widgets/theme_button.dart';
 
 class AuthBaseWidget extends StatelessWidget {
   final String titlel;
   final int totalStep;
   final int currentStep;
+  final String? nextStepText;
+  final bool isShowTrailingButton;
+  final void Function()? nextStepOnPressed;
+  final void Function()? trailingOnPressed;
   final Widget Function(BuildContext) contentBuilder;
 
   const AuthBaseWidget(
@@ -14,11 +19,24 @@ class AuthBaseWidget extends StatelessWidget {
     required this.totalStep,
     required this.currentStep,
     required this.contentBuilder,
+    this.nextStepText,
+    this.nextStepOnPressed,
+    this.trailingOnPressed,
+    this.isShowTrailingButton = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: nextStepOnPressed != null
+          ? ThemeButton(
+              width: 252.0,
+              height: 52.0,
+              title: nextStepText ?? '',
+              onPressed: nextStepOnPressed == null ? () {} : nextStepOnPressed!,
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -61,6 +79,17 @@ class AuthBaseWidget extends StatelessWidget {
             color: Global.themeTextColor,
           ),
         ),
+        actions: isShowTrailingButton
+            ? [
+                IconButton(
+                  onPressed: trailingOnPressed,
+                  icon: Icon(
+                    Icons.add_circle_outline,
+                    color: Global.themeTextColor,
+                  ),
+                )
+              ]
+            : null,
       ),
       body: contentBuilder(context),
     );

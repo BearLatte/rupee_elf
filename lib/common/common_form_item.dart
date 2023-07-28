@@ -93,6 +93,25 @@ class CommonFormItem extends StatelessWidget {
   }
 
   Widget _selectWidget() {
-    return Container();
+    return Row(
+      children: [
+        Expanded(
+          child: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: onTap,
+            child: Text(
+              inputValue ?? hintText,
+              style: TextStyle(
+                fontSize: 16.0,
+                color: inputValue == null
+                    ? Global.seconaryTextColor
+                    : Global.themeTextColor,
+              ),
+            ),
+          ),
+        ),
+        const Icon(Icons.keyboard_arrow_right)
+      ],
+    );
   }
 }

@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context)
                         .pushNamed('/productDetail/${item.id}');
                   } else {
-                    Navigator.pushNamed(context, 'authKyc');
+                    Navigator.pushNamed(context, 'authFirst');
                   }
                 },
               );
