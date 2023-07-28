@@ -31,8 +31,13 @@ class _HomePageState extends State<HomePage> {
                 isOdd: productItemData.indexOf(item) % 2 == 0,
                 product: item,
                 onTap: () {
-                  // todo
-                  Navigator.of(context).pushNamed('/productDetail/${item.id}');
+                  if (Global.isCeitified) {
+                    // todo
+                    Navigator.of(context)
+                        .pushNamed('/productDetail/${item.id}');
+                  } else {
+                    Navigator.pushNamed(context, 'authKyc');
+                  }
                 },
               );
             }).toList(),

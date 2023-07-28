@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/base_view_widget.dart';
+import 'base_view_widget.dart';
 
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({super.key});

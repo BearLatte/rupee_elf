@@ -14,6 +14,7 @@ class Global {
   static Color seconaryTextColor = HexColor('#999999');
   static Color borderColor = HexColor('#DDDDDD');
   static Color boxBackgroundColor = HexColor('#EFEFEF');
+  static Color dividerColor = HexColor('#EAEAEA');
   static Color randomColor = Color.fromARGB(255, Random().nextInt(256) + 0,
       Random().nextInt(256) + 0, Random().nextInt(256) + 0);
 
@@ -24,5 +25,4 @@ class Global {
   static initPreferences() async {
     prefs = await SharedPreferences.getInstance();
   }
-
 }
