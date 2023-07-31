@@ -1,5 +1,7 @@
 import 'dart:math';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,6 +10,8 @@ class Global {
   static const bool isLogin = false;
   static const bool isCeitified = false;
   static const String currentAccount = '';
+  static late final Map<String, dynamic> allDeviceInfo;
+  static late final PackageInfo packageInfo;
 
   // 颜色值
   static Color themeColor = HexColor('#F05C09');
@@ -26,5 +30,12 @@ class Global {
 
   static initPreferences() async {
     prefs = await SharedPreferences.getInstance();
+  }
+
+  static initConstants() async {
+    var deviceInfo = await DeviceInfoPlugin().iosInfo;
+    allDeviceInfo = deviceInfo.data;
+
+    packageInfo = await PackageInfo.fromPlatform();
   }
 }

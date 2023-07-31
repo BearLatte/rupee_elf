@@ -24,7 +24,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           const CommonImage(
               src: 'static/images/home_not_certified_head_img.png'),
-          const HomeMenuWidget(isCeitified: Global.isCeitified),
+          const HomeMenuWidget(
+              isCeitified: Global.isLogin && Global.isCeitified),
           Column(
             children: productItemData.map((item) {
               return ProductItemCell(

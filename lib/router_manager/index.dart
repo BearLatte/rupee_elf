@@ -5,6 +5,7 @@ import 'package:rupee_elf/component/auth/auth_third_page.dart';
 import 'package:rupee_elf/component/auth/face_auth_page.dart';
 import 'package:rupee_elf/component/auth/simple_toast_page.dart';
 import 'package:rupee_elf/component/product/product_purchase_successed_page.dart';
+import 'package:rupee_elf/component/profile/profile_about_us_page.dart';
 import 'package:rupee_elf/component/profile/profile_page.dart';
 import 'package:rupee_elf/widgets/not_found_page.dart';
 import 'package:rupee_elf/component/auth/auth_first_page.dart';
@@ -31,6 +32,7 @@ class RouterManager {
 
   // profile
   static String profile = '/profile';
+  static String aboutUs = '/aboutUs';
 
   // 定义路由处理函数
 
@@ -91,6 +93,10 @@ class RouterManager {
   static final Handler _profileHandler =
       Handler(handlerFunc: (context, parametes) {
     return const ProfilePage();
+  });
+  static final Handler _aboutUsHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return const ProfileAboutUsPage();
   });
 
   static final Handler _notFoundHandler =
@@ -154,6 +160,12 @@ class RouterManager {
     router.define(
       profile,
       handler: _profileHandler,
+    );
+
+    router.define(
+      aboutUs,
+      handler: _aboutUsHandler,
+      transitionType: TransitionType.cupertino,
     );
 
     router.define(

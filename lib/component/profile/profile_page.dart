@@ -71,7 +71,11 @@ class ProfilePage extends StatelessWidget {
                     _itemCell(title: 'Feedback', onTap: _feedbackOnPressed),
                     _itemCell(
                         title: 'Privacy Policy', onTap: _privacyOnPressed),
-                    _itemCell(title: 'About Us', onTap: _aboutUsOnPressed),
+                    _itemCell(
+                        title: 'About Us',
+                        onTap: () {
+                          _aboutUsOnPressed(context);
+                        }),
                     if (Global.isLogin)
                       _itemCell(
                         title: 'Delete account',
@@ -99,6 +103,7 @@ class ProfilePage extends StatelessWidget {
   }
 
   void _feedbackOnPressed() {
+    debugPrint(Global.allDeviceInfo['utsname']['version']);
     debugPrint('DEBUG: 点击feedback');
   }
 
@@ -106,8 +111,8 @@ class ProfilePage extends StatelessWidget {
     debugPrint('DEBUG: 点击 privacy');
   }
 
-  void _aboutUsOnPressed() {
-    debugPrint('DEBUG: 点击aboutUs');
+  void _aboutUsOnPressed(BuildContext context) {
+    Navigator.of(context).pushNamed('/aboutUs');
   }
 
   void _deleteAccountOnPressed() {
