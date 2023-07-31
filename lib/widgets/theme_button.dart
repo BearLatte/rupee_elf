@@ -5,6 +5,7 @@ class ThemeButton extends StatelessWidget {
   final Function() onPressed;
   final double width;
   final double height;
+  final Color? backgroundColor;
 
   const ThemeButton({
     super.key,
@@ -12,6 +13,7 @@ class ThemeButton extends StatelessWidget {
     required this.onPressed,
     this.width = 0,
     this.height = 0,
+    this.backgroundColor,
   });
 
   @override
@@ -25,6 +27,9 @@ class ThemeButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onPressed,
             style: ButtonStyle(
+              backgroundColor: backgroundColor != null
+                  ? MaterialStateProperty.all(backgroundColor)
+                  : null,
               shape: MaterialStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),

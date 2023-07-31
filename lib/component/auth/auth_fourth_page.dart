@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_form_item.dart';
+import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/widgets/auth_base_widget.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 
@@ -11,8 +12,16 @@ class AuthFourthPage extends StatelessWidget {
     return AuthBaseWidget(
       'My authentication',
       nextStepText: 'Submit',
-      nextStepOnPressed: () {
-        debugPrint('DEBUG: 提交银行卡信息, 此处需要做埋点');
+      nextStepOnPressed: () async {
+        var isOk = await CommonAlert.showAlert(
+          context: context,
+          type: AlertType.succesed,
+          message:
+              'The 1-3 steps information cannot be changed after submission. Please fill in the correct information.',
+        );
+        if (isOk) {
+          debugPrint('DEBUG: 提交银行卡信息, 此处需要做埋点');
+        }
       },
       totalStep: 4,
       currentStep: 4,

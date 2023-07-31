@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/component/auth/contact_family_member_item.dart';
+import 'package:rupee_elf/component/auth/contact_relation_item.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/widgets/auth_base_widget.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
+import 'package:rupee_elf/widgets/theme_button.dart';
 
 class AuthThirdPage extends StatelessWidget {
   const AuthThirdPage({super.key});
@@ -42,10 +45,24 @@ class AuthThirdPage extends StatelessWidget {
                             color: Global.seconaryTextColor,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
+                const ContactRelationItem(),
+                const ContactRelationItem(),
+                const ContactRelationItem(),
+                const ContactFamilyMemberItem(title: 'Parents'),
+                const ContactFamilyMemberItem(title: 'Brothers/Sisters'),
+                const Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                ThemeButton(
+                    width: 252.0,
+                    height: 52.0,
+                    title: 'Next',
+                    onPressed: () {
+                      debugPrint('DEBUG: 此处需要做埋点');
+                      Navigator.of(context).pushNamed('/authFourth');
+                    })
               ],
             ),
           ),
