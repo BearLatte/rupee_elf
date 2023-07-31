@@ -7,9 +7,14 @@ class BaseViewWidget extends StatelessWidget {
   final String title;
   final Widget? child;
   final bool showBackButton;
+  final Widget? floatingActionButton;
 
   const BaseViewWidget(
-      {super.key, required this.title, this.child, this.showBackButton = true});
+      {super.key,
+      required this.title,
+      this.child,
+      this.showBackButton = true,
+      this.floatingActionButton});
 
   Widget? backButton(BuildContext context) {
     if (showBackButton) {
@@ -27,6 +32,10 @@ class BaseViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return HiddenKeyboardWrapper(
       child: Scaffold(
+        floatingActionButton: floatingActionButton,
+        floatingActionButtonLocation: floatingActionButton != null
+            ? FloatingActionButtonLocation.centerFloat
+            : null,
         appBar: AppBar(
           title: Text(title),
           backgroundColor: Colors.transparent,

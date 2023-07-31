@@ -7,6 +7,7 @@ class Global {
   // 常量
   static const bool isLogin = false;
   static const bool isCeitified = false;
+  static const String currentAccount = '';
 
   // 颜色值
   static Color themeColor = HexColor('#F05C09');
