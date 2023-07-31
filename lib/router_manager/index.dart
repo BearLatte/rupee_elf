@@ -2,7 +2,10 @@ import 'package:fluro/fluro.dart';
 import 'package:rupee_elf/component/auth/auth_fourth_page.dart';
 import 'package:rupee_elf/component/auth/auth_second_page.dart';
 import 'package:rupee_elf/component/auth/auth_third_page.dart';
+import 'package:rupee_elf/component/auth/face_auth_page.dart';
 import 'package:rupee_elf/component/auth/simple_toast_page.dart';
+import 'package:rupee_elf/component/product/product_purchase_successed_page.dart';
+import 'package:rupee_elf/component/profile/profile_page.dart';
 import 'package:rupee_elf/widgets/not_found_page.dart';
 import 'package:rupee_elf/component/auth/auth_first_page.dart';
 import 'package:rupee_elf/component/home/index.dart';
@@ -20,8 +23,14 @@ class RouterManager {
   static String authThird = '/authThird';
   static String authFourth = '/authFourth';
   static String authSimple = '/authSimple';
+  static String authFace = '/faceAuth';
 
+  // 产品相关
   static String productDetail = '/productDetail/:productId';
+  static String productPurchaseSuccessed = '/productPurchaseSuccessed';
+
+  // profile
+  static String profile = '/profile';
 
   // 定义路由处理函数
 
@@ -61,12 +70,27 @@ class RouterManager {
     return const SimpleToastPage();
   });
 
+  static final Handler _authFaceHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return const FaceAuthPage();
+  });
+
   // 产品详情
   static final Handler _productDetailHandler =
       Handler(handlerFunc: (context, parametes) {
     return ProductDetailPage(
       productId: parametes['productId']![0],
     );
+  });
+
+  static final Handler _productPurchaseSuccessedHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return const ProductPurchaseSuccessedPage();
+  });
+
+  static final Handler _profileHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return const ProfilePage();
   });
 
   static final Handler _notFoundHandler =
@@ -76,20 +100,68 @@ class RouterManager {
 
   // 管理路由名称和处理函数
   static void defineRoutes(FluroRouter router) {
-    router.define(home,
-        handler: _homeHandler, transitionType: TransitionType.cupertino);
-    router.define(login, handler: _loginHandler);
-    router.define(authFirst, handler: _authFirstHandler);
-    router.define(authSimple, handler: _authSimpleHandler);
-    router.define(authSecond,
-        handler: _authSecondHandler, transitionType: TransitionType.cupertino);
-    router.define(authThird,
-        handler: _authThirdHandler, transitionType: TransitionType.cupertino);
-    router.define(authFourth,
-        handler: _authFourthHandler, transitionType: TransitionType.cupertino);
-    router.define(productDetail,
-        handler: _productDetailHandler,
-        transitionType: TransitionType.cupertino);
+    router.define(
+      home,
+      handler: _homeHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      login,
+      handler: _loginHandler,
+    );
+
+    router.define(
+      authFirst,
+      handler: _authFirstHandler,
+    );
+
+    router.define(
+      authSimple,
+      handler: _authSimpleHandler,
+    );
+
+    router.define(
+      authSecond,
+      handler: _authSecondHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      authThird,
+      handler: _authThirdHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      authFourth,
+      handler: _authFourthHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      authFace,
+      handler: _authFaceHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      productPurchaseSuccessed,
+      handler: _productPurchaseSuccessedHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      profile,
+      handler: _profileHandler,
+    );
+
+    router.define(
+      productDetail,
+      handler: _productDetailHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
     router.notFoundHandler = _notFoundHandler;
   }
 }

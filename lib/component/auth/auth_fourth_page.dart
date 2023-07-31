@@ -21,6 +21,12 @@ class AuthFourthPage extends StatelessWidget {
         );
         if (isOk) {
           debugPrint('DEBUG: 提交银行卡信息, 此处需要做埋点');
+          if (context.mounted) {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/productDetail/6733577', (route) {
+              return route.isFirst;
+            });
+          }
         }
       },
       totalStep: 4,
