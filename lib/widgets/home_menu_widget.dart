@@ -4,9 +4,9 @@ import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 
 class HomeMenuWidget extends StatefulWidget {
-  final bool isCeitified;
+  final bool isCertified;
 
-  const HomeMenuWidget({super.key, required this.isCeitified});
+  const HomeMenuWidget({super.key, required this.isCertified});
 
   @override
   State<HomeMenuWidget> createState() => _HomeMenuWidgetState();
@@ -20,7 +20,7 @@ class _HomeMenuWidgetState extends State<HomeMenuWidget> {
         ? Container(
             width: 363.0,
             height: 90.0,
-            alignment: widget.isCeitified
+            alignment: widget.isCertified
                 ? Alignment.centerRight
                 : Alignment.centerLeft,
             child: Container(
@@ -29,7 +29,7 @@ class _HomeMenuWidgetState extends State<HomeMenuWidget> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    widget.isCeitified
+                    widget.isCertified
                         ? 'static/images/home_menu_rigth_bg_img.png'
                         : 'static/images/home_menu_left_bg_img.png',
                   ),
@@ -37,52 +37,41 @@ class _HomeMenuWidgetState extends State<HomeMenuWidget> {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: widget.isCeitified
-                    ? [
-                        _createBackGesture(
-                            'static/icons/home_menu_arrow_right.png'),
-                        _createMenuItem(
-                          'Change Bank Info',
-                          'static/icons/home_bank_card_icon.png',
-                          Global.isLogin ? '/changeBankInfo' : '/login',
-                        ),
-                        _createMenuItem(
-                          'My Orders',
-                          'static/icons/home_order_icon.png',
-                          Global.isLogin ? '/orderList' : '/login',
-                        ),
-                        _createMenuItem(
-                          'Personal center',
-                          'static/icons/home_profile_icon.png',
-                          '/profile',
-                        ),
-                      ]
-                    : [
-                        _createMenuItem(
-                          'Change Bank Info',
-                          'static/icons/home_bank_card_icon.png',
-                          Global.isLogin ? '/orderList' : '/login',
-                        ),
-                        _createMenuItem(
-                          'My Orders',
-                          'static/icons/home_order_icon.png',
-                          Global.isLogin ? '/orderList' : '/login',
-                        ),
-                        _createMenuItem(
-                          'Personal center',
-                          'static/icons/home_profile_icon.png',
-                          '/profile',
-                        ),
-                        _createBackGesture(
-                            'static/icons/home_menu_arrow_left.png'),
-                      ],
+                children: [
+                  if (widget.isCertified)
+                    _createBackGesture(
+                      'static/icons/home_menu_arrow_right.png',
+                    ),
+                  _createMenuItem(
+                    'Change Bank Info',
+                    iconPath: 'static/icons/home_bank_card_icon.png',
+                    needsCerifaction: true,
+                    navigatorDestination: '/changeBankInfo',
+                  ),
+                  _createMenuItem(
+                    'My Orders',
+                    iconPath: 'static/icons/home_order_icon.png',
+                    needsCerifaction: false,
+                    navigatorDestination: '/order',
+                  ),
+                  _createMenuItem(
+                    'Personal center',
+                    iconPath: 'static/icons/home_profile_icon.png',
+                    navigatorDestination: '/profile',
+                    needsLogin: false,
+                  ),
+                  if (!widget.isCertified)
+                    _createBackGesture(
+                      'static/icons/home_menu_arrow_left.png',
+                    ),
+                ],
               ),
             ),
           )
         : Container(
             width: 90.0,
             height: 90.0,
-            alignment: widget.isCeitified
+            alignment: widget.isCertified
                 ? Alignment.centerRight
                 : Alignment.centerLeft,
             child: GestureDetector(
@@ -92,7 +81,7 @@ class _HomeMenuWidgetState extends State<HomeMenuWidget> {
                 });
               },
               child: CommonImage(
-                src: widget.isCeitified
+                src: widget.isCertified
                     ? 'static/icons/arrow_left_bg_icon.png'
                     : 'static/icons/arrow_right_bg_icon.png',
               ),
@@ -115,10 +104,25 @@ class _HomeMenuWidgetState extends State<HomeMenuWidget> {
     );
   }
 
-  GestureDetector _createMenuItem(
-      String title, String iconPath, String navigatorDestination) {
+  GestureDetector _createMenuItem(String title,
+      {required iconPath,
+      bool needsCerification = false,
+      required String navigatorDestination,
+      bool needsCerifaction = false,
+      bool needsLogin = true}) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () {
+        if (needsLogin && !Global.isLogin) {
+          Navigator.of(context).pushNamed('/login');
+          return;
+        }
+
+        if (needsCerification && !Global.isCerified) {
+          Navigator.of(context).pushNamed('authFirst');
+          return;
+        }
+
         Navigator.of(context).pushNamed(navigatorDestination);
       },
       child: Column(

@@ -4,7 +4,9 @@ import 'package:rupee_elf/component/auth/auth_second_page.dart';
 import 'package:rupee_elf/component/auth/auth_third_page.dart';
 import 'package:rupee_elf/component/auth/face_auth_page.dart';
 import 'package:rupee_elf/component/auth/simple_toast_page.dart';
+import 'package:rupee_elf/component/order/index.dart';
 import 'package:rupee_elf/component/product/product_purchase_successed_page.dart';
+import 'package:rupee_elf/component/profile/change_bank_card_page.dart';
 import 'package:rupee_elf/component/profile/profile_about_us_page.dart';
 import 'package:rupee_elf/component/profile/profile_page.dart';
 import 'package:rupee_elf/widgets/not_found_page.dart';
@@ -33,6 +35,10 @@ class RouterManager {
   // profile
   static String profile = '/profile';
   static String aboutUs = '/aboutUs';
+  static String changeBankCard = '/changeBankInfo';
+
+  // Orders
+  static String orderList = '/order';
 
   // 定义路由处理函数
 
@@ -42,11 +48,13 @@ class RouterManager {
     return const HomePage();
   });
 
+  // 登录
   static final Handler _loginHandler =
       Handler(handlerFunc: (context, parametes) {
     return const LoginPage();
   });
 
+  // 认证
   static final Handler _authFirstHandler =
       Handler(handlerFunc: (context, parametes) {
     return const AuthFirstPage();
@@ -77,7 +85,7 @@ class RouterManager {
     return const FaceAuthPage();
   });
 
-  // 产品详情
+  // 产品
   static final Handler _productDetailHandler =
       Handler(handlerFunc: (context, parametes) {
     return ProductDetailPage(
@@ -90,15 +98,29 @@ class RouterManager {
     return const ProductPurchaseSuccessedPage();
   });
 
+  // Profile
   static final Handler _profileHandler =
       Handler(handlerFunc: (context, parametes) {
     return const ProfilePage();
   });
+
   static final Handler _aboutUsHandler =
       Handler(handlerFunc: (context, parametes) {
     return const ProfileAboutUsPage();
   });
 
+  static final Handler _changeBankCardHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return const ChangeBankCardPage();
+  });
+
+  // 订单
+  static final Handler _orderListHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return const OrderListPage();
+  });
+
+  // 404
   static final Handler _notFoundHandler =
       Handler(handlerFunc: (context, parameters) {
     return const NotFoundPage();
@@ -165,6 +187,18 @@ class RouterManager {
     router.define(
       aboutUs,
       handler: _aboutUsHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      changeBankCard,
+      handler: _changeBankCardHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      orderList,
+      handler: _orderListHandler,
       transitionType: TransitionType.cupertino,
     );
 

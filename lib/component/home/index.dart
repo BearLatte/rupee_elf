@@ -25,14 +25,14 @@ class _HomePageState extends State<HomePage> {
           const CommonImage(
               src: 'static/images/home_not_certified_head_img.png'),
           const HomeMenuWidget(
-              isCeitified: Global.isLogin && Global.isCeitified),
+              isCertified: Global.isLogin && Global.isCerified),
           Column(
             children: productItemData.map((item) {
               return ProductItemCell(
                 isOdd: productItemData.indexOf(item) % 2 == 0,
                 product: item,
                 onTap: () {
-                  if (Global.isCeitified) {
+                  if (Global.isCerified) {
                     // todo
                     Navigator.of(context)
                         .pushNamed('/productDetail/${item.id}');

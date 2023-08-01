@@ -13,6 +13,7 @@ class CommonFormItem extends StatelessWidget {
   final void Function()? onTap;
   final void Function(String)? onValueChanged;
   final TextEditingController? editingController;
+  final bool isMultiLine;
 
   const CommonFormItem({
     super.key,
@@ -24,6 +25,7 @@ class CommonFormItem extends StatelessWidget {
     this.onTap,
     this.onValueChanged,
     this.editingController,
+    this.isMultiLine = false,
   });
 
   @override
@@ -65,7 +67,7 @@ class CommonFormItem extends StatelessWidget {
       onChanged: onValueChanged,
       style: TextStyle(fontSize: 16.0, color: Global.themeTextColor),
       onTap: onTap,
-      maxLines: null,
+      maxLines: isMultiLine ? null : 1,
     );
   }
 

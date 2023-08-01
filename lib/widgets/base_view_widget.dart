@@ -22,7 +22,10 @@ class BaseViewWidget extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: const Icon(IconFont.icon_back));
+          icon: const Icon(
+            IconFont.icon_back,
+            size: 16.0,
+          ));
     } else {
       return null;
     }

@@ -7,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Global {
   // 常量
-  static const bool isLogin = false;
-  static const bool isCeitified = false;
+  static const bool isLogin = true;
+  static const bool isCerified = true;
   static const String currentAccount = '';
   static late final Map<String, dynamic> allDeviceInfo;
   static late final PackageInfo packageInfo;
@@ -24,7 +24,6 @@ class Global {
   static Color randomColor = Color.fromARGB(255, Random().nextInt(256) + 0,
       Random().nextInt(256) + 0, Random().nextInt(256) + 0);
 
-  // 本地存储
   // 本地存储
   static SharedPreferences? prefs;
 

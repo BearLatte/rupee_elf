@@ -103,7 +103,6 @@ class ProfilePage extends StatelessWidget {
   }
 
   void _feedbackOnPressed() {
-    debugPrint(Global.allDeviceInfo['utsname']['version']);
     debugPrint('DEBUG: 点击feedback');
   }
 
