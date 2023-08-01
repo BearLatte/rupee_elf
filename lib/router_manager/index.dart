@@ -4,6 +4,7 @@ import 'package:rupee_elf/component/auth/auth_second_page.dart';
 import 'package:rupee_elf/component/auth/auth_third_page.dart';
 import 'package:rupee_elf/component/auth/face_auth_page.dart';
 import 'package:rupee_elf/component/auth/simple_toast_page.dart';
+import 'package:rupee_elf/component/feedback/index.dart';
 import 'package:rupee_elf/component/order/index.dart';
 import 'package:rupee_elf/component/product/product_purchase_successed_page.dart';
 import 'package:rupee_elf/component/profile/change_bank_card_page.dart';
@@ -39,6 +40,9 @@ class RouterManager {
 
   // Orders
   static String orderList = '/order';
+
+  // Feedback
+  static String feedbackList = '/feedback';
 
   // 定义路由处理函数
 
@@ -120,6 +124,12 @@ class RouterManager {
     return const OrderListPage();
   });
 
+  // feedback
+  static final Handler _feedbackListHandler =
+      Handler(handlerFunc: (context, parameters) {
+    return const FeedbackPage();
+  });
+
   // 404
   static final Handler _notFoundHandler =
       Handler(handlerFunc: (context, parameters) {
@@ -199,6 +209,13 @@ class RouterManager {
     router.define(
       orderList,
       handler: _orderListHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    // feedback
+    router.define(
+      feedbackList,
+      handler: _feedbackListHandler,
       transitionType: TransitionType.cupertino,
     );
 

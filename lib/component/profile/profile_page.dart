@@ -39,7 +39,7 @@ class ProfilePage extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(top: 220.0),
-            color: HexColor('#F5F4F3'),
+            color: Global.seconaryBackgroundColor,
           ),
           Column(
             children: [
@@ -68,7 +68,11 @@ class ProfilePage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    _itemCell(title: 'Feedback', onTap: _feedbackOnPressed),
+                    _itemCell(
+                        title: 'Feedback',
+                        onTap: () {
+                          _feedbackOnPressed(context);
+                        }),
                     _itemCell(
                         title: 'Privacy Policy', onTap: _privacyOnPressed),
                     _itemCell(
@@ -102,8 +106,8 @@ class ProfilePage extends StatelessWidget {
     debugPrint('DEBUG: 退出登录');
   }
 
-  void _feedbackOnPressed() {
-    debugPrint('DEBUG: 点击feedback');
+  void _feedbackOnPressed(BuildContext context) {
+    Navigator.of(context).pushNamed(Global.isLogin ? '/feedback' : '/login');
   }
 
   void _privacyOnPressed() {

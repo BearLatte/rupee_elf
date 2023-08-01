@@ -21,6 +21,7 @@ class Global {
   static Color boxBackgroundColor = HexColor('#EFEFEF');
   static Color dividerColor = HexColor('#EAEAEA');
   static Color arrowColor = HexColor('#9e9e9e');
+  static Color seconaryBackgroundColor = HexColor('#F5F4F3');
   static Color randomColor = Color.fromARGB(255, Random().nextInt(256) + 0,
       Random().nextInt(256) + 0, Random().nextInt(256) + 0);
 

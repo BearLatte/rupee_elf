@@ -13,10 +13,25 @@ enum OrderType {
   repaied
 }
 
-class OrderItemListPage extends StatelessWidget {
+class OrderItemListPage extends StatefulWidget {
   final OrderType type;
 
   const OrderItemListPage({super.key, required this.type});
+
+  @override
+  State<OrderItemListPage> createState() => _OrderItemListPageState();
+}
+
+class _OrderItemListPageState extends State<OrderItemListPage> {
+  @override
+  void initState() {
+    super.initState();
+    _getOrders();
+  }
+
+  void _getOrders() {
+    debugPrint('获取订单列表');
+  }
 
   @override
   Widget build(BuildContext context) {

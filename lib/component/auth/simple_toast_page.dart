@@ -22,7 +22,7 @@ class SimpleToastPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: HexColor('#F5F4F3'),
+        backgroundColor: Global.seconaryBackgroundColor,
         title: Text(
           'Photo Tips',
           style: TextStyle(color: Global.themeTextColor),
@@ -35,7 +35,7 @@ class SimpleToastPage extends StatelessWidget {
             color: Global.themeTextColor),
       ),
       body: Container(
-        color: HexColor('#F5F4F3'),
+        color: Global.seconaryBackgroundColor,
         alignment: Alignment.center,
         padding: const EdgeInsets.only(left: 38.0, right: 38.0, top: 44.0),
         child: ListView(

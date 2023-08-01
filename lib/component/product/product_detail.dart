@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/global.dart';
-import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
 
@@ -28,7 +27,7 @@ class ProductDetailPage extends StatelessWidget {
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.65,
-                color: HexColor('#F5F4F3'),
+                color: Global.seconaryBackgroundColor,
               )
             ],
           ),

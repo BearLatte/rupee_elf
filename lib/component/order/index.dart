@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/component/order/order_item_list_page.dart';
+import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 
@@ -26,22 +27,13 @@ class _OrderListPageState extends State<OrderListPage>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: tabs.length, vsync: this)
-      ..addListener(() {
-        if (!_controller.indexIsChanging) {
-          _loadOrders(type: OrderType.values[_controller.index]);
-        }
-      });
+    _controller = TabController(length: tabs.length, vsync: this);
   }
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  void _loadOrders({required OrderType type}) {
-    debugPrint('DEBUG:此处加载类型为${type.toString()}数据');
   }
 
   @override
@@ -71,7 +63,7 @@ class _OrderListPageState extends State<OrderListPage>
               children: [
                 Container(
                   margin: const EdgeInsets.only(top: 34.0),
-                  color: HexColor('#F5F4F3'),
+                  color: Global.seconaryBackgroundColor,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,6 +88,8 @@ class _OrderListPageState extends State<OrderListPage>
                         tabs: tabs.map((title) => Tab(text: title)).toList(),
                         controller: _controller,
                         indicatorColor: Colors.transparent,
+                        labelPadding:
+                            const EdgeInsets.only(left: 9.0, right: 9.0),
                       ),
                     ),
                     Expanded(
@@ -119,8 +113,3 @@ class _OrderListPageState extends State<OrderListPage>
     );
   }
 }
-
-// TabBarView(
-//                     controller = _controller,
-//                     children = ,
-//                 ] )
