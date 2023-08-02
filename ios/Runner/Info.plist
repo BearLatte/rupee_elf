@@ -31,15 +31,10 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
@@ -47,5 +42,17 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier will be used to recommend personalized advertisements to you.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>You did not allow us to access the camera, which will help you obtain a loan. Would you like to set up authorization.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Please allow us to use location information, which will help you obtain a loan, otherwise you will not be able to apply for a loan.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please allow us to use location information, which will help you obtain a loan, otherwise you will not be able to apply for a loan.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Please allow us to use Contacts information, which will help you obtain a loan, otherwise you will not be able to apply for a loan.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You did not allow us to access the Photo Library, which will help you obtain a loan. Would you like to set up authorization.</string>
 </dict>
 </plist>

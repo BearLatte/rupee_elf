@@ -141,7 +141,13 @@ class OrderItemCell extends StatelessWidget {
                     ),
                   ],
                 ),
-                const CommonImage(src: 'static/icons/order_earphone_icon.png')
+                TextButton(
+                  onPressed: () {
+                    debugPrint('DEBUG: 此处跳转到添加feedback页面');
+                  },
+                  child: const CommonImage(
+                      src: 'static/icons/order_earphone_icon.png'),
+                ),
               ],
             ),
             Row(
