@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:rupee_elf/util/global.dart';
 
 class HttpOptions {
@@ -23,12 +25,13 @@ class HttpOptions {
     deviceInfo['bag'] = Global.packageInfo.packageName;
     deviceInfo['brand'] = 'Apple';
     deviceInfo['channel'] = 'App Store';
-    deviceInfo['deviceModel'] = Global.allDeviceInfo.model;
+    deviceInfo['deviceModel'] = Global.allDeviceInfo.name;
     deviceInfo['mac'] = '';
     deviceInfo['operationSys'] = 'iOS';
     deviceInfo['osVersion'] = Global.allDeviceInfo.systemVersion;
     deviceInfo['androidIdOrUdid'] = Global.allDeviceInfo.identifierForVendor;
     deviceInfo['gaidOrIdfa'] = Global.idfa;
+    headers['deviceInfo'] = jsonEncode(deviceInfo);
     return headers;
   }
 }

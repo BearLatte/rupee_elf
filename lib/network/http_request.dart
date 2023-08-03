@@ -56,9 +56,8 @@ class HttpRequest {
       HttpMethod.head: 'head'
     };
 
-    //动态添加header头
-    Map<String, dynamic> headers = <String, dynamic>{};
-    headers["version"] = "1.0.0";
+    // 动态添加header头
+    Map<String, dynamic> headers = HttpOptions.instance.headers;
 
     Options options = Options(
       method: methodValues[method],

@@ -10,7 +10,6 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 初始化本地存储对象
-    Global.initPreferences();
     Global.initConstants();
 
     // 配置路由

@@ -22,7 +22,7 @@ class HttpUtils {
   /// post
   static Future post({
     required String path,
-    required HttpMethod method,
+    HttpMethod method = HttpMethod.post,
     dynamic data,
     bool showLoading = true,
     bool showErrorMessage = true,

@@ -4,6 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,11 +36,9 @@ class Global {
   // 本地存储
   static SharedPreferences? prefs;
 
-  static initPreferences() async {
-    prefs = await SharedPreferences.getInstance();
-  }
-
   static initConstants() async {
+    // 初始化 userdefaults
+    prefs = await SharedPreferences.getInstance();
     // 获取设备信息
     allDeviceInfo = await DeviceInfoPlugin().iosInfo;
 
@@ -49,10 +48,13 @@ class Global {
     // 请求 idfa
     var status = await Permission.appTrackingTransparency.request();
     if (status == PermissionStatus.granted) {
-      idfa = await AdvertisingId.id() ?? '';
+      String idfaString = await AdvertisingId.id() ?? '';
+      idfa = idfaString == '00000000-0000-0000-0000-000000000000' ? '' : idfaString;
       prefs?.setString('kIDFA_KEY', idfa);
     } else {
       idfa = prefs?.getString('kIDFA_KEY') ?? '';
     }
+
+    await NetworkService.firstLaunch();
   }
 }

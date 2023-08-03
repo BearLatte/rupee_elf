@@ -20,7 +20,7 @@ class ErrorInterceptor extends Interceptor {
     err.copyWith(error: httpException);
 
     /// 调用父类，回到dio框架
-    super.onError(httpException as DioException, handler);
+    super.onError(err, handler);
   }
 }
 

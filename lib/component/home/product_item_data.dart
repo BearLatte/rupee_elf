@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:rupee_elf/util/random_util.dart';
+
 class ProductItem {
   final String id;
   final String imageUrl;
@@ -20,7 +22,7 @@ const List<String> _scores = ['4.8', '4.9', '5.0'];
 // scores[]
 List<ProductItem> productItemData = [
   ProductItem(
-    id: generateRandomString(10),
+    id: RandomUtil.generateRandomString(10),
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第一个',
@@ -28,7 +30,7 @@ List<ProductItem> productItemData = [
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
-    id: generateRandomString(10),
+    id: RandomUtil.generateRandomString(10),
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第二个',
@@ -36,7 +38,7 @@ List<ProductItem> productItemData = [
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
-    id: generateRandomString(10),
+    id: RandomUtil.generateRandomString(10),
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第三个',
@@ -44,7 +46,7 @@ List<ProductItem> productItemData = [
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
-    id: generateRandomString(10),
+    id: RandomUtil.generateRandomString(10),
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第四个',
@@ -52,7 +54,7 @@ List<ProductItem> productItemData = [
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
-    id: generateRandomString(10),
+    id: RandomUtil.generateRandomString(10),
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第五个',
@@ -60,7 +62,7 @@ List<ProductItem> productItemData = [
     loanAmount: '₹ 20,000',
   ),
   ProductItem(
-    id: generateRandomString(10),
+    id: RandomUtil.generateRandomString(10),
     imageUrl:
         'https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-reveal-attack-4K-legal_2022-en-12dec22?\$1600px\$',
     productName: '第六个',
@@ -68,13 +70,3 @@ List<ProductItem> productItemData = [
     loanAmount: '₹ 20,000',
   )
 ];
-
-String generateRandomString(int length) {
-  final random = Random();
-  const availableChars =
-      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  final randomString = List.generate(length,
-      (index) => availableChars[random.nextInt(availableChars.length)]).join();
-
-  return randomString;
-}
