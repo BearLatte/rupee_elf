@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:rupee_elf/network_service/api_response.dart';
 
 //辅助配置
 import 'http_options.dart';
@@ -30,7 +31,7 @@ class HttpRequest {
     dio = Dio(options);
 
     /// 添加各种拦截器
-    dio.interceptors.add(ErrorInterceptor());
+    // dio.interceptors.add(ErrorInterceptor());
     dio.interceptors.add(PrettyDioLogger(
         requestHeader: true,
         requestBody: true,
@@ -74,9 +75,9 @@ class HttpRequest {
         queryParameters: queryParameters,
         options: options,
       );
-      return response.data;
+      return response;
     } on DioException catch (error) {
-      HttpException httpException = error.error as HttpException;
+      HttpException httpException = HttpException.create(error);
       if (showErrorMessage) {
         EasyLoading.showToast(httpException.msg);
       }

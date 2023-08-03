@@ -12,9 +12,9 @@ class HttpOptions {
   static get instance => _instance ?? HttpOptions._internal();
 
   String baseUrl = 'https://api.newapisys.com/';
-  int connectTimeout = 1500;
-  int receiveTimeout = 1500;
-  int sendTimeout = 1500;
+  int connectTimeout = 15000;
+  int receiveTimeout = 15000;
+  int sendTimeout = 15000;
   get headers {
     Map<String, String?> headers = {};
     headers['lang'] = 'en';
