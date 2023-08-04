@@ -17,7 +17,5 @@ class Constants {
   // 常量
   static const String TOKEN_KEY = 'kACCESS_TOKEN';
   static const String LOGIN_KEY = 'kLOGIN_KEY';
-
-  // 当前登录账号
-  static const String currentAccount = '';
+  static const String CURRENT_PHONE_KEY = 'kCURRENT_PHONE_KEY';
 }

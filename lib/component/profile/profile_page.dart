@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool _isLogin = Global.instance.isLogin;
   @override
   Widget build(BuildContext context) {
     return BaseViewWidget(
       title: '',
-      floatingActionButton: Global.instance.isLogin
+      floatingActionButton: _isLogin
           ? Container(
               width: 228.0,
               height: 50.0,
@@ -52,7 +59,7 @@ class ProfilePage extends StatelessWidget {
               const Padding(padding: EdgeInsets.only(bottom: 10.0)),
               Text(
                 Global.instance.isLogin
-                    ? Constants.currentAccount
+                    ? Global.instance.currentAccount
                     : 'Please log in',
                 style: const TextStyle(
                     fontSize: 20.0,
@@ -105,8 +112,13 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  void _logoutAction() {
-    debugPrint('DEBUG: 退出登录');
+  void _logoutAction() async {
+    await NetworkService.logout(() {
+      Global.instance.clearLocalInfo();
+      setState(() {
+        _isLogin = false;
+      });
+    });
   }
 
   void _feedbackOnPressed(BuildContext context) {

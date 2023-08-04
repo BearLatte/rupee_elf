@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/models/login_model.dart';
+import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/constants.dart';
+import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 import 'package:rupee_elf/widgets/count_down_button.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
@@ -28,10 +32,12 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _isShowBoder = false;
 
-  final FocusNode _phoneFocusNode = FocusNode();
-  final FocusNode _codeFocuNode = FocusNode();
+  FocusNode? _phoneFocusNode = FocusNode();
 
   bool _isShowCodeWidget = false;
+
+  String currentPhoneNumber = '';
+  String currentSmsCode = '';
 
   @override
   void initState() {
@@ -58,10 +64,14 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     if (phoneNumber.length == 10) {
-      _phoneFocusNode.unfocus();
+      _phoneFocusNode?.unfocus();
     }
 
-    debugPrint('DEBUG: 当前输入的电话号码为$phoneNumber');
+    currentPhoneNumber = phoneNumber;
+  }
+
+  void _codeInputFieldValuechanged(String code) {
+    currentSmsCode = code;
   }
 
   @override
@@ -169,7 +179,8 @@ class _LoginPageState extends State<LoginPage> {
             decoration: BoxDecoration(
               color: Constants.boxBackgroundColor,
               border: Border.all(
-                  color: _isShowBoder ? Constants.themeColor : Colors.transparent,
+                  color:
+                      _isShowBoder ? Constants.themeColor : Colors.transparent,
                   width: 1.0),
               borderRadius: const BorderRadius.all(
                 Radius.circular(12),
@@ -193,8 +204,8 @@ class _LoginPageState extends State<LoginPage> {
                 Expanded(
                   child: TextField(
                     focusNode: _phoneFocusNode,
-                    style:
-                        TextStyle(color: Constants.themeTextColor, fontSize: 20.0),
+                    style: TextStyle(
+                        color: Constants.themeTextColor, fontSize: 20.0),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Mobile number',
@@ -222,12 +233,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 68.0,
             isCircle: true,
             isNotPadding: true,
-            onTap: (state) {
-              state.startTimer();
-              setState(() {
-                _isShowCodeWidget = true;
-              });
-            },
+            onTap: countDownButtonClicked,
           ),
           const Padding(padding: EdgeInsets.only(bottom: 16.0)),
           if (_isShowCodeWidget)
@@ -245,12 +251,12 @@ class _LoginPageState extends State<LoginPage> {
               child: PinCodeTextField(
                 length: 6,
                 appContext: context,
-                focusNode: _codeFocuNode,
                 textStyle: TextStyle(
                   fontSize: 20.0,
                   color: Constants.themeTextColor,
                 ),
                 cursorColor: Constants.themeColor,
+                onChanged: _codeInputFieldValuechanged,
                 pinTheme: PinTheme(
                   fieldWidth: 44.0,
                   fieldHeight: 52.0,
@@ -267,14 +273,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-          SizedBox(
+          ThemeButton(
             width: 252.0,
             height: 52.0,
-            child: ThemeButton(
-                title: 'Login now',
-                onPressed: () {
-                  debugPrint('DEBUG: 立即登录操作');
-                }),
+            title: 'Login now',
+            onPressed: () {
+              onLogin(context);
+            },
           )
         ],
       ),
@@ -332,12 +337,61 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  void countDownButtonClicked(CountDownButtonState state) async {
+    if (currentPhoneNumber.length < 10) {
+      await CommonToast.showToast('Please enter a 10-digit mobile number');
+      return;
+    }
+
+    NetworkService.sendSms(currentPhoneNumber, () {
+      state.startTimer();
+      setState(() {
+        _isShowCodeWidget = true;
+      });
+    });
+  }
+
+  void onLogin(BuildContext context) async {
+    if (currentPhoneNumber.length < 10) {
+      await CommonToast.showToast('Please enter a 10-digit mobile number');
+      return;
+    }
+
+    if (currentSmsCode.isEmpty) {
+      await CommonToast.showToast('Please enter OTP');
+      return;
+    }
+
+    // 发送登录请求
+    LoginModel model =
+        await NetworkService.login(currentPhoneNumber, currentSmsCode);
+
+    if (model.rkmectsultCode == 0) {
+      await CommonToast.showToast(model.rkmectsultMsg);
+      return;
+    }
+
+    if (model.ikmsctRegistered == 1) {
+      debugPrint('DEBUG: 注册，此处需要做埋点');
+    }
+
+    // 保存登录数据
+    Global.instance.isLogin = true;
+    Global.instance.prefs.setBool(Constants.LOGIN_KEY, true);
+    Global.instance.prefs.setString(Constants.TOKEN_KEY, model.lkmoctginToken);
+    Global.instance.prefs.setString(Constants.CURRENT_PHONE_KEY, currentPhoneNumber);
+
+    if (context.mounted) {
+      Navigator.of(context).pop('successed');
+    }
+  }
+
   @override
   void dispose() {
     _tapCondition.dispose();
     _tapPolicy.dispose();
-    _phoneFocusNode.dispose();
-    _codeFocuNode.dispose();
+    _phoneFocusNode?.dispose();
+    _phoneFocusNode = null;
     super.dispose();
   }
 }

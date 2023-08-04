@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:rupee_elf/router_manager/index.dart';
 import 'package:rupee_elf/util/constants.dart';
+import 'package:rupee_elf/util/navigator_key.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
@@ -19,6 +20,7 @@ class Application extends StatelessWidget {
             const ColorScheme.light().copyWith(primary: Constants.themeColor),
       ),
       builder: EasyLoading.init(),
+      navigatorKey: NavigatorKey.navKey,
     );
   }
 }

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/component/home/product_item_cell.dart';
 import 'package:rupee_elf/models/product_model.dart';
+import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
-import 'package:rupee_elf/widgets/home_menu_widget.dart';
+import 'package:rupee_elf/widgets/home_menu/home_menu_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,6 +27,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void deactivate() {
+    super.deactivate();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BaseViewWidget(
       title: 'Home Page',
@@ -34,7 +40,18 @@ class _HomePageState extends State<HomePage> {
         children: [
           const CommonImage(
               src: 'static/images/home_not_certified_head_img.png'),
-          HomeMenuWidget(isCertified: _isCerified),
+          HomeMenuWidget(
+            isCertified: _isCerified,
+            bankCardChangeOnTap: () {
+              bankCardChangeItemClicked(context);
+            },
+            orderOnTap: () {
+              orderItemClicked(context);
+            },
+            profileOnTap: () {
+              profilItemClicked(context);
+            },
+          ),
           Column(
             children: _products.map((item) {
               return ProductItemCell(
@@ -57,6 +74,28 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void bankCardChangeItemClicked(BuildContext context) async {
+    if (Global.instance.isLogin) {
+    } else {
+      var result = await Navigator.of(context).pushNamed('/login');
+      if (result != null) await loadData();
+    }
+  }
+
+  void orderItemClicked(BuildContext context) async {
+    if (Global.instance.isLogin) {
+    } else {
+      var result = await Navigator.of(context).pushNamed('/login');
+      if (result != null) await loadData();
+    }
+  }
+
+  void profilItemClicked(BuildContext context) {
+    Navigator.of(context).pushNamed('/profile').then((value) {
+      loadData();
+    });
+  }
+
   // 获取网络数据
   Future<void> loadData() async {
     // 先初始化全局对象
@@ -67,9 +106,17 @@ class _HomePageState extends State<HomePage> {
       _isSendedFirstLaunchRequest = true;
     }
 
-    var listModel = await NetworkService.getProductList();
+    List<ProductModel>? list;
+    if (Global.instance.isLogin) {
+      UserInfoModel? model = await NetworkService.getUserInfo();
+      list = model?.pkmrctoductList;
+    } else {
+      var listModel = await NetworkService.getProductList();
+      list = listModel.pkmrctoductList;
+    }
+
     setState(() {
-      _products = listModel.pkmrctoductList;
+      if (list != null) _products = list;
     });
   }
 }

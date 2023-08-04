@@ -1,28 +1,30 @@
 import 'package:json_annotation/json_annotation.dart';
-  
+
 part 'login_model.g.dart';
 
-
 @JsonSerializable()
-  class LoginModel extends Object {
+class LoginModel extends Object {
+  @JsonKey(name: 'rkmectsultCode')
+  int rkmectsultCode;
 
-  @JsonKey(name: 'resultCode')
-  int resultCode;
+  @JsonKey(name: 'rkmectsultMsg')
+  String rkmectsultMsg;
 
-  @JsonKey(name: 'resultMsg')
-  String resultMsg;
+  @JsonKey(name: 'lkmoctginToken')
+  String? lkmoctginToken;
 
-  @JsonKey(name: 'loginToken')
-  String loginToken;
+  @JsonKey(name: 'ikmsctRegistered')
+  int? ikmsctRegistered;
 
-  @JsonKey(name: 'isRegistered')
-  int isRegistered;
+  LoginModel(
+    this.rkmectsultCode,
+    this.rkmectsultMsg,
+    this.lkmoctginToken,
+    this.ikmsctRegistered,
+  );
 
-  LoginModel(this.resultCode,this.resultMsg,this.loginToken,this.isRegistered,);
-
-  factory LoginModel.fromJson(dynamic srcJson) => _$LoginModelFromJson(srcJson);
+  factory LoginModel.fromJson(Map<String, dynamic> srcJson) =>
+      _$LoginModelFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$LoginModelToJson(this);
 }
-
-  

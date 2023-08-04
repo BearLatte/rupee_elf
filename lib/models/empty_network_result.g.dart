@@ -1,22 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_model.dart';
+part of 'empty_network_result.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginModel _$LoginModelFromJson(Map<String, dynamic> json) => LoginModel(
+EmptyNetworkResult _$EmptyNetworkResultFromJson(Map<String, dynamic> json) =>
+    EmptyNetworkResult(
       json['rkmectsultCode'] as int,
       json['rkmectsultMsg'] as String,
-      json['lkmoctginToken'] as String?,
-      json['ikmsctRegistered'] as int?,
     );
 
-Map<String, dynamic> _$LoginModelToJson(LoginModel instance) =>
+Map<String, dynamic> _$EmptyNetworkResultToJson(EmptyNetworkResult instance) =>
     <String, dynamic>{
       'rkmectsultCode': instance.rkmectsultCode,
       'rkmectsultMsg': instance.rkmectsultMsg,
-      'lkmoctginToken': instance.lkmoctginToken,
-      'ikmsctRegistered': instance.ikmsctRegistered,
     };

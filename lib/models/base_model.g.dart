@@ -1,22 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_model.dart';
+part of 'base_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginModel _$LoginModelFromJson(Map<String, dynamic> json) => LoginModel(
+BaseModel _$BaseModelFromJson(Map<String, dynamic> json) => BaseModel(
       json['rkmectsultCode'] as int,
       json['rkmectsultMsg'] as String,
-      json['lkmoctginToken'] as String?,
-      json['ikmsctRegistered'] as int?,
     );
 
-Map<String, dynamic> _$LoginModelToJson(LoginModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$BaseModelToJson(BaseModel instance) => <String, dynamic>{
       'rkmectsultCode': instance.rkmectsultCode,
       'rkmectsultMsg': instance.rkmectsultMsg,
-      'lkmoctginToken': instance.lkmoctginToken,
-      'ikmsctRegistered': instance.ikmsctRegistered,
     };

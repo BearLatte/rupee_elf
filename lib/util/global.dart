@@ -19,17 +19,22 @@ class Global {
 
   /// 是否已经登录
   late bool isLogin;
+
   /// 唯一广告定位串
   late String idfa;
+
+  // 当前登录账号
+  late String currentAccount;
+
   /// 所有设备信息
   late IosDeviceInfo allDeviceInfo;
+
   /// 包信息
   late PackageInfo packageInfo;
   // 本地存储 对象
   late SharedPreferences prefs;
 
   Future<void> initConstants() async {
-    debugPrint('DEBUG: 开始初始化对象内属性');
     // 初始化 userdefaults
     prefs = await SharedPreferences.getInstance();
     // 获取安装包信息
@@ -51,7 +56,14 @@ class Global {
 
     // 获取是否已经登录
     isLogin = prefs.getBool(Constants.LOGIN_KEY) ?? false;
-    debugPrint('DEBUG: 对象内属性初始化完成');
+    currentAccount = prefs.getString(Constants.CURRENT_PHONE_KEY) ?? '';
+  }
+
+  // 清除信息
+  void clearLocalInfo() {
+    isLogin = false;
+    prefs.setBool(Constants.LOGIN_KEY, false);
+    prefs.remove(Constants.TOKEN_KEY);
   }
 
   Color randomColor = Color.fromARGB(255, Random().nextInt(256) + 0,
