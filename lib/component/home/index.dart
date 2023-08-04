@@ -17,12 +17,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var isShowMenu = false;
-  late List<ProductModel> _products;
+  List<ProductModel> _products = [];
+  bool _isSendedFirstLaunchRequest = false;
+  bool _isCerified = false;
   @override
   void initState() {
     super.initState();
-    _products = [];
-    initPageNeedsData();
+    loadData();
   }
 
   @override
@@ -34,15 +35,14 @@ class _HomePageState extends State<HomePage> {
         children: [
           const CommonImage(
               src: 'static/images/home_not_certified_head_img.png'),
-          const HomeMenuWidget(
-              isCertified: Global.isLogin && Global.isCerified),
+          HomeMenuWidget(isCertified: _isCerified),
           Column(
             children: productItemData.map((item) {
               return ProductItemCell(
                 isOdd: productItemData.indexOf(item) % 2 == 0,
                 product: item,
                 onTap: () {
-                  if (Global.isCerified) {
+                  if (_isCerified) {
                     // todo
                     Navigator.of(context)
                         .pushNamed('/productDetail/${item.id}');
@@ -58,13 +58,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> initPageNeedsData() async {
-    await Global.initConstants();
-    await loadData();
-  }
-
   // 获取网络数据
   Future<void> loadData() async {
+    // 先初始化全局对象
+    await Global.instance.initConstants();
+
+    if (!_isSendedFirstLaunchRequest) {
+      await NetworkService.firstLaunch();
+      _isSendedFirstLaunchRequest = true;
+    }
+
     var listModel = await NetworkService.getProductList();
     setState(() {
       _products = listModel.pkmrctoductList;

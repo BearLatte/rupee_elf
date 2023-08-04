@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 
 enum FormType { input, date, selecte }
 
@@ -38,7 +38,7 @@ class CommonFormItem extends StatelessWidget {
           maxWidth: MediaQuery.of(context).size.width - 40),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(width: 1.0, color: Global.dividerColor),
+          bottom: BorderSide(width: 1.0, color: Constants.dividerColor),
         ),
       ),
       child: _getCurrentChild(),
@@ -61,11 +61,11 @@ class CommonFormItem extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         border: InputBorder.none,
-        hintStyle: TextStyle(fontSize: 16.0, color: Global.seconaryTextColor),
+        hintStyle: TextStyle(fontSize: 16.0, color: Constants.seconaryTextColor),
       ),
       keyboardType: keyboardType,
       onChanged: onValueChanged,
-      style: TextStyle(fontSize: 16.0, color: Global.themeTextColor),
+      style: TextStyle(fontSize: 16.0, color: Constants.themeTextColor),
       onTap: onTap,
       maxLines: isMultiLine ? null : 1,
     );
@@ -83,8 +83,8 @@ class CommonFormItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.0,
                 color: inputValue == null
-                    ? Global.seconaryTextColor
-                    : Global.themeTextColor,
+                    ? Constants.seconaryTextColor
+                    : Constants.themeTextColor,
               ),
             ),
           ),
@@ -106,8 +106,8 @@ class CommonFormItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.0,
                 color: inputValue == null
-                    ? Global.seconaryTextColor
-                    : Global.themeTextColor,
+                    ? Constants.seconaryTextColor
+                    : Constants.themeTextColor,
               ),
             ),
           ),

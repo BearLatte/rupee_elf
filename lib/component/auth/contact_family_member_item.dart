@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/util/constants.dart';
-import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 
 class ContactFamilyMemberItem extends StatefulWidget {

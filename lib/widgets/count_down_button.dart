@@ -65,9 +65,9 @@ class CountDownButtonState extends State<CountDownButton> {
   void initState() {
     super.initState();
     _text = widget.text ?? '';
-    _isStart = Global.prefs?.getBool(widget.session + boolSuffix) ?? false;
+    _isStart = Global.instance.prefs.getBool(widget.session + boolSuffix) ?? false;
     int currentTimeMillis = DateTime.now().millisecondsSinceEpoch;
-    int startTimeMillis = Global.prefs?.getInt(widget.session + intSuffix) ?? 0;
+    int startTimeMillis = Global.instance.prefs.getInt(widget.session + intSuffix) ?? 0;
     if (startTimeMillis != 0 &&
         (currentTimeMillis - startTimeMillis) / 1000 <= widget.countDownValue &&
         (_isStart ?? false)) {
@@ -78,7 +78,7 @@ class CountDownButtonState extends State<CountDownButton> {
   void startTimer() {
     int count = 0;
     int currentTimeMillis = DateTime.now().millisecondsSinceEpoch;
-    int startTimeMillis = Global.prefs?.getInt(widget.session + intSuffix) ?? 0;
+    int startTimeMillis = Global.instance.prefs.getInt(widget.session + intSuffix) ?? 0;
     if (startTimeMillis == 0 ||
         (currentTimeMillis - startTimeMillis) / 1000 > widget.countDownValue) {
       _startTimeMillis = currentTimeMillis;
@@ -96,8 +96,8 @@ class CountDownButtonState extends State<CountDownButton> {
         timer.cancel();
         if (mounted) {
           _isStart = false;
-          Global.prefs?.setBool(widget.session + boolSuffix, false);
-          Global.prefs?.setInt(widget.session + intSuffix, 0);
+          Global.instance.prefs.setBool(widget.session + boolSuffix, false);
+          Global.instance.prefs.setInt(widget.session + intSuffix, 0);
           setState(() {
             _text = widget.text ?? '';
             _disabled = false;
@@ -119,8 +119,8 @@ class CountDownButtonState extends State<CountDownButton> {
   void dispose() {
     //退出时关闭计时器防止内存泄露
     timer?.cancel();
-    Global.prefs?.setBool(widget.session + boolSuffix, _isStart ?? false);
-    Global.prefs?.setInt(widget.session + intSuffix, _startTimeMillis ?? 0);
+    Global.instance.prefs.setBool(widget.session + boolSuffix, _isStart ?? false);
+    Global.instance.prefs.setInt(widget.session + intSuffix, _startTimeMillis ?? 0);
     super.dispose();
   }
 

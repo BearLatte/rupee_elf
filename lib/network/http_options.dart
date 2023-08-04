@@ -19,19 +19,20 @@ class HttpOptions {
   get headers {
     Map<String, String?> headers = {};
     headers['lang'] = 'en';
-    headers['token'] = Global.prefs?.getString(Constants.TOKEN_KEY);
+    headers['token'] = Global.instance.prefs.getString(Constants.TOKEN_KEY);
 
     Map<String, String?> deviceInfo = {};
-    deviceInfo['appVersion'] = Global.packageInfo?.version;
-    deviceInfo['bag'] = Global.packageInfo?.packageName;
+    deviceInfo['appVersion'] = Global.instance.packageInfo?.version;
+    deviceInfo['bag'] = Global.instance.packageInfo?.packageName;
     deviceInfo['brand'] = 'Apple';
     deviceInfo['channel'] = 'App Store';
-    deviceInfo['deviceModel'] = Global.allDeviceInfo?.name;
+    deviceInfo['deviceModel'] = Global.instance.allDeviceInfo?.name;
     deviceInfo['mac'] = '';
     deviceInfo['operationSys'] = 'iOS';
-    deviceInfo['osVersion'] = Global.allDeviceInfo?.systemVersion;
-    deviceInfo['androidIdOrUdid'] = Global.allDeviceInfo?.identifierForVendor;
-    deviceInfo['gaidOrIdfa'] = Global.idfa;
+    deviceInfo['osVersion'] = Global.instance.allDeviceInfo?.systemVersion;
+    deviceInfo['androidIdOrUdid'] =
+        Global.instance.allDeviceInfo?.identifierForVendor;
+    deviceInfo['gaidOrIdfa'] = Global.instance.idfa;
     headers['deviceInfo'] = jsonEncode(deviceInfo);
     return headers;
   }

@@ -113,12 +113,12 @@ class _HomeMenuWidgetState extends State<HomeMenuWidget> {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
-        if (needsLogin && !Global.isLogin) {
+        if (needsLogin && !Global.instance.isLogin) {
           Navigator.of(context).pushNamed('/login');
           return;
         }
 
-        if (needsCerification && !Global.isCerified) {
+        if (needsCerification) {
           Navigator.of(context).pushNamed('authFirst');
           return;
         }

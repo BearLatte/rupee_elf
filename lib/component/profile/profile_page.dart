@@ -12,7 +12,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseViewWidget(
       title: '',
-      floatingActionButton: Global.isLogin
+      floatingActionButton: Global.instance.isLogin
           ? Container(
               width: 228.0,
               height: 50.0,
@@ -44,15 +44,17 @@ class ProfilePage extends StatelessWidget {
           ),
           Column(
             children: [
-              const CommonImage(
-                src: Global.isLogin
+              CommonImage(
+                src: Global.instance.isLogin
                     ? 'static/icons/profile_logo_did_login_icon.png'
                     : 'static/icons/profile_logo_not_login_icon.png',
               ),
               const Padding(padding: EdgeInsets.only(bottom: 10.0)),
-              const Text(
-                Global.isLogin ? Global.currentAccount : 'Please log in',
-                style: TextStyle(
+              Text(
+                Global.instance.isLogin
+                    ? Constants.currentAccount
+                    : 'Please log in',
+                style: const TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
                     fontWeight: FontWeight.w600),
@@ -81,7 +83,7 @@ class ProfilePage extends StatelessWidget {
                         onTap: () {
                           _aboutUsOnPressed(context);
                         }),
-                    if (Global.isLogin)
+                    if (Global.instance.isLogin)
                       _itemCell(
                         title: 'Delete account',
                         onTap: _deleteAccountOnPressed,
@@ -108,7 +110,8 @@ class ProfilePage extends StatelessWidget {
   }
 
   void _feedbackOnPressed(BuildContext context) {
-    Navigator.of(context).pushNamed(Global.isLogin ? '/feedback' : '/login');
+    Navigator.of(context)
+        .pushNamed(Global.instance.isLogin ? '/feedback' : '/login');
   }
 
   void _privacyOnPressed() {
