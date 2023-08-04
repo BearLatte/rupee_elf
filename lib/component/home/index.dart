@@ -21,6 +21,9 @@ class _HomePageState extends State<HomePage> {
   List<ProductModel> _products = [];
   bool _isSendedFirstLaunchRequest = false;
   final bool _isCerified = false;
+
+  late UserInfoModel userInfo;
+
   @override
   void initState() {
     super.initState();
@@ -58,15 +61,7 @@ class _HomePageState extends State<HomePage> {
               return ProductItemCell(
                 isOdd: _products.indexOf(item) % 2 == 0,
                 product: item,
-                onTap: () {
-                  if (_isCerified) {
-                    // todo
-                    // Navigator.of(context)
-                    //     .pushNamed('/productDetail/${item.id}');
-                  } else {
-                    Navigator.pushNamed(context, 'authFirst');
-                  }
-                },
+                onTap: itemCellOnTap,
               );
             }).toList(),
           ),
@@ -77,6 +72,9 @@ class _HomePageState extends State<HomePage> {
 
   void bankCardChangeItemClicked(BuildContext context) {
     if (Global.instance.isLogin) {
+      Navigator.of(context).pushNamed('/changeBankInfo').then((value) {
+        loadData();
+      });
     } else {
       Navigator.of(context).pushNamed('/login').then((value) {
         loadData();
@@ -86,6 +84,9 @@ class _HomePageState extends State<HomePage> {
 
   void orderItemClicked(BuildContext context) {
     if (Global.instance.isLogin) {
+      Navigator.of(context).pushNamed('/order').then((value) {
+        loadData();
+      });
     } else {
       Navigator.of(context).pushNamed('/login').then((value) {
         loadData();
@@ -97,6 +98,20 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).pushNamed('/profile').then((value) {
       loadData();
     });
+  }
+
+  void itemCellOnTap() {
+    if (Global.instance.isLogin && userInfo.ukmscterStatus == 1) {
+      debugPrint('DEBUG: 此处查询订单状态，跳转页面');
+    } else if (!Global.instance.isLogin) {
+      Navigator.of(context).pushNamed('/login').then((value) {
+        loadData();
+      });
+    } else {
+      Navigator.pushNamed(context, 'authFirst').then((value) {
+        loadData();
+      });
+    }
   }
 
   // 获取网络数据
@@ -112,8 +127,14 @@ class _HomePageState extends State<HomePage> {
     List<ProductModel>? list;
     if (Global.instance.isLogin) {
       UserInfoModel? model = await NetworkService.getUserInfo();
-      list = model?.pkmrctoductList;
-      if (model?.ukmscterPayFail == 1) {
+
+      if (model != null) {
+        userInfo = model;
+      }
+
+      list = userInfo.pkmrctoductList;
+
+      if (userInfo.ukmscterPayFail == 1) {
         if (context.mounted) {
           await CommonAlert.showAlert(
               context: context, type: AlertType.dibursingFailed, model: model);

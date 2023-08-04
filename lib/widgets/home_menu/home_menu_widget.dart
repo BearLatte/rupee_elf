@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/util/global.dart';
-import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/home_menu/home_menu_item.dart';
 
 class HomeMenuWidget extends StatefulWidget {
@@ -64,24 +62,6 @@ class _HomeMenuWidgetState extends State<HomeMenuWidget> {
                       title: 'Personal center',
                       iconPath: 'static/icons/home_profile_icon.png',
                       onTap: widget.profileOnTap),
-                  // _createMenuItem(
-                  //   ,
-                  //   iconPath: ,
-                  //   needsCerifaction: true,
-                  //   navigatorDestination: '/changeBankInfo',
-                  // ),
-                  // _createMenuItem(
-                  //   ,
-                  //   iconPath: ,
-                  //   needsCerifaction: false,
-                  //   navigatorDestination: '/order',
-                  // ),
-                  // _createMenuItem(
-                  //   '',
-                  //   iconPath: '',
-                  //   navigatorDestination: '/profile',
-                  //   needsLogin: false,
-                  // ),
                   if (!widget.isCertified)
                     _createBackGesture(
                       'static/icons/home_menu_arrow_left.png',
