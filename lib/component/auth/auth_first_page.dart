@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_form_item.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/widgets/auth_base_widget.dart';
 import 'package:rupee_elf/widgets/can_bg_image_widget.dart';
@@ -42,7 +43,7 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                         'Please upload clear and original documents.',
                         style: TextStyle(
                           fontSize: 14.0,
-                          color: Global.seconaryTextColor,
+                          color: Constants.seconaryTextColor,
                         ),
                         maxLines: null,
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
@@ -39,7 +40,7 @@ class ProfilePage extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(top: 220.0),
-            color: Global.seconaryBackgroundColor,
+            color: Constants.seconaryBackgroundColor,
           ),
           Column(
             children: [
@@ -134,7 +135,7 @@ class ProfilePage extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  color: Global.themeTextColor,
+                  color: Constants.themeTextColor,
                   fontSize: 18.0,
                   fontWeight: FontWeight.w600,
                 ),

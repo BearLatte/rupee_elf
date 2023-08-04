@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/component/order/order_item_data.dart';
 import 'package:rupee_elf/component/order/order_item_list_page.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 
 class OrderItemCell extends StatelessWidget {
@@ -46,9 +46,9 @@ class OrderItemCell extends StatelessWidget {
         typeStringColor = HexColor('#F42040');
       case OrderType.repaied:
         typeString = 'Repaied';
-        typeStringColor = Global.seconaryTextColor;
+        typeStringColor = Constants.seconaryTextColor;
       default:
-        typeStringColor = Global.seconaryTextColor;
+        typeStringColor = Constants.seconaryTextColor;
         break;
     }
     TextStyle typeStringStyle = TextStyle(
@@ -84,7 +84,7 @@ class OrderItemCell extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.w600,
-                    color: Global.themeTextColor,
+                    color: Constants.themeTextColor,
                   ),
                 ),
                 const Spacer(),
@@ -105,7 +105,7 @@ class OrderItemCell extends StatelessWidget {
                           'Loan Date :',
                           style: TextStyle(
                             fontSize: 14.0,
-                            color: Global.seconaryTextColor,
+                            color: Constants.seconaryTextColor,
                           ),
                         ),
                         const Padding(padding: EdgeInsets.only(left: 10.0)),
@@ -114,7 +114,7 @@ class OrderItemCell extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w600,
-                            color: Global.themeTextColor,
+                            color: Constants.themeTextColor,
                           ),
                         )
                       ],
@@ -125,7 +125,7 @@ class OrderItemCell extends StatelessWidget {
                           'Loan amount :',
                           style: TextStyle(
                             fontSize: 14.0,
-                            color: Global.seconaryTextColor,
+                            color: Constants.seconaryTextColor,
                           ),
                         ),
                         const Padding(padding: EdgeInsets.only(left: 10.0)),
@@ -134,7 +134,7 @@ class OrderItemCell extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w600,
-                            color: Global.themeColor,
+                            color: Constants.themeColor,
                           ),
                         )
                       ],
@@ -156,7 +156,7 @@ class OrderItemCell extends StatelessWidget {
                   'Order Number :',
                   style: TextStyle(
                     fontSize: 14.0,
-                    color: Global.seconaryTextColor,
+                    color: Constants.seconaryTextColor,
                   ),
                 ),
                 const Padding(padding: EdgeInsets.only(left: 10.0)),
@@ -169,7 +169,7 @@ class OrderItemCell extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w600,
-                      color: Global.themeTextColor,
+                      color: Constants.themeTextColor,
                     ),
                   ),
                 )

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/util/common_alert.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
 
@@ -27,7 +27,7 @@ class ProductDetailPage extends StatelessWidget {
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.65,
-                color: Global.seconaryBackgroundColor,
+                color: Constants.seconaryBackgroundColor,
               )
             ],
           ),
@@ -80,7 +80,7 @@ class ProductDetailPage extends StatelessWidget {
               _itemCell(
                 key: 'Repayment Amount :',
                 value: ' ₹ 401,000.00',
-                valueColor: Global.themeColor,
+                valueColor: Constants.themeColor,
               ),
               const Padding(padding: EdgeInsets.only(bottom: 50.0)),
               ThemeButton(
@@ -122,12 +122,12 @@ class ProductDetailPage extends StatelessWidget {
           children: [
             Text(
               key,
-              style: TextStyle(color: Global.seconaryTextColor, fontSize: 16.0),
+              style: TextStyle(color: Constants.seconaryTextColor, fontSize: 16.0),
             ),
             Text(
               value,
               style: TextStyle(
-                  color: valueColor ?? Global.themeTextColor, fontSize: 16.0),
+                  color: valueColor ?? Constants.themeTextColor, fontSize: 16.0),
             )
           ],
         )

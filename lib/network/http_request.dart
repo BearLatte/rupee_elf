@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:rupee_elf/network_service/api_response.dart';
 
 //辅助配置
 import 'http_options.dart';
@@ -40,7 +39,7 @@ class HttpRequest {
   }
 
   /// 封装request方法
-  Future request({
+  Future<dynamic> request({
     required String path, //接口地址
     required HttpMethod method, //请求方式
     dynamic data, //数据
@@ -75,7 +74,7 @@ class HttpRequest {
         queryParameters: queryParameters,
         options: options,
       );
-      return response;
+      return response.data;
     } on DioException catch (error) {
       HttpException httpException = HttpException.create(error);
       if (showErrorMessage) {

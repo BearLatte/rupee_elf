@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_form_item.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
@@ -36,14 +36,14 @@ class _ChangeBankCardPageState extends State<ChangeBankCardPage> {
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.w600,
-              color: Global.themeTextColor,
+              color: Constants.themeTextColor,
             ),
           ),
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
             icon: const Icon(IconFont.icon_back),
-            color: Global.themeTextColor,
+            color: Constants.themeTextColor,
             iconSize: 16.0,
             onPressed: () {
               Navigator.of(context).pop();

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
 
@@ -46,7 +46,7 @@ Future<bool> _showErrorAlert(BuildContext context, String? message) async {
                       message,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Global.themeTextColor, fontSize: 16.0),
+                          color: Constants.themeTextColor, fontSize: 16.0),
                     ),
                   const Padding(padding: EdgeInsets.only(bottom: 16.0)),
                   Row(
@@ -103,7 +103,7 @@ Future<bool> _showSuccessedAlert(BuildContext context, String? message) async {
                           message,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: Global.themeTextColor, fontSize: 16.0),
+                              color: Constants.themeTextColor, fontSize: 16.0),
                         ),
                       const Padding(padding: EdgeInsets.only(bottom: 16.0)),
                       ThemeButton(
@@ -156,7 +156,7 @@ Future<bool> _showTipsAlert(BuildContext context, String? message) async {
                       message,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Global.themeTextColor, fontSize: 16.0),
+                          color: Constants.themeTextColor, fontSize: 16.0),
                     ),
                   const Padding(padding: EdgeInsets.only(bottom: 16.0)),
                   Row(

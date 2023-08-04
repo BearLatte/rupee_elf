@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/iconfont.dart';
-import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
 
 class AuthBaseWidget extends StatelessWidget {
@@ -46,7 +46,7 @@ class AuthBaseWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
-                color: Global.themeTextColor,
+                color: Constants.themeTextColor,
               ),
             ),
             const Padding(padding: EdgeInsets.only(right: 10.0)),
@@ -55,7 +55,7 @@ class AuthBaseWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
-                color: Global.themeColor,
+                color: Constants.themeColor,
               ),
             ),
             Text(
@@ -63,7 +63,7 @@ class AuthBaseWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14.0,
                 fontWeight: FontWeight.w700,
-                color: Global.themeTextColor,
+                color: Constants.themeTextColor,
               ),
             )
           ],
@@ -76,7 +76,7 @@ class AuthBaseWidget extends StatelessWidget {
           },
           icon: Icon(
             IconFont.icon_back,
-            color: Global.themeTextColor,
+            color: Constants.themeTextColor,
           ),
         ),
         actions: isShowTrailingButton
@@ -85,7 +85,7 @@ class AuthBaseWidget extends StatelessWidget {
                   onPressed: trailingOnPressed,
                   icon: Icon(
                     Icons.add_circle_outline,
-                    color: Global.themeTextColor,
+                    color: Constants.themeTextColor,
                   ),
                 )
               ]

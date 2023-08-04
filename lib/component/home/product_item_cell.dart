@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/component/home/product_item_data.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
 
 class ProductItemCell extends StatelessWidget {
@@ -47,7 +48,7 @@ class ProductItemCell extends StatelessWidget {
                                 product.productName,
                                 style: TextStyle(
                                     fontSize: 20.0,
-                                    color: Global.themeTextColor,
+                                    color: Constants.themeTextColor,
                                     fontWeight: FontWeight.bold),
                               ),
                               Container(
@@ -55,7 +56,7 @@ class ProductItemCell extends StatelessWidget {
                                 height: 20,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Global.borderColor, width: 1),
+                                      color: Constants.borderColor, width: 1),
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(10),
                                   ),
@@ -73,7 +74,7 @@ class ProductItemCell extends StatelessWidget {
                                       product.score,
                                       style: TextStyle(
                                           fontSize: 14.0,
-                                          color: Global.themeTextColor),
+                                          color: Constants.themeTextColor),
                                     )
                                   ],
                                 ),
@@ -93,13 +94,13 @@ class ProductItemCell extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 30.0,
                             fontWeight: FontWeight.bold,
-                            color: Global.themeColor,
+                            color: Constants.themeColor,
                           ),
                         ),
                         Text(
                           'Loan amount',
                           style: TextStyle(
-                            color: Global.seconaryTextColor,
+                            color: Constants.seconaryTextColor,
                             fontSize: 20.0,
                           ),
                         )

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
@@ -22,20 +22,20 @@ class SimpleToastPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Global.seconaryBackgroundColor,
+        backgroundColor: Constants.seconaryBackgroundColor,
         title: Text(
           'Photo Tips',
-          style: TextStyle(color: Global.themeTextColor),
+          style: TextStyle(color: Constants.themeTextColor),
         ),
         leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
             icon: const Icon(IconFont.icon_back),
-            color: Global.themeTextColor),
+            color: Constants.themeTextColor),
       ),
       body: Container(
-        color: Global.seconaryBackgroundColor,
+        color: Constants.seconaryBackgroundColor,
         alignment: Alignment.center,
         padding: const EdgeInsets.only(left: 38.0, right: 38.0, top: 44.0),
         child: ListView(
@@ -64,7 +64,7 @@ class SimpleToastPage extends StatelessWidget {
                 'Please ensure the whole cotent involved and words clear.',
                 style: TextStyle(
                   fontSize: 16.0,
-                  color: Global.themeTextColor,
+                  color: Constants.themeTextColor,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -85,7 +85,7 @@ class SimpleToastPage extends StatelessWidget {
           const Padding(padding: EdgeInsets.only(right: 18.0)),
           Text(
             text,
-            style: TextStyle(fontSize: 16.0, color: Global.themeTextColor),
+            style: TextStyle(fontSize: 16.0, color: Constants.themeTextColor),
           )
         ],
       ),

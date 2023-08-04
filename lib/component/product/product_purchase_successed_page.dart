@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/component/home/product_item_cell.dart';
 import 'package:rupee_elf/component/home/product_item_data.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 
@@ -31,11 +31,11 @@ class ProductPurchaseSuccessedPage extends StatelessWidget {
                 Text(
                   'You have successfully applied',
                   style:
-                      TextStyle(fontSize: 16.0, color: Global.themeTextColor),
+                      TextStyle(fontSize: 16.0, color: Constants.themeTextColor),
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: Global.themeColor,
+                    color: Constants.themeColor,
                     borderRadius: const BorderRadius.all(
                       Radius.circular(20.0),
                     ),

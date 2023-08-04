@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 
@@ -46,7 +46,7 @@ class BaseViewWidget extends StatelessWidget {
           leading: backButton(context),
         ),
         body: child,
-        backgroundColor: Global.themeColor,
+        backgroundColor: Constants.themeColor,
       ),
     );
   }

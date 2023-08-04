@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:rupee_elf/models/login_model.dart';
+import 'package:rupee_elf/models/product_list_model.dart';
 import 'package:rupee_elf/network/index.dart';
-import 'package:rupee_elf/network_service/api_response.dart';
 import 'package:rupee_elf/util/md5_util.dart';
 import 'package:rupee_elf/util/random_util.dart';
 
@@ -11,24 +11,34 @@ class NetworkService {
     await _defaultService(path: '/cLqgPJf/jNSuDf');
   }
 
+  // login
   static Future<LoginModel> login(String phone, String code) async {
     var params = {'userPhone': phone, 'loginCode': code};
-    return await _defaultService<LoginModel>(
-        path: '/cLqgPJf/HJKfYM', parameters: params);
+    var json =
+        await _defaultService(path: '/cLqgPJf/HJKfYM', parameters: params);
+    return LoginModel.fromJson(json);
   }
 
+  // 登录前首页列表
+  static Future<ProductListModel> getProductList() async {
+    var result = await _defaultService(path: '/cLqgPJf/JvLpx');
+    return ProductListModel.fromJson(result);
+  }
 
-  static Future<T> _defaultService<T>(
-      {required String path, Map<String, dynamic>? parameters}) async {
+  static Future<dynamic> _defaultService({
+    required String path,
+    Map<String, dynamic>? parameters,
+    bool showLoading = true,
+    bool showErrorMessage = true,
+  }) async {
     var formData = FormData.fromMap(_configParameters(parameters));
-    var response = await HttpUtils.post(
+
+    return await HttpUtils.post(
       path: path,
       data: formData,
-      showLoading: true,
-      showErrorMessage: true,
+      showLoading: showLoading,
+      showErrorMessage: showErrorMessage,
     );
-    ApiResponse<T> baseResult = ApiResponse.fromJson(response, response.data);
-    return baseResult.data;
   }
 
   static Map<String, dynamic> _configParameters(

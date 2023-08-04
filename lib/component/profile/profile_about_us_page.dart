@@ -20,7 +20,7 @@ class ProfileAboutUsPage extends StatelessWidget {
             children: [
               const CommonImage(src: 'static/images/profile_about_us_img.png'),
               const Padding(padding: EdgeInsets.only(bottom: 10.0)),
-              Text('Version ${Global.packageInfo.version}')
+              Text('Version ${Global.packageInfo?.version}')
             ],
           ),
         )

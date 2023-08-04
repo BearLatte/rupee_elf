@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/Constants.dart';
 
 class GenderSelector extends StatefulWidget {
   final double height;
@@ -39,7 +39,7 @@ class _GenderSelectorState extends State<GenderSelector> {
             'Gender',
             style: TextStyle(
               fontSize: 16.0,
-              color: Global.themeTextColor,
+              color: Constants.themeTextColor,
             ),
           ),
         ),
@@ -68,8 +68,8 @@ class _GenderSelectorState extends State<GenderSelector> {
                       bottom: BorderSide(
                         width: 1.0,
                         color: genderList.indexOf(_selectedValue) == index
-                            ? Global.themeColor
-                            : Global.dividerColor,
+                            ? Constants.themeColor
+                            : Constants.dividerColor,
                       ),
                     ),
                   ),
@@ -78,8 +78,8 @@ class _GenderSelectorState extends State<GenderSelector> {
                     style: TextStyle(
                         fontSize: 16.0,
                         color: genderList.indexOf(_selectedValue) == index
-                            ? Global.themeColor
-                            : Global.seconaryTextColor),
+                            ? Constants.themeColor
+                            : Constants.seconaryTextColor),
                   ),
                 ));
           }).toList(),

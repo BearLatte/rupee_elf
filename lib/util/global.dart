@@ -9,27 +9,21 @@ import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Global {
-  // 常量
-  // ignore: constant_identifier_names
-  static const String TOKEN_KEY = 'kACCESS_TOKEN';
+  static final Global _instance = Global._internal();
+
+  factory Global() => _instance;
+
+  Global._internal() {}
 
   static const bool isLogin = true;
   static const bool isCerified = true;
   static const String currentAccount = '';
 
-  static late final String idfa;
-  static late final IosDeviceInfo allDeviceInfo;
-  static late final PackageInfo packageInfo;
+  static late String idfa;
+  static late IosDeviceInfo? allDeviceInfo;
+  static late PackageInfo? packageInfo;
 
-  // 颜色值
-  static Color themeColor = HexColor('#F05C09');
-  static Color themeTextColor = HexColor('#333333');
-  static Color seconaryTextColor = HexColor('#999999');
-  static Color borderColor = HexColor('#DDDDDD');
-  static Color boxBackgroundColor = HexColor('#EFEFEF');
-  static Color dividerColor = HexColor('#EAEAEA');
-  static Color arrowColor = HexColor('#9e9e9e');
-  static Color seconaryBackgroundColor = HexColor('#F5F4F3');
+
   static Color randomColor = Color.fromARGB(255, Random().nextInt(256) + 0,
       Random().nextInt(256) + 0, Random().nextInt(256) + 0);
 
@@ -38,18 +32,20 @@ class Global {
 
   static initConstants() async {
     // 初始化 userdefaults
-    prefs = await SharedPreferences.getInstance();
-    // 获取设备信息
-    allDeviceInfo = await DeviceInfoPlugin().iosInfo;
+    prefs ??= await SharedPreferences.getInstance();
 
     // 获取安装包信息
-    packageInfo = await PackageInfo.fromPlatform();
+    packageInfo ??= await PackageInfo.fromPlatform();
+    // 获取设备信息
+    allDeviceInfo ??= await DeviceInfoPlugin().iosInfo;
 
     // 请求 idfa
     var status = await Permission.appTrackingTransparency.request();
     if (status == PermissionStatus.granted) {
       String idfaString = await AdvertisingId.id() ?? '';
-      idfa = idfaString == '00000000-0000-0000-0000-000000000000' ? '' : idfaString;
+      idfa = idfaString == '00000000-0000-0000-0000-000000000000'
+          ? ''
+          : idfaString;
       prefs?.setString('kIDFA_KEY', idfa);
     } else {
       idfa = prefs?.getString('kIDFA_KEY') ?? '';

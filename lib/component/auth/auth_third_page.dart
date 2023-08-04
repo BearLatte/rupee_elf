@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/component/auth/contact_family_member_item.dart';
 import 'package:rupee_elf/component/auth/contact_relation_item.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/widgets/auth_base_widget.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
@@ -42,7 +42,7 @@ class AuthThirdPage extends StatelessWidget {
                           maxLines: null,
                           style: TextStyle(
                             fontSize: 14.0,
-                            color: Global.seconaryTextColor,
+                            color: Constants.seconaryTextColor,
                           ),
                         ),
                       ),

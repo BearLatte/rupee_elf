@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 import 'package:rupee_elf/widgets/count_down_button.dart';
@@ -19,9 +20,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var isChecked = true;
   var defaultTextStyle =
-      TextStyle(fontSize: 14.0, color: Global.themeTextColor);
+      TextStyle(fontSize: 14.0, color: Constants.themeTextColor);
   var richTextStyle = TextStyle(
-      fontSize: 14.0, fontWeight: FontWeight.w600, color: Global.themeColor);
+      fontSize: 14.0, fontWeight: FontWeight.w600, color: Constants.themeColor);
 
   late TapGestureRecognizer _tapCondition;
   late TapGestureRecognizer _tapPolicy;
@@ -84,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Global.themeColor, Colors.white],
+                        colors: [Constants.themeColor, Colors.white],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),
@@ -159,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
           const Padding(padding: EdgeInsets.only(top: 30.0)),
           Text(
             'Mobile number',
-            style: TextStyle(color: Global.themeTextColor, fontSize: 20),
+            style: TextStyle(color: Constants.themeTextColor, fontSize: 20),
           ),
           const Padding(padding: EdgeInsets.only(bottom: 10.0)),
           Container(
@@ -167,9 +168,9 @@ class _LoginPageState extends State<LoginPage> {
             height: 52.0,
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
-              color: Global.boxBackgroundColor,
+              color: Constants.boxBackgroundColor,
               border: Border.all(
-                  color: _isShowBoder ? Global.themeColor : Colors.transparent,
+                  color: _isShowBoder ? Constants.themeColor : Colors.transparent,
                   width: 1.0),
               borderRadius: const BorderRadius.all(
                 Radius.circular(12),
@@ -181,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: 52.0,
                   height: 52.0,
                   decoration: BoxDecoration(
-                    color: Global.themeColor,
+                    color: Constants.themeColor,
                     borderRadius: const BorderRadius.all(
                       Radius.circular(12),
                     ),
@@ -194,12 +195,12 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextField(
                     focusNode: _phoneFocusNode,
                     style:
-                        TextStyle(color: Global.themeTextColor, fontSize: 20.0),
+                        TextStyle(color: Constants.themeTextColor, fontSize: 20.0),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Mobile number',
                       hintStyle: TextStyle(
-                          color: Global.seconaryTextColor, fontSize: 20),
+                          color: Constants.seconaryTextColor, fontSize: 20),
                     ),
                     keyboardType: TextInputType.phone,
                     inputFormatters: [
@@ -235,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
               'One-time-Password',
               style: TextStyle(
                 fontSize: 20,
-                color: Global.themeTextColor,
+                color: Constants.themeTextColor,
               ),
             ),
           if (_isShowCodeWidget)
@@ -248,18 +249,18 @@ class _LoginPageState extends State<LoginPage> {
                 focusNode: _codeFocuNode,
                 textStyle: TextStyle(
                   fontSize: 20.0,
-                  color: Global.themeTextColor,
+                  color: Constants.themeTextColor,
                 ),
-                cursorColor: Global.themeColor,
+                cursorColor: Constants.themeColor,
                 pinTheme: PinTheme(
                   fieldWidth: 44.0,
                   fieldHeight: 52.0,
                   shape: PinCodeFieldShape.box,
-                  activeColor: Global.themeColor,
-                  inactiveColor: Global.boxBackgroundColor,
-                  activeFillColor: Global.themeColor,
+                  activeColor: Constants.themeColor,
+                  inactiveColor: Constants.boxBackgroundColor,
+                  activeFillColor: Constants.themeColor,
                   activeBorderWidth: 1.0,
-                  selectedColor: Global.themeColor,
+                  selectedColor: Constants.themeColor,
                   selectedBorderWidth: 1.0,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(12),

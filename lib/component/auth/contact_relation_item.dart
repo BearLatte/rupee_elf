@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 
 class ContactRelationItem extends StatefulWidget {
@@ -15,7 +15,7 @@ class _ContactRelationItemState extends State<ContactRelationItem> {
       height: 45.0,
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(width: 1.0, color: Global.borderColor),
+          bottom: BorderSide(width: 1.0, color: Constants.borderColor),
         ),
       ),
       child: Row(
@@ -31,11 +31,11 @@ class _ContactRelationItemState extends State<ContactRelationItem> {
                 hintText: hitText,
                 hintStyle: TextStyle(
                   fontSize: 16.0,
-                  color: Global.seconaryTextColor,
+                  color: Constants.seconaryTextColor,
                 ),
                 border: InputBorder.none,
               ),
-              style: TextStyle(fontSize: 16.0, color: Global.themeTextColor),
+              style: TextStyle(fontSize: 16.0, color: Constants.themeTextColor),
             ),
           ),
           if (icon != null) icon
@@ -53,7 +53,7 @@ class _ContactRelationItemState extends State<ContactRelationItem> {
           'Ralation',
           Icon(
             Icons.keyboard_arrow_right,
-            color: Global.arrowColor,
+            color: Constants.arrowColor,
             size: 16.0,
           ),
           false,
@@ -62,7 +62,7 @@ class _ContactRelationItemState extends State<ContactRelationItem> {
           'Name',
           Icon(
             IconFont.icon_dianhuabu,
-            color: Global.themeColor,
+            color: Constants.themeColor,
             size: 16.0,
           ),
           true,

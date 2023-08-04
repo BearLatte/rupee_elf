@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 
@@ -24,14 +25,14 @@ class _ContactFamilyMemberItemState extends State<ContactFamilyMemberItem> {
           style: TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.w600,
-            color: Global.themeTextColor,
+            color: Constants.themeTextColor,
           ),
         ),
         Container(
           height: 45.0,
           decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(width: 1.0, color: Global.borderColor),
+              bottom: BorderSide(width: 1.0, color: Constants.borderColor),
             ),
           ),
           child: Row(
@@ -43,14 +44,14 @@ class _ContactFamilyMemberItemState extends State<ContactFamilyMemberItem> {
                     hintText: 'Name',
                     hintStyle: TextStyle(
                       fontSize: 16.0,
-                      color: Global.seconaryTextColor,
+                      color: Constants.seconaryTextColor,
                     ),
                   ),
                 ),
               ),
               Icon(
                 IconFont.icon_dianhuabu,
-                color: Global.themeColor,
+                color: Constants.themeColor,
                 size: 16.0,
               )
             ],
@@ -60,7 +61,7 @@ class _ContactFamilyMemberItemState extends State<ContactFamilyMemberItem> {
           height: 45.0,
           decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(width: 1.0, color: Global.borderColor),
+              bottom: BorderSide(width: 1.0, color: Constants.borderColor),
             ),
           ),
           child: TextField(
@@ -68,7 +69,7 @@ class _ContactFamilyMemberItemState extends State<ContactFamilyMemberItem> {
               border: InputBorder.none,
               hintText: 'Number',
               hintStyle:
-                  TextStyle(fontSize: 16.0, color: Global.seconaryTextColor),
+                  TextStyle(fontSize: 16.0, color: Constants.seconaryTextColor),
             ),
           ),
         )

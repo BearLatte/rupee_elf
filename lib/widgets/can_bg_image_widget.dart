@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 
 class CanBgImageWidget extends StatelessWidget {
   final String icon;
@@ -32,7 +32,7 @@ class CanBgImageWidget extends StatelessWidget {
             height: height,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              color: backgroundImage == null ? Global.themeColor : null,
+              color: backgroundImage == null ? Constants.themeColor : null,
               borderRadius: BorderRadius.circular(20),
             ),
             child: backgroundImage != null

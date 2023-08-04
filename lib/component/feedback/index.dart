@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 
 class FeedbackPage extends StatefulWidget {
@@ -29,7 +29,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
       title: 'My feedback',
       child: Container(
         width: MediaQuery.of(context).size.width,
-        color: Global.seconaryBackgroundColor,
+        color: Constants.seconaryBackgroundColor,
         child: feedbackList.isNotEmpty ? _fillChild() : _emptyChild(),
       ),
     );
