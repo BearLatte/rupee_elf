@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/component/order/order_item_list_page.dart';
 import 'package:rupee_elf/util/constants.dart';
-import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 

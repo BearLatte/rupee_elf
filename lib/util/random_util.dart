@@ -11,4 +11,9 @@ class RandomUtil {
 
     return randomString;
   }
+
+  static String randomScore() {
+    List<String> scores = ['4.8', '4.9', '5.0'];
+    return scores[Random().nextInt(3) + 0];
+  }
 }

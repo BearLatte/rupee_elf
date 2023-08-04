@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/component/home/product_item_cell.dart';
-import 'package:rupee_elf/component/home/product_item_data.dart';
 import 'package:rupee_elf/models/product_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/global.dart';
@@ -37,15 +36,15 @@ class _HomePageState extends State<HomePage> {
               src: 'static/images/home_not_certified_head_img.png'),
           HomeMenuWidget(isCertified: _isCerified),
           Column(
-            children: productItemData.map((item) {
+            children: _products.map((item) {
               return ProductItemCell(
-                isOdd: productItemData.indexOf(item) % 2 == 0,
+                isOdd: _products.indexOf(item) % 2 == 0,
                 product: item,
                 onTap: () {
                   if (_isCerified) {
                     // todo
-                    Navigator.of(context)
-                        .pushNamed('/productDetail/${item.id}');
+                    // Navigator.of(context)
+                    //     .pushNamed('/productDetail/${item.id}');
                   } else {
                     Navigator.pushNamed(context, 'authFirst');
                   }

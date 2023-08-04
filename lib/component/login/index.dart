@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/util/constants.dart';
-import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 import 'package:rupee_elf/widgets/count_down_button.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';

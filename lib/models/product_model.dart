@@ -7,7 +7,7 @@ part 'product_model.g.dart';
   class ProductModel extends Object {
 
   @JsonKey(name: 'pkmrctoductId')
-  String pkmrctoductId;
+  int pkmrctoductId;
 
   @JsonKey(name: 'pkmrctoductLogo')
   String pkmrctoductLogo;

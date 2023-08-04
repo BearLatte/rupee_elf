@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/component/home/product_item_data.dart';
+import 'package:rupee_elf/models/product_model.dart';
 import 'package:rupee_elf/util/constants.dart';
-import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/random_util.dart';
 
 class ProductItemCell extends StatelessWidget {
   final bool isOdd;
-  final ProductItem product;
+  final ProductModel product;
   final GestureTapCallback? onTap;
 
   const ProductItemCell(
@@ -45,7 +45,7 @@ class ProductItemCell extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                product.productName,
+                                product.pkmrctoductName,
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Constants.themeTextColor,
@@ -71,7 +71,7 @@ class ProductItemCell extends StatelessWidget {
                                       height: 14,
                                     ),
                                     Text(
-                                      product.score,
+                                      RandomUtil.randomScore(),
                                       style: TextStyle(
                                           fontSize: 14.0,
                                           color: Constants.themeTextColor),
@@ -90,7 +90,7 @@ class ProductItemCell extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          product.loanAmount,
+                          '₹ ${product.pkmrctoductAmount}',
                           style: TextStyle(
                             fontSize: 30.0,
                             fontWeight: FontWeight.bold,
@@ -115,7 +115,7 @@ class ProductItemCell extends StatelessWidget {
               right: isOdd ? null : 24,
               child: ClipOval(
                 child: CommonImage(
-                  src: product.imageUrl,
+                  src: product.pkmrctoductLogo,
                   width: 68.0,
                   height: 68.0,
                   fit: BoxFit.cover,
