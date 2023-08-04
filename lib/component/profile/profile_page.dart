@@ -123,7 +123,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _feedbackOnPressed(BuildContext context) {
     Navigator.of(context)
-        .pushNamed(Global.instance.isLogin ? '/feedback' : '/login');
+        .pushNamed(Global.instance.isLogin ? '/feedback' : '/login')
+        .then((value) {
+      setState(() {
+        _isLogin = Global.instance.isLogin;
+      });
+    });
   }
 
   void _privacyOnPressed() {
@@ -135,7 +140,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _deleteAccountOnPressed() {
-    debugPrint('DEBUG: deleteAccount');
+    _logoutAction();
   }
 
   Widget _itemCell({required String title, required Function() onTap}) {

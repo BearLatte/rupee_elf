@@ -8,18 +8,18 @@ part of 'user_info_model.dart';
 
 UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
     UserInfoModel(
-      json['ukmscterStatus'] as int,
-      json['pkmhctotoContent'] as int?,
-      json['gkmpctsContent'] as int?,
-      json['pkmhctoneContent'] as int?,
+      json['ukmscterStatus'] as int?,
+      json['pkmhctotoContent'] as String?,
+      json['gkmpctsContent'] as String?,
+      json['pkmhctoneContent'] as String?,
       json['ckmoctntactNum'] as int?,
       json['ukmscterLiveness'] as int?,
-      json['tkmhctirdLiveness'] as String?,
+      json['tkmhctirdLiveness'] as String,
       json['ukmscterPayFail'] as int?,
-      json['pkmactyFailLogo'] as String?,
-      json['pkmactyFailContent'] as String?,
-      json['pkmactyFailLoanName'] as String?,
-      json['pkmactyFailLoanNo'] as String?,
+      json['pkmactyFailLogo'] as String,
+      json['pkmactyFailContent'] as String,
+      json['pkmactyFailLoanName'] as String,
+      json['pkmactyFailLoanNo'] as String,
       (json['pkmrctoductList'] as List<dynamic>?)
           ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
           .toList(),

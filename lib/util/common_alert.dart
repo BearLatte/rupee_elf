@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
 
-enum AlertType { tips, succesed, error }
+enum AlertType { tips, succesed, error, dibursingFailed }
 
 class CommonAlert {
   static Future<bool> showAlert({
     required BuildContext context,
     required AlertType type,
     String? message,
+    UserInfoModel? model,
   }) async {
     switch (type) {
       case AlertType.error:
@@ -20,6 +22,8 @@ class CommonAlert {
         return _showSuccessedAlert(context, message);
       case AlertType.tips:
         return await _showTipsAlert(context, message);
+      case AlertType.dibursingFailed:
+        return await _showDisbursingFailAlert(context, model!);
     }
   }
 }
@@ -192,6 +196,86 @@ Future<bool> _showTipsAlert(BuildContext context, String? message) async {
       );
     },
   );
+
+  return response == 'ok';
+}
+
+Future<bool> _showDisbursingFailAlert(
+    BuildContext context, UserInfoModel model) async {
+  var response = await showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          child: Container(
+            padding: const EdgeInsets.only(
+              top: 20.0,
+              left: 10.0,
+              bottom: 20.0,
+              right: 10.0,
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    ClipOval(
+                      child: CommonImage(
+                        src: model.pkmactyFailLogo,
+                        width: 40.0,
+                        height: 40.0,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.only(right: 14.0)),
+                    Text(
+                      model.pkmactyFailLoanName,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Constants.themeTextColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Order Number :',
+                      style: TextStyle(
+                        color: Constants.seconaryTextColor,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    Text(
+                      model.pkmactyFailLoanNo,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Constants.themeTextColor,
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  'Tips\n${model.pkmactyFailContent}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Constants.themeTextColor,
+                  ),
+                ),
+                ThemeButton(
+                  width: 140.0,
+                  height: 52.0,
+                  title: 'Ok',
+                  onPressed: () {
+                    Navigator.of(context).pop('ok');
+                  },
+                )
+              ],
+            ),
+          ),
+        );
+      });
 
   return response == 'ok';
 }

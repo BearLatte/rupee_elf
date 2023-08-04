@@ -4,6 +4,7 @@ import 'package:rupee_elf/component/home/product_item_cell.dart';
 import 'package:rupee_elf/models/product_model.dart';
 import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/home_menu/home_menu_widget.dart';
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   var isShowMenu = false;
   List<ProductModel> _products = [];
   bool _isSendedFirstLaunchRequest = false;
-  bool _isCerified = false;
+  final bool _isCerified = false;
   @override
   void initState() {
     super.initState();
@@ -74,19 +75,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void bankCardChangeItemClicked(BuildContext context) async {
+  void bankCardChangeItemClicked(BuildContext context) {
     if (Global.instance.isLogin) {
     } else {
-      var result = await Navigator.of(context).pushNamed('/login');
-      if (result != null) await loadData();
+      Navigator.of(context).pushNamed('/login').then((value) {
+        loadData();
+      });
     }
   }
 
-  void orderItemClicked(BuildContext context) async {
+  void orderItemClicked(BuildContext context) {
     if (Global.instance.isLogin) {
     } else {
-      var result = await Navigator.of(context).pushNamed('/login');
-      if (result != null) await loadData();
+      Navigator.of(context).pushNamed('/login').then((value) {
+        loadData();
+      });
     }
   }
 
@@ -110,6 +113,12 @@ class _HomePageState extends State<HomePage> {
     if (Global.instance.isLogin) {
       UserInfoModel? model = await NetworkService.getUserInfo();
       list = model?.pkmrctoductList;
+      if (model?.ukmscterPayFail == 1) {
+        if (context.mounted) {
+          await CommonAlert.showAlert(
+              context: context, type: AlertType.dibursingFailed, model: model);
+        }
+      }
     } else {
       var listModel = await NetworkService.getProductList();
       list = listModel.pkmrctoductList;
