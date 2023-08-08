@@ -27,11 +27,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void deactivate() {
-    super.deactivate();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BaseViewWidget(
       title: 'Home Page',
@@ -58,13 +53,7 @@ class _HomePageState extends State<HomePage> {
                 isOdd: _products.indexOf(item) % 2 == 0,
                 product: item,
                 onTap: () {
-                  if (_isCerified) {
-                    // todo
-                    // Navigator.of(context)
-                    //     .pushNamed('/productDetail/${item.id}');
-                  } else {
-                    Navigator.pushNamed(context, 'authFirst');
-                  }
+                  productCellClicked(context);
                 },
               );
             }).toList(),
@@ -96,6 +85,21 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void productCellClicked(BuildContext context) {
+    if (!Global.instance.isLogin) {
+      Navigator.of(context).pushNamed('/login').then((value) {
+        loadData();
+      });
+    }
+
+    if (_isCerified) {
+    } else {
+      Navigator.of(context).pushNamed('/authFirst').then((value) {
+        loadData();
+      });
+    }
+  }
+
   // 获取网络数据
   Future<void> loadData() async {
     // 先初始化全局对象
@@ -107,15 +111,19 @@ class _HomePageState extends State<HomePage> {
     }
 
     List<ProductModel>? list;
+    bool isCer;
     if (Global.instance.isLogin) {
       UserInfoModel? model = await NetworkService.getUserInfo();
       list = model?.pkmrctoductList;
+      isCer = model?.ukmscterStatus == 2;
     } else {
       var listModel = await NetworkService.getProductList();
       list = listModel.pkmrctoductList;
+      isCer = false;
     }
 
     setState(() {
+      _isCerified = isCer;
       if (list != null) _products = list;
     });
   }
