@@ -66,7 +66,10 @@ class HttpRequest {
 
     try {
       if (showLoading) {
-        EasyLoading.show(status: 'loading...');
+        EasyLoading.show(
+          status: 'loading...',
+          maskType: EasyLoadingMaskType.black,
+        );
       }
       Response response = await HttpRequest.dio.request(
         path,

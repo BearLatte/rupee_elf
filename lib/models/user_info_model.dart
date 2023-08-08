@@ -8,16 +8,16 @@ part 'user_info_model.g.dart';
 @JsonSerializable()
 class UserInfoModel extends BaseModel {
   @JsonKey(name: 'ukmscterStatus')
-  int ukmscterStatus;
+  int? ukmscterStatus;
 
   @JsonKey(name: 'pkmhctotoContent')
-  int? pkmhctotoContent;
+  String? pkmhctotoContent;
 
   @JsonKey(name: 'gkmpctsContent')
-  int? gkmpctsContent;
+  String? gkmpctsContent;
 
   @JsonKey(name: 'pkmhctoneContent')
-  int? pkmhctoneContent;
+  String? pkmhctoneContent;
 
   @JsonKey(name: 'ckmoctntactNum')
   int? ckmoctntactNum;
@@ -26,22 +26,22 @@ class UserInfoModel extends BaseModel {
   int? ukmscterLiveness;
 
   @JsonKey(name: 'tkmhctirdLiveness')
-  String? tkmhctirdLiveness;
+  String tkmhctirdLiveness;
 
   @JsonKey(name: 'ukmscterPayFail')
   int? ukmscterPayFail;
 
   @JsonKey(name: 'pkmactyFailLogo')
-  String? pkmactyFailLogo;
+  String pkmactyFailLogo;
 
   @JsonKey(name: 'pkmactyFailContent')
-  String? pkmactyFailContent;
+  String pkmactyFailContent;
 
   @JsonKey(name: 'pkmactyFailLoanName')
-  String? pkmactyFailLoanName;
+  String pkmactyFailLoanName;
 
   @JsonKey(name: 'pkmactyFailLoanNo')
-  String? pkmactyFailLoanNo;
+  String pkmactyFailLoanNo;
 
   @JsonKey(name: 'pkmrctoductList')
   List<ProductModel>? pkmrctoductList;
