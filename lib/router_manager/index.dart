@@ -1,4 +1,3 @@
-import 'dart:convert' as convert;
 
 import 'package:fluro/fluro.dart';
 import 'package:rupee_elf/component/auth/auth_fourth_page.dart';
@@ -6,7 +5,6 @@ import 'package:rupee_elf/component/auth/auth_second_page.dart';
 import 'package:rupee_elf/component/auth/auth_third_page.dart';
 import 'package:rupee_elf/component/auth/face_auth_page.dart';
 import 'package:rupee_elf/component/auth/simple_toast_page.dart';
-import 'package:rupee_elf/component/feedback/add_feedback_page.dart';
 import 'package:rupee_elf/component/feedback/index.dart';
 import 'package:rupee_elf/component/order/index.dart';
 import 'package:rupee_elf/component/product/product_purchase_successed_page.dart';

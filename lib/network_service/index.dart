@@ -1,8 +1,16 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:date_format/date_format.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:rupee_elf/models/aws_params_model.dart';
 import 'package:rupee_elf/models/base_model.dart';
+import 'package:rupee_elf/models/certification_info_model.dart';
 import 'package:rupee_elf/models/empty_network_result.dart';
 import 'package:rupee_elf/models/login_model.dart';
+import 'package:rupee_elf/models/ocr_model.dart';
 import 'package:rupee_elf/models/product_list_model.dart';
 import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network/index.dart';
@@ -35,6 +43,15 @@ class NetworkService {
     return LoginModel.fromJson(json);
   }
 
+  // 退出登录
+  static logout(Function() success) async {
+    var result = await _defaultService(path: '/cLqgPJf/HJKfYM');
+    var model = BaseModel.fromJson(result);
+    if (model.rkmectsultCode == 1) {
+      success();
+    }
+  }
+
   // 登录前首页列表
   static Future<ProductListModel> getProductList() async {
     var result = await _defaultService(path: '/cLqgPJf/JvLpx');
@@ -51,14 +68,82 @@ class NetworkService {
     return await _configNetworkError(model);
   }
 
-  static logout(Function() success) async {
-    var result = await _defaultService(path: '/cLqgPJf/HJKfYM');
-    var model = BaseModel.fromJson(result);
-    if(model.rkmectsultCode == 1) {
-      success();
-    }
+  // 获取用户的认证信息
+  static Future<CertificationInfoModel?> getCertificationInfo() async {
+    var result = await _defaultService(path: '/cLqgPJf/tuVg/IKVwHM');
+    CertificationInfoModel info = CertificationInfoModel.fromJson(result);
+    return await _configNetworkError(info);
   }
 
+  // OCR 识别
+  static Future<OcrModel> ocrRecgonizer(String filePath, String ocrType) async {
+    EasyLoading.show(
+        status: 'identifying...', maskType: EasyLoadingMaskType.black);
+    String imgUrl = await awsImageUpload(filePath);
+    var json = await _defaultService(
+        path: '/cLqgPJf/tuVg/sKsiv',
+        parameters: {'iYYmaYgeUrl': imgUrl, 'oYYcrYType': ocrType});
+    EasyLoading.dismiss();
+    return OcrModel.fromJson(json);
+  }
+
+  // AWS图片上传
+  static Future<String> awsImageUpload(String filePath) async {
+    var result = await _defaultService(
+      path: '/cLqgPJf/tuVg/lmTHO',
+      showLoading: false,
+      showErrorMessage: true,
+    );
+    AwsParamsModel params = AwsParamsModel.fromJson(result);
+
+    // AwsClientCredentials credentials = AwsClientCredentials(
+    //   accessKey: params.ckmrctedentials.accessKeyId,
+    //   secretKey: params.ckmrctedentials.secretAccessKey,
+    //   sessionToken: params.ckmrctedentials.sessionToken,
+    //   expiration: DateTime(params.ckmrctedentials.expiration),
+    // );
+    // S3 client = S3(
+    //   region: params.akmwctsRegion,
+    //   credentials: credentials,
+    //   endpointUrl: params.akmwctsHttp,
+    // );
+
+    // // 配置图片路径
+    // var date = formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
+    // String objectKey =
+    //     'india/img/$date/${RandomUtil.generateRandomString(32)}.jpg';
+    // Uint8List imgData = await compressImageToLower200kB(filePath);
+    // PutObjectOutput uploadResult = await client.putObject(
+    //   bucket: params.akmwctsBucket,
+    //   key: objectKey,
+    //   body: imgData,
+    //   contentType: 'image/jpeg',
+    //   expires: DateTime(params.ckmrctedentials.expiration),
+    // );
+
+    // debugPrint('DEBUG: 上传成功$uploadResult');
+    return '';
+  }
+
+  // 压缩图片到200kb
+  static Future<Uint8List> compressImageToLower200kB(String filePath) async {
+    Uint8List imageCompressed = Uint8List(0);
+    for (int i = 0; i < 100; i++) {
+      Uint8List? stempList = await FlutterImageCompress.compressWithFile(
+        filePath,
+        minWidth: 1024,
+        minHeight: 768,
+        quality: 100 - i,
+        rotate: 90,
+      );
+      if (stempList != null && stempList.length <= 200000) {
+        imageCompressed = stempList;
+      }
+    }
+    return imageCompressed;
+  }
+
+  // 处理 API 内部报错
   static Future<T?> _configNetworkError<T extends BaseModel>(T model) async {
     if (model.rkmectsultCode == 1) {
       return model;
@@ -81,6 +166,7 @@ class NetworkService {
     return null;
   }
 
+  // 统一处理网络请求服务
   static Future<dynamic> _defaultService({
     required String path,
     Map<String, dynamic>? parameters,
@@ -97,6 +183,7 @@ class NetworkService {
     );
   }
 
+  // 统一处理参数签名
   static Map<String, dynamic> _configParameters(
       Map<String, dynamic>? parameters) {
     Map<String, dynamic> newParams;
@@ -114,6 +201,7 @@ class NetworkService {
     return newParams;
   }
 
+  // 参数排序
   static String _sortedMapWith(Map<String, dynamic> params) {
     List<String> allKeys = params.keys.toList();
     allKeys.sort(

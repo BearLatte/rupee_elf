@@ -1,6 +1,13 @@
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:rupee_elf/common/common_form_item.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/models/certification_info_model.dart';
+import 'package:rupee_elf/models/ocr_model.dart';
+import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/widgets/auth_base_widget.dart';
 import 'package:rupee_elf/widgets/can_bg_image_widget.dart';
@@ -20,6 +27,65 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
   String? _selectedBackImage;
   String? _selectedPanImage;
   String? _selectedGender;
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  void loadData() async {
+    CertificationInfoModel? info = await NetworkService.getCertificationInfo();
+    debugPrint('DEBUG: 当前认证信息是 $info');
+  }
+
+  void cardFrontOnTap(BuildContext context) async {
+    var result = await Navigator.of(context).pushNamed('authSimple');
+    if (result != null) {
+      configCameraParams(0);
+    }
+  }
+
+  void configCameraParams(int type) async {
+    var status = await Permission.camera.request();
+    if (status == PermissionStatus.granted) {
+      // 有相机权限，打开相机拍照
+      ImagePicker picker = ImagePicker();
+      XFile? img = await picker.pickImage(source: ImageSource.camera);
+
+      if (img != null) {
+        selectedImage(type, img.path);
+      }
+    } else {
+      await CommonToast.showToast(
+          'You did not allow us to access the camera, which will help you obtain a loan. Would you like to set up authorization.');
+    }
+  }
+
+  void selectedImage(int type, String src) async {
+    String typeStr;
+    if (type == 0) {
+      setState(() {
+        _selectedFrontImage = src;
+      });
+
+      typeStr = 'AADHAAR_FRONT';
+    } else if (type == 1) {
+      setState(() {
+        _selectedBackImage = src;
+      });
+      typeStr = 'AADHAAR_BACK';
+    } else {
+      setState(() {
+        _selectedPanImage = src;
+      });
+      typeStr = 'PAN_FRONT';
+    }
+
+    OcrModel model = await NetworkService.ocrRecgonizer(src, typeStr);
+    debugPrint('DEBUG: 识别成功$model');
+  }
+
   @override
   Widget build(BuildContext context) {
     return AuthBaseWidget(
@@ -57,17 +123,7 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   height: 120,
                   backgroundImage: _selectedFrontImage,
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamed('authSimple')
-                        .then((params) {
-                      if (params != null) {
-                        setState(() {
-                          _selectedFrontImage =
-                              'https://media.gq.com.tw/photos/5dbc27d22551d4000869e16b/3:2/w_1600%2Cc_limit/2019050674544721.jpg';
-                        });
-                        debugPrint('DEBUG: card Front 点击');
-                      }
-                    });
+                    cardFrontOnTap(context);
                   },
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 10.0)),
