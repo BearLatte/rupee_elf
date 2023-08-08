@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'dart:typed_data';
+import 'package:aws_s3_api/s3-2006-03-01.dart';
 import 'package:date_format/date_format.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -96,33 +96,29 @@ class NetworkService {
     );
     AwsParamsModel params = AwsParamsModel.fromJson(result);
 
-    // AwsClientCredentials credentials = AwsClientCredentials(
-    //   accessKey: params.ckmrctedentials.accessKeyId,
-    //   secretKey: params.ckmrctedentials.secretAccessKey,
-    //   sessionToken: params.ckmrctedentials.sessionToken,
-    //   expiration: DateTime(params.ckmrctedentials.expiration),
-    // );
-    // S3 client = S3(
-    //   region: params.akmwctsRegion,
-    //   credentials: credentials,
-    //   endpointUrl: params.akmwctsHttp,
-    // );
+    AwsClientCredentials credentials = AwsClientCredentials(
+      accessKey: params.ckmrctedentials.accessKeyId,
+      secretKey: params.ckmrctedentials.secretAccessKey,
+      sessionToken: params.ckmrctedentials.sessionToken,
+      expiration: DateTime(params.ckmrctedentials.expiration),
+    );
+    S3 client = S3(
+      region: params.akmwctsRegion,
+      credentials: credentials,
+    );
 
-    // // 配置图片路径
-    // var date = formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
-    // String objectKey =
-    //     'india/img/$date/${RandomUtil.generateRandomString(32)}.jpg';
-    // Uint8List imgData = await compressImageToLower200kB(filePath);
-    // PutObjectOutput uploadResult = await client.putObject(
-    //   bucket: params.akmwctsBucket,
-    //   key: objectKey,
-    //   body: imgData,
-    //   contentType: 'image/jpeg',
-    //   expires: DateTime(params.ckmrctedentials.expiration),
-    // );
-
-    // debugPrint('DEBUG: 上传成功$uploadResult');
-    return '';
+    // 配置图片路径
+    var date = formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
+    String objectKey =
+        'india/img/$date/${RandomUtil.generateRandomString(32)}.jpg';
+    Uint8List imgData = await compressImageToLower200kB(filePath);
+    PutObjectOutput _ = await client.putObject(
+      bucket: params.akmwctsBucket,
+      key: objectKey,
+      body: imgData,
+      contentType: 'image/jpeg',
+    );
+    return objectKey;
   }
 
   // 压缩图片到200kb

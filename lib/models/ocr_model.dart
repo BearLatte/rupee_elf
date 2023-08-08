@@ -8,27 +8,29 @@ part 'ocr_model.g.dart';
   class OcrModel extends BaseModel {
 
   @JsonKey(name: 'ukmscterNames')
-  String ukmscterNames;
+  String? ukmscterNames;
 
   @JsonKey(name: 'akmactdhaarNumber')
-  String akmactdhaarNumber;
+  String? akmactdhaarNumber;
 
   @JsonKey(name: 'ukmscterGender')
-  String ukmscterGender;
+  String? ukmscterGender;
 
   @JsonKey(name: 'dkmactteOfBirth')
-  String dkmactteOfBirth;
+  String? dkmactteOfBirth;
 
   @JsonKey(name: 'akmdctdressDetail')
-  String akmdctdressDetail;
+  String? akmdctdressDetail;
 
   @JsonKey(name: 'pkmactnNumber')
-  String pkmactnNumber;
+  String? pkmactnNumber;
 
   OcrModel(this.ukmscterNames,this.akmactdhaarNumber,this.ukmscterGender,this.dkmactteOfBirth,this.akmdctdressDetail,this.pkmactnNumber,) : super(0, '');
 
   factory OcrModel.fromJson(Map<String, dynamic> srcJson) => _$OcrModelFromJson(srcJson);
 
+
+  @override
   Map<String, dynamic> toJson() => _$OcrModelToJson(this);
 
 }

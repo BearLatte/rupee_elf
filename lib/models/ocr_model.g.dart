@@ -7,12 +7,12 @@ part of 'ocr_model.dart';
 // **************************************************************************
 
 OcrModel _$OcrModelFromJson(Map<String, dynamic> json) => OcrModel(
-      json['ukmscterNames'] as String,
-      json['akmactdhaarNumber'] as String,
-      json['ukmscterGender'] as String,
-      json['dkmactteOfBirth'] as String,
-      json['akmdctdressDetail'] as String,
-      json['pkmactnNumber'] as String,
+      json['ukmscterNames'] as String?,
+      json['akmactdhaarNumber'] as String?,
+      json['ukmscterGender'] as String?,
+      json['dkmactteOfBirth'] as String?,
+      json['akmdctdressDetail'] as String?,
+      json['pkmactnNumber'] as String?,
     )
       ..rkmectsultCode = json['rkmectsultCode'] as int
       ..rkmectsultMsg = json['rkmectsultMsg'] as String;

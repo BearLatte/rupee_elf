@@ -16,6 +16,7 @@ dependencies:
   dio: ^5.3.1
   fluro: ^2.0.5
   crypto: ^3.0.3
+  aws_s3_api: ^2.0.0
   date_format: ^2.0.7
   fluttertoast: ^8.2.2
   image_picker: ^1.0.2
@@ -31,12 +32,6 @@ dependencies:
   flutter_easyloading: ^3.0.5
   flutter_image_compress: ^2.0.4
   flutter_advanced_networkimage_2: ^2.0.1
-  
-  #AWS 图片上传依赖
-  amplify_flutter: ^1.0.0
-  amplify_storage_s3: ^1.0.0
-  amplify_auth_cognito: ^1.0.0
-  
   
   cupertino_icons: ^1.0.2
 

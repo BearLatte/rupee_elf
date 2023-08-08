@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   var isShowMenu = false;
   List<ProductModel> _products = [];
   bool _isSendedFirstLaunchRequest = false;
-  final bool _isCerified = false;
+  bool _isCerified = false;
 
   late UserInfoModel userInfo;
 
@@ -56,13 +56,7 @@ class _HomePageState extends State<HomePage> {
               return ProductItemCell(
                 isOdd: _products.indexOf(item) % 2 == 0,
                 product: item,
-<<<<<<< HEAD
-                onTap: () {
-                  productCellClicked(context);
-                },
-=======
                 onTap: itemCellOnTap,
->>>>>>> 2514c7d76132467b913dff21b884f761061e6d67
               );
             }).toList(),
           ),
@@ -101,20 +95,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-<<<<<<< HEAD
-  void productCellClicked(BuildContext context) {
-    if (!Global.instance.isLogin) {
-      Navigator.of(context).pushNamed('/login').then((value) {
-        loadData();
-      });
-    }
-
-    if (_isCerified) {
-    } else {
-      Navigator.of(context).pushNamed('/authFirst').then((value) {
-=======
   void itemCellOnTap() {
-    if (Global.instance.isLogin && userInfo.ukmscterStatus == 1) {
+    if (Global.instance.isLogin && userInfo.ukmscterStatus == 2) {
       debugPrint('DEBUG: 此处查询订单状态，跳转页面');
     } else if (!Global.instance.isLogin) {
       Navigator.of(context).pushNamed('/login').then((value) {
@@ -122,7 +104,6 @@ class _HomePageState extends State<HomePage> {
       });
     } else {
       Navigator.pushNamed(context, 'authFirst').then((value) {
->>>>>>> 2514c7d76132467b913dff21b884f761061e6d67
         loadData();
       });
     }
@@ -139,13 +120,9 @@ class _HomePageState extends State<HomePage> {
     }
 
     List<ProductModel>? list;
-    bool isCer;
+    bool isCer = _isCerified;
     if (Global.instance.isLogin) {
       UserInfoModel? model = await NetworkService.getUserInfo();
-<<<<<<< HEAD
-      list = model?.pkmrctoductList;
-      isCer = model?.ukmscterStatus == 2;
-=======
 
       if (model != null) {
         userInfo = model;
@@ -159,7 +136,6 @@ class _HomePageState extends State<HomePage> {
               context: context, type: AlertType.dibursingFailed, model: model);
         }
       }
->>>>>>> 2514c7d76132467b913dff21b884f761061e6d67
     } else {
       var listModel = await NetworkService.getProductList();
       list = listModel.pkmrctoductList;
