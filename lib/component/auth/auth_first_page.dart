@@ -1,4 +1,6 @@
+// ignore_for_file: constant_identifier_names
 
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -6,14 +8,18 @@ import 'package:rupee_elf/common/common_form_item.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/models/certification_info_model.dart';
 import 'package:rupee_elf/models/ocr_model.dart';
+import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
+import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/widgets/auth_base_widget.dart';
 import 'package:rupee_elf/widgets/can_bg_image_widget.dart';
 import 'package:rupee_elf/widgets/gender_selector.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
+
+enum OcrType { AADHAAR_FRONT, AADHAAR_BACK, PAN_FRONT }
 
 class AuthFirstPage extends StatefulWidget {
   const AuthFirstPage({super.key});
@@ -26,7 +32,18 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
   String? _selectedFrontImage;
   String? _selectedBackImage;
   String? _selectedPanImage;
-  String? _selectedGender;
+  String _selectedGender = '';
+  String _selectedBirth = '';
+
+  TextEditingController aadhaarNameController = TextEditingController();
+  TextEditingController aadhaarNumberController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController panNumberController = TextEditingController();
+
+  // 后台需要的数据
+  OcrModel? aadhaarFrontModel;
+  OcrModel? aadhaarBackModel;
+  OcrModel? panFrontModel;
 
   @override
   void initState() {
@@ -39,14 +56,132 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
     debugPrint('DEBUG: 当前认证信息是 $info');
   }
 
-  void cardFrontOnTap(BuildContext context) async {
+  void cardFrontOnTap() async {
     var result = await Navigator.of(context).pushNamed('authSimple');
     if (result != null) {
-      configCameraParams(0);
+      configCameraParams(OcrType.AADHAAR_FRONT);
     }
   }
 
-  void configCameraParams(int type) async {
+  void cardBackOnTap() {
+    configCameraParams(OcrType.AADHAAR_BACK);
+  }
+
+  void panCardOnTap() {
+    configCameraParams(OcrType.PAN_FRONT);
+  }
+
+  void birthItemOnTap() async {
+    var selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(DateTime.now().year - 80),
+      lastDate: DateTime.now(),
+    );
+
+    if (selectedDate != null) {
+      setState(() {
+        _selectedBirth =
+            formatDate(selectedDate, ['yyyy', '-', 'mm', '-', 'dd']);
+      });
+    }
+
+    debugPrint('DEBUG: Date of Birth 点击，此处要做埋点');
+  }
+
+  void nextOnTap() async {
+    var status = await Permission.locationWhenInUse.request();
+    if (status != PermissionStatus.granted) {
+      if (context.mounted) {
+        bool isOk = await CommonAlert.showAlert(
+          context: context,
+          type: AlertType.tips,
+          message:
+              'This feature requires you to authorize this app to open the location service\nHow to set it: open phone Settings -> Privacy -> Location service',
+        );
+        if (isOk) {
+          openAppSettings();
+        }
+        return;
+      }
+    }
+
+    if (_selectedBackImage == null) {
+      await CommonToast.showToast('Please upload your Aadhaar!');
+      return;
+    }
+
+    if (_selectedBackImage == null) {
+      await CommonToast.showToast('Please upload your Aadhaar!');
+      return;
+    }
+
+    if (_selectedPanImage == null) {
+      await CommonToast.showToast('Please upload your Pan card!');
+      return;
+    }
+
+    if (aadhaarNameController.text.trim().isEmpty) {
+      await CommonToast.showToast('Aadhaar Name can not be empty!');
+      return;
+    }
+
+    if (aadhaarNumberController.text.trim().isEmpty) {
+      await CommonToast.showToast('Aadhaar Number can not be empty!');
+      return;
+    }
+
+    if (_selectedBirth.trim().isEmpty) {
+      await CommonToast.showToast('Date of Birth can not be empty!');
+      return;
+    }
+
+    if (_selectedGender.trim().isEmpty) {
+      await CommonToast.showToast('Gender can not be empty!');
+      return;
+    }
+
+    if (addressController.text.trim().isEmpty) {
+      await CommonToast.showToast('Detail Address can not be empty!');
+      return;
+    }
+
+    if (panNumberController.text.trim().isEmpty) {
+      await CommonToast.showToast('Pan Number can not be empty!');
+      return;
+    }
+
+    // 截取图片的路径
+    String frontImage =
+        _selectedFrontImage!.substring(_selectedFrontImage!.indexOf('india'));
+    String backImage =
+        _selectedBackImage!.substring(_selectedBackImage!.indexOf('india'));
+    String panImage =
+        _selectedPanImage!.substring(_selectedPanImage!.indexOf('india'));
+
+    UserAuthSubmitModel submitModel = UserAuthSubmitModel(
+      aYYutYhStep: '1',
+      fYYroYntImage: frontImage,
+      bYYacYkImage: backImage,
+      pYYanYCardImg: panImage,
+      uYYseYrNames: aadhaarNameController.text,
+      aYYadYhaarNumber: aadhaarNumberController.text,
+      dYYatYeOfBirth: _selectedBirth,
+      uYYseYrGender: _selectedGender,
+      aYYddYressDetail: addressController.text,
+      pYYanYNumber: panNumberController.text,
+    );
+
+    await NetworkService.userAuthSubmit(submitModel, () {
+      if (context.mounted) {
+        Navigator.of(context).pushNamed('authSecond');
+      }
+    });
+
+    debugPrint('DEBUG: Next 按钮 点击，此处要做埋点');
+  }
+
+  void configCameraParams(OcrType type) async {
     var status = await Permission.camera.request();
     if (status == PermissionStatus.granted) {
       // 有相机权限，打开相机拍照
@@ -62,28 +197,44 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
     }
   }
 
-  void selectedImage(int type, String src) async {
-    String typeStr;
-    if (type == 0) {
-      setState(() {
-        _selectedFrontImage = src;
-      });
+  void selectedImage(OcrType type, String src) async {
+    OcrModel? model = await NetworkService.ocrRecgonizer(src, type.name);
 
-      typeStr = 'AADHAAR_FRONT';
-    } else if (type == 1) {
-      setState(() {
-        _selectedBackImage = src;
-      });
-      typeStr = 'AADHAAR_BACK';
-    } else {
-      setState(() {
-        _selectedPanImage = src;
-      });
-      typeStr = 'PAN_FRONT';
+    switch (type) {
+      case OcrType.AADHAAR_FRONT:
+        aadhaarFrontModel = model;
+        break;
+      case OcrType.AADHAAR_BACK:
+        aadhaarBackModel = model;
+        break;
+      case OcrType.PAN_FRONT:
+        panFrontModel = model;
+        break;
     }
 
-    OcrModel model = await NetworkService.ocrRecgonizer(src, typeStr);
-    debugPrint('DEBUG: 识别成功$model');
+    setState(() {
+      if (aadhaarFrontModel != null) {
+        _selectedFrontImage =
+            '${aadhaarFrontModel?.ikmmctageHttp}/${aadhaarFrontModel?.ikmmctagePath}';
+        aadhaarNameController.text = aadhaarFrontModel?.ukmscterNames ?? '';
+        aadhaarNumberController.text =
+            aadhaarFrontModel?.akmactdhaarNumber ?? '';
+        _selectedBirth = aadhaarFrontModel?.dkmactteOfBirth ?? '';
+        _selectedGender = aadhaarFrontModel?.ukmscterGender ?? '';
+      }
+
+      if (aadhaarBackModel != null) {
+        _selectedBackImage =
+            '${aadhaarBackModel?.ikmmctageHttp}/${aadhaarBackModel?.ikmmctagePath}';
+        addressController.text = aadhaarBackModel?.akmdctdressDetail ?? '';
+      }
+
+      if (panFrontModel != null) {
+        _selectedPanImage =
+            '${panFrontModel?.ikmmctageHttp}/${panFrontModel?.ikmmctagePath}';
+        panNumberController.text = panFrontModel?.pkmactnNumber ?? '';
+      }
+    });
   }
 
   @override
@@ -122,47 +273,41 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   width: 214.0,
                   height: 120,
                   backgroundImage: _selectedFrontImage,
-                  onTap: () {
-                    cardFrontOnTap(context);
-                  },
+                  onTap: cardFrontOnTap,
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 10.0)),
                 CommonFormItem(
                   type: FormType.input,
                   hintText: 'Aadhaar Name',
                   keyboardType: TextInputType.name,
+                  editingController: aadhaarNameController,
                   onTap: () {
                     debugPrint('DEBUG: 点击了 Aadhaar Name 选项，此处要做埋点');
-                  },
-                  onValueChanged: (value) {
-                    debugPrint('DEBUG: Aadhaar Name 当前输入的文字是$value');
                   },
                 ),
                 CommonFormItem(
                   type: FormType.input,
                   hintText: 'Aadhaar Number',
                   keyboardType: TextInputType.number,
+                  editingController: aadhaarNumberController,
                   onTap: () {
                     debugPrint('DEBUG: 点击了 Aadhaar Number 选项，此处要做埋点');
-                  },
-                  onValueChanged: (value) {
-                    debugPrint('DEBUG: Aadhaar Number 当前输入的文字是$value');
                   },
                 ),
                 CommonFormItem(
                   type: FormType.date,
                   hintText: 'Date of Birth',
-                  onTap: () {
-                    debugPrint('DEBUG: Date of Birth 点击，此处要做埋点');
-                  },
+                  inputValue: _selectedBirth,
+                  onTap: birthItemOnTap,
                 ),
                 GenderSelector(
                   height: 50.0,
-                  selectedValue: _selectedGender,
+                  selectedValue: _selectedGender ?? '',
                   onTap: () {
                     debugPrint('DEBUG: 选择了性别，此处需要做埋点');
                   },
                   onValueChanged: (selectedGender) {
+                    _selectedGender = selectedGender;
                     debugPrint('DEBUG: 当前选中的性别是$selectedGender');
                   },
                 ),
@@ -173,17 +318,13 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   width: 214.0,
                   height: 120,
                   backgroundImage: _selectedBackImage,
-                  onTap: () {
-                    setState(() {
-                      _selectedBackImage =
-                          'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/8a3e-hukwxnv6582111-1553152727.jpg?crop=1xw:1xh;center,top&resize=980:*';
-                    });
-                    debugPrint('DEBUG: card back 点击,此处需做埋点');
-                  },
+                  onTap: cardBackOnTap,
                 ),
                 CommonFormItem(
                   type: FormType.input,
                   hintText: 'Detail Address',
+                  editingController: addressController,
+                  isMultiLine: true,
                   onTap: () {
                     debugPrint('DEBUG: Detail Address 点击，此处要做埋点');
                   },
@@ -198,17 +339,12 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   width: 214.0,
                   height: 120,
                   backgroundImage: _selectedPanImage,
-                  onTap: () {
-                    setState(() {
-                      _selectedPanImage =
-                          'https://assets.juksy.com/files/articles/57859/800x_100_w-61bc3f2761aa2.jpg';
-                    });
-                    debugPrint('DEBUG: Pan card Front 点击,此处需做埋点');
-                  },
+                  onTap: panCardOnTap,
                 ),
                 CommonFormItem(
                   type: FormType.input,
                   hintText: 'Pan Number',
+                  editingController: panNumberController,
                   onTap: () {
                     debugPrint('DEBUG: Pan Number 点击，此处要做埋点');
                   },
@@ -221,10 +357,7 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   width: 252.0,
                   height: 52.0,
                   title: 'Next',
-                  onPressed: () {
-                    debugPrint('DEBUG: Next 按钮 点击，此处要做埋点');
-                    Navigator.of(context).pushNamed('authSecond');
-                  },
+                  onPressed: nextOnTap,
                 ),
               ],
             ),

@@ -36,7 +36,7 @@ class CommonImage extends StatelessWidget {
     } else if (fileImageUrlReg.hasMatch(src)) {
       return Image.file(File(src), fit: fit, width: width, height: height);
     }
-    
+
     assert(false, 'The image url is illegal.');
     return Container();
   }

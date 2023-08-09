@@ -15,14 +15,11 @@ class AwsParamsModel extends BaseModel {
   @JsonKey(name: 'ckmrctedentials')
   AwsCredentials ckmrctedentials;
 
-  @JsonKey(name: 'akmwctsHttp')
-  String akmwctsHttp;
 
   AwsParamsModel(
     this.akmwctsBucket,
     this.akmwctsRegion,
     this.ckmrctedentials,
-    this.akmwctsHttp,
   ) : super(0, '');
 
   factory AwsParamsModel.fromJson(Map<String, dynamic> srcJson) =>

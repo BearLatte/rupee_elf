@@ -7,6 +7,8 @@ part of 'ocr_model.dart';
 // **************************************************************************
 
 OcrModel _$OcrModelFromJson(Map<String, dynamic> json) => OcrModel(
+      json['ikmmctageHttp'] as String,
+      json['ikmmctagePath'] as String,
       json['ukmscterNames'] as String?,
       json['akmactdhaarNumber'] as String?,
       json['ukmscterGender'] as String?,
@@ -20,6 +22,8 @@ OcrModel _$OcrModelFromJson(Map<String, dynamic> json) => OcrModel(
 Map<String, dynamic> _$OcrModelToJson(OcrModel instance) => <String, dynamic>{
       'rkmectsultCode': instance.rkmectsultCode,
       'rkmectsultMsg': instance.rkmectsultMsg,
+      'ikmmctageHttp': instance.ikmmctageHttp,
+      'ikmmctagePath': instance.ikmmctagePath,
       'ukmscterNames': instance.ukmscterNames,
       'akmactdhaarNumber': instance.akmactdhaarNumber,
       'ukmscterGender': instance.ukmscterGender,

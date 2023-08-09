@@ -11,7 +11,6 @@ AwsParamsModel _$AwsParamsModelFromJson(Map<String, dynamic> json) =>
       json['akmwctsBucket'] as String,
       json['akmwctsRegion'] as String,
       AwsCredentials.fromJson(json['ckmrctedentials'] as Map<String, dynamic>),
-      json['akmwctsHttp'] as String,
     )
       ..rkmectsultCode = json['rkmectsultCode'] as int
       ..rkmectsultMsg = json['rkmectsultMsg'] as String;
@@ -23,5 +22,4 @@ Map<String, dynamic> _$AwsParamsModelToJson(AwsParamsModel instance) =>
       'akmwctsBucket': instance.akmwctsBucket,
       'akmwctsRegion': instance.akmwctsRegion,
       'ckmrctedentials': instance.ckmrctedentials,
-      'akmwctsHttp': instance.akmwctsHttp,
     };

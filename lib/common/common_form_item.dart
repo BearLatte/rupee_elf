@@ -68,6 +68,7 @@ class CommonFormItem extends StatelessWidget {
       style: TextStyle(fontSize: 16.0, color: Constants.themeTextColor),
       onTap: onTap,
       maxLines: isMultiLine ? null : 1,
+      controller: editingController,
     );
   }
 

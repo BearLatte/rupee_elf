@@ -12,6 +12,7 @@ import 'package:rupee_elf/models/empty_network_result.dart';
 import 'package:rupee_elf/models/login_model.dart';
 import 'package:rupee_elf/models/ocr_model.dart';
 import 'package:rupee_elf/models/product_list_model.dart';
+import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network/index.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
@@ -75,16 +76,45 @@ class NetworkService {
     return await _configNetworkError(info);
   }
 
+  // 用户认证信息提交
+  static userAuthSubmit(
+      UserAuthSubmitModel submitModel, Function() success) async {
+    Map<String, dynamic> params = {'aYYutYhStep': submitModel.aYYutYhStep};
+    if (submitModel.aYYutYhStep == '1') {
+      params['fYYroYntImage'] = submitModel.fYYroYntImage;
+      params['bYYacYkImage'] = submitModel.bYYacYkImage;
+      params['pYYanYCardImg'] = submitModel.pYYanYCardImg;
+      params['uYYseYrNames'] = submitModel.uYYseYrNames;
+      params['aYYadYhaarNumber'] = submitModel.aYYadYhaarNumber;
+      params['dYYatYeOfBirth'] = submitModel.dYYatYeOfBirth;
+      params['uYYseYrGender'] = submitModel.uYYseYrGender;
+      params['aYYddYressDetail'] = submitModel.aYYddYressDetail;
+      params['pYYanYNumber'] = submitModel.pYYanYNumber;
+    }
+
+    var json =
+        await _defaultService(path: '/cLqgPJf/tuVg/hUsKR', parameters: params);
+    BaseModel model = BaseModel.fromJson(json);
+
+    if (await _configNetworkError<BaseModel>(model) != null) {
+      success();
+    }
+  }
+
   // OCR 识别
-  static Future<OcrModel> ocrRecgonizer(String filePath, String ocrType) async {
+  static Future<OcrModel?> ocrRecgonizer(
+      String filePath, String ocrType) async {
     EasyLoading.show(
         status: 'identifying...', maskType: EasyLoadingMaskType.black);
-    String imgUrl = await awsImageUpload(filePath);
+    String imageUrl = await awsImageUpload(filePath);
     var json = await _defaultService(
-        path: '/cLqgPJf/tuVg/sKsiv',
-        parameters: {'iYYmaYgeUrl': imgUrl, 'oYYcrYType': ocrType});
+      path: '/cLqgPJf/tuVg/sKsiv',
+      parameters: {'iYYmaYgeUrl': imageUrl, 'oYYcrYType': ocrType},
+      showLoading: false,
+    );
     EasyLoading.dismiss();
-    return OcrModel.fromJson(json);
+    OcrModel model = OcrModel.fromJson(json);
+    return await _configNetworkError<OcrModel>(model);
   }
 
   // AWS图片上传
@@ -100,7 +130,6 @@ class NetworkService {
       accessKey: params.ckmrctedentials.accessKeyId,
       secretKey: params.ckmrctedentials.secretAccessKey,
       sessionToken: params.ckmrctedentials.sessionToken,
-      expiration: DateTime(params.ckmrctedentials.expiration),
     );
     S3 client = S3(
       region: params.akmwctsRegion,
@@ -130,7 +159,6 @@ class NetworkService {
         minWidth: 1024,
         minHeight: 768,
         quality: 100 - i,
-        rotate: 90,
       );
       if (stempList != null && stempList.length <= 200000) {
         imageCompressed = stempList;
@@ -172,7 +200,7 @@ class NetworkService {
     var formData = FormData.fromMap(_configParameters(parameters));
 
     return await HttpUtils.post(
-      path: path,
+      path: path.trim(),
       data: formData,
       showLoading: showLoading,
       showErrorMessage: showErrorMessage,
