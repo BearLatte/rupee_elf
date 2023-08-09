@@ -32,10 +32,11 @@ class HttpRequest {
     /// 添加各种拦截器
     // dio.interceptors.add(ErrorInterceptor());
     dio.interceptors.add(PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: true,
-        responseBody: true));
+      requestHeader: true,
+      requestBody: true,
+      responseHeader: true,
+      responseBody: true,
+    ));
   }
 
   /// 封装request方法

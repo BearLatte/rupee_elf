@@ -314,7 +314,7 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                 ),
                 GenderSelector(
                   height: 50.0,
-                  selectedValue: _selectedGender ?? '',
+                  selectedValue: _selectedGender,
                   onTap: () {
                     debugPrint('DEBUG: 选择了性别，此处需要做埋点');
                   },

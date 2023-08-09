@@ -42,6 +42,10 @@ class HttpException implements Exception {
   factory HttpException.create(DioException error) {
     /// dio异常
     switch (error.type) {
+      case DioExceptionType.unknown:
+      {
+        return HttpException(code: -1, msg: 'Connection failed');
+      }
       case DioExceptionType.cancel:
         {
           return HttpException(code: -1, msg: 'request cancel');
@@ -81,6 +85,11 @@ class HttpException implements Exception {
                       code: statusCode, msg: 'Server rejects execution');
                 }
               case 404:
+                {
+                  return HttpException(
+                      code: statusCode, msg: 'Unable to connect to server');
+                }
+              case 443:
                 {
                   return HttpException(
                       code: statusCode, msg: 'Unable to connect to server');
