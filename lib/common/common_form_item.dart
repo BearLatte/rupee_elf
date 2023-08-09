@@ -81,10 +81,10 @@ class CommonFormItem extends StatelessWidget {
             behavior: HitTestBehavior.translucent,
             onTap: onTap,
             child: Text(
-              inputValue ?? hintText,
+              inputValue.trim().isEmpty ? hintText : inputValue,
               style: TextStyle(
                 fontSize: 16.0,
-                color: inputValue == null
+                color: inputValue.trim().isEmpty
                     ? Constants.seconaryTextColor
                     : Constants.themeTextColor,
               ),
