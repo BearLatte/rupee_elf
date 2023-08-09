@@ -37,8 +37,8 @@ CertificationInfoModel _$CertificationInfoModelFromJson(
       (json['ekmdctucationList'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      (json['mkmactritalStatusList'] as List<dynamic>?)
-          ?.map((e) => e as String)
+      (json['mkmactrriageStatusList'] as List<dynamic>)
+          .map((e) => e as String)
           .toList(),
       (json['wkmoctrkTitleList'] as List<dynamic>)
           .map((e) => e as String)
@@ -85,7 +85,7 @@ Map<String, dynamic> _$CertificationInfoModelToJson(
       'bkmactnkIfscCode': instance.bkmactnkIfscCode,
       'ukmscterGenderList': instance.ukmscterGenderList,
       'ekmdctucationList': instance.ekmdctucationList,
-      'mkmactritalStatusList': instance.mkmactritalStatusList,
+      'mkmactrriageStatusList': instance.mkmactrriageStatusList,
       'wkmoctrkTitleList': instance.wkmoctrkTitleList,
       'ikmnctdustryList': instance.ikmnctdustryList,
       'mkmoctnthlySalaryList': instance.mkmoctnthlySalaryList,

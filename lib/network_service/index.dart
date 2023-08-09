@@ -92,6 +92,19 @@ class NetworkService {
       params['pYYanYNumber'] = submitModel.pYYanYNumber;
     }
 
+    if (submitModel.aYYutYhStep == '2') {
+      params['mYYarYriageStatus'] = submitModel.mYYarYriageStatus;
+      params['eYYduYcation'] = submitModel.eYYduYcation;
+      params['uYYseYrIndustry'] = submitModel.uYYseYrIndustry;
+      params['mYYonYthlySalary'] = submitModel.mYYonYthlySalary;
+      params['wYYorYkTitle'] = submitModel.wYYorYkTitle;
+      params['wYYhaYtsAppAccount'] = submitModel.wYYhaYtsAppAccount;
+      params['uYYseYrEmail'] = submitModel.uYYseYrEmail;
+      if (submitModel.fYYacYebookId.trim().isNotEmpty) {
+        params['fYYacYebookId'] = submitModel.fYYacYebookId;
+      }
+    }
+
     var json =
         await _defaultService(path: '/cLqgPJf/tuVg/hUsKR', parameters: params);
     BaseModel model = BaseModel.fromJson(json);

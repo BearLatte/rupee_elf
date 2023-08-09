@@ -8,7 +8,7 @@ class CommonFormItem extends StatelessWidget {
   final double minHeight;
   final FormType type;
   final String hintText;
-  final String? inputValue;
+  final String inputValue;
   final TextInputType? keyboardType;
   final void Function()? onTap;
   final void Function(String)? onValueChanged;
@@ -20,7 +20,7 @@ class CommonFormItem extends StatelessWidget {
     this.minHeight = 50,
     required this.type,
     required this.hintText,
-    this.inputValue,
+    this.inputValue = '',
     this.keyboardType,
     this.onTap,
     this.onValueChanged,
@@ -61,7 +61,8 @@ class CommonFormItem extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         border: InputBorder.none,
-        hintStyle: TextStyle(fontSize: 16.0, color: Constants.seconaryTextColor),
+        hintStyle:
+            TextStyle(fontSize: 16.0, color: Constants.seconaryTextColor),
       ),
       keyboardType: keyboardType,
       onChanged: onValueChanged,
@@ -103,10 +104,10 @@ class CommonFormItem extends StatelessWidget {
             behavior: HitTestBehavior.translucent,
             onTap: onTap,
             child: Text(
-              inputValue ?? hintText,
+              inputValue.trim().isEmpty ? hintText : inputValue,
               style: TextStyle(
                 fontSize: 16.0,
-                color: inputValue == null
+                color: inputValue.trim().isEmpty
                     ? Constants.seconaryTextColor
                     : Constants.themeTextColor,
               ),

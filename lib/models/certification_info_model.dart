@@ -5,7 +5,6 @@ part 'certification_info_model.g.dart';
 
 @JsonSerializable()
 class CertificationInfoModel extends BaseModel {
-
   @JsonKey(name: 'ikmmctageHttp')
   String ikmmctageHttp;
 
@@ -78,8 +77,8 @@ class CertificationInfoModel extends BaseModel {
   @JsonKey(name: 'ekmdctucationList')
   List<String> ekmdctucationList;
 
-  @JsonKey(name: 'mkmactritalStatusList')
-  List<String>? mkmactritalStatusList;
+  @JsonKey(name: 'mkmactrriageStatusList')
+  List<String> mkmactrriageStatusList;
 
   @JsonKey(name: 'wkmoctrkTitleList')
   List<String> wkmoctrkTitleList;
@@ -118,7 +117,7 @@ class CertificationInfoModel extends BaseModel {
     this.bkmactnkIfscCode,
     this.ukmscterGenderList,
     this.ekmdctucationList,
-    this.mkmactritalStatusList,
+    this.mkmactrriageStatusList,
     this.wkmoctrkTitleList,
     this.ikmnctdustryList,
     this.mkmoctnthlySalaryList,
