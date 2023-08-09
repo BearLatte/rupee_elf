@@ -5,6 +5,10 @@ part 'certification_info_model.g.dart';
 
 @JsonSerializable()
 class CertificationInfoModel extends BaseModel {
+
+  @JsonKey(name: 'ikmmctageHttp')
+  String ikmmctageHttp;
+
   @JsonKey(name: 'fkmrctontImage')
   String fkmrctontImage;
 
@@ -90,6 +94,7 @@ class CertificationInfoModel extends BaseModel {
   List<String> rkmectlationList;
 
   CertificationInfoModel(
+    this.ikmmctageHttp,
     this.fkmrctontImage,
     this.bkmactckImage,
     this.ukmscterNames,
@@ -123,5 +128,6 @@ class CertificationInfoModel extends BaseModel {
   factory CertificationInfoModel.fromJson(Map<String, dynamic> srcJson) =>
       _$CertificationInfoModelFromJson(srcJson);
 
+  @override
   Map<String, dynamic> toJson() => _$CertificationInfoModelToJson(this);
 }

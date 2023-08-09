@@ -9,6 +9,7 @@ part of 'certification_info_model.dart';
 CertificationInfoModel _$CertificationInfoModelFromJson(
         Map<String, dynamic> json) =>
     CertificationInfoModel(
+      json['ikmmctageHttp'] as String,
       json['fkmrctontImage'] as String,
       json['bkmactckImage'] as String,
       json['ukmscterNames'] as String,
@@ -60,6 +61,7 @@ Map<String, dynamic> _$CertificationInfoModelToJson(
     <String, dynamic>{
       'rkmectsultCode': instance.rkmectsultCode,
       'rkmectsultMsg': instance.rkmectsultMsg,
+      'ikmmctageHttp': instance.ikmmctageHttp,
       'fkmrctontImage': instance.fkmrctontImage,
       'bkmactckImage': instance.bkmactckImage,
       'ukmscterNames': instance.ukmscterNames,

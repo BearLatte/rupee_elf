@@ -53,7 +53,19 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
 
   void loadData() async {
     CertificationInfoModel? info = await NetworkService.getCertificationInfo();
-    debugPrint('DEBUG: 当前认证信息是 $info');
+    if (info != null) {
+      setState(() {
+        _selectedFrontImage = '${info.ikmmctageHttp}/${info.fkmrctontImage}';
+        _selectedBackImage = '${info.ikmmctageHttp}/${info.bkmactckImage}';
+        _selectedPanImage = '${info.ikmmctageHttp}/${info.pkmactnCardImg}';
+        aadhaarNameController.text = info.ukmscterNames;
+        aadhaarNumberController.text = info.akmactdhaarNumber;
+        _selectedBirth = info.dkmactteOfBirth;
+        _selectedGender = info.ukmscterGender;
+        addressController.text = info.akmdctdressDetail;
+        panNumberController.text = info.pkmactnNumber;
+      });
+    }
   }
 
   void cardFrontOnTap() async {
