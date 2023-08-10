@@ -18,4 +18,6 @@ class Constants {
   static const String TOKEN_KEY = 'kACCESS_TOKEN';
   static const String LOGIN_KEY = 'kLOGIN_KEY';
   static const String CURRENT_PHONE_KEY = 'kCURRENT_PHONE_KEY';
+  /// 苹果应用商店审核账号，上线前需要填写
+  static const String APP_STORE_AUDIT_ACCOUNT = '';
 }

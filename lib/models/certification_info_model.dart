@@ -5,6 +5,9 @@ part 'certification_info_model.g.dart';
 
 @JsonSerializable()
 class CertificationInfoModel extends BaseModel {
+  @JsonKey(name: 'ckmoctntactNum')
+  int ckmoctntactNum;
+
   @JsonKey(name: 'ikmmctageHttp')
   String ikmmctageHttp;
 
@@ -93,6 +96,7 @@ class CertificationInfoModel extends BaseModel {
   List<String> rkmectlationList;
 
   CertificationInfoModel(
+    this.ckmoctntactNum,
     this.ikmmctageHttp,
     this.fkmrctontImage,
     this.bkmactckImage,

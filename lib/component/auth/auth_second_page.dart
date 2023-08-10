@@ -21,9 +21,9 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
   String _industry = '';
   String _salary = '';
   String _workTitle = '';
-  TextEditingController _whatAppAccountController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _facebookIdController = TextEditingController();
+  final TextEditingController _whatAppAccountController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _facebookIdController = TextEditingController();
 
   List<String> _marriageList = [];
   List<String> _educationList = [];

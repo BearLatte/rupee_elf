@@ -10,6 +10,34 @@ class ContactRelationItem extends StatefulWidget {
 }
 
 class _ContactRelationItemState extends State<ContactRelationItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Padding(padding: EdgeInsets.only(top: 15.0)),
+        _itemContainer(
+          'Ralation',
+          Icon(
+            Icons.keyboard_arrow_right,
+            color: Constants.arrowColor,
+            size: 16.0,
+          ),
+          false,
+        ),
+        _itemContainer(
+          'Name',
+          Icon(
+            IconFont.icon_dianhuabu,
+            color: Constants.themeColor,
+            size: 16.0,
+          ),
+          true,
+        ),
+        _itemContainer('Number', null, true)
+      ],
+    );
+  }
+
   Widget _itemContainer(String hitText, Icon? icon, bool isInputEnable) {
     return Container(
       height: 45.0,
@@ -41,34 +69,6 @@ class _ContactRelationItemState extends State<ContactRelationItem> {
           if (icon != null) icon
         ],
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(padding: EdgeInsets.only(top: 15.0)),
-        _itemContainer(
-          'Ralation',
-          Icon(
-            Icons.keyboard_arrow_right,
-            color: Constants.arrowColor,
-            size: 16.0,
-          ),
-          false,
-        ),
-        _itemContainer(
-          'Name',
-          Icon(
-            IconFont.icon_dianhuabu,
-            color: Constants.themeColor,
-            size: 16.0,
-          ),
-          true,
-        ),
-        _itemContainer('Number', null, true)
-      ],
     );
   }
 }
