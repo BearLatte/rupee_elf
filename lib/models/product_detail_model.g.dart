@@ -8,17 +8,17 @@ part of 'product_detail_model.dart';
 
 ProductDetailModel _$ProductDetailModelFromJson(Map<String, dynamic> json) =>
     ProductDetailModel(
-      json['pkmrctoductId'] as String,
+      json['pkmrctoductId'] as int,
       json['pkmrctoductLogo'] as String,
       json['pkmrctoductName'] as String,
-      json['lkmoctanAmount'] as String,
-      json['lkmoctanOfDays'] as String,
-      json['lkmoctanPayAmount'] as String,
-      json['lkmoctanFeeVerify'] as String,
-      json['lkmoctanFeeGst'] as String,
-      json['lkmoctanInterest'] as String,
+      json['lkmoctanAmount'] as int,
+      json['lkmoctanOfDays'] as int,
+      json['lkmoctanPayAmount'] as int,
+      json['lkmoctanFeeVerify'] as int,
+      json['lkmoctanFeeGst'] as int,
+      json['lkmoctanInterest'] as int,
       json['lkmoctanOverdue'] as String,
-      json['lkmoctanRepayAmount'] as String,
+      json['lkmoctanRepayAmount'] as int,
     );
 
 Map<String, dynamic> _$ProductDetailModelToJson(ProductDetailModel instance) =>

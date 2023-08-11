@@ -68,7 +68,7 @@ class _AuthFourthPageState extends State<AuthFourthPage> {
       }
     }
 
-    if (userInfo!.lkmoctanProduct!.pkmrctoductId.trim().isEmpty) {
+    if (userInfo!.lkmoctanProduct!.pkmrctoductId == 0) {
       if (context.mounted) {
         Navigator.of(context).popUntil((route) => route.isFirst);
       }

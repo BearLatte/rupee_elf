@@ -63,7 +63,7 @@ class NetworkService {
   static Future<UserInfoModel?> getUserInfo({String isRecommend = '0'}) async {
     var result = await _defaultService(
       path: '/cLqgPJf/tuVg/eQmnX',
-      parameters: {'iYYsYRecommend': isRecommend},
+      parameters: {'iYYsRYecommend': isRecommend},
     );
 
     UserInfoModel? model = await _configNetworkError(UserInfoModel.fromJson(result));

@@ -37,11 +37,11 @@ class _HomePageState extends State<HomePage> {
       title: 'Home Page',
       showBackButton: false,
       floatingActionButton: ThemeButton(
-          width: 152,
-          height: 52,
+          width: 152.0,
+          height: 52.0,
           title: 'test',
           onPressed: () {
-            Navigator.of(context).pushNamed('/authThird');
+            Navigator.of(context).pushNamed('authThird');
           }),
       child: ListView(
         children: [
@@ -134,6 +134,7 @@ class _HomePageState extends State<HomePage> {
 
       if (model != null) {
         userInfo = model;
+        isCer = model.ukmscterStatus == 2;
       }
 
       list = userInfo.pkmrctoductList;

@@ -1,13 +1,11 @@
-import 'package:json_annotation/json_annotation.dart'; 
-  
+import 'package:json_annotation/json_annotation.dart';
+
 part 'product_detail_model.g.dart';
 
-
 @JsonSerializable()
-  class ProductDetailModel extends Object {
-
+class ProductDetailModel extends Object {
   @JsonKey(name: 'pkmrctoductId')
-  String pkmrctoductId;
+  int pkmrctoductId;
 
   @JsonKey(name: 'pkmrctoductLogo')
   String pkmrctoductLogo;
@@ -16,35 +14,45 @@ part 'product_detail_model.g.dart';
   String pkmrctoductName;
 
   @JsonKey(name: 'lkmoctanAmount')
-  String lkmoctanAmount;
+  int lkmoctanAmount;
 
   @JsonKey(name: 'lkmoctanOfDays')
-  String lkmoctanOfDays;
+  int lkmoctanOfDays;
 
   @JsonKey(name: 'lkmoctanPayAmount')
-  String lkmoctanPayAmount;
+  int lkmoctanPayAmount;
 
   @JsonKey(name: 'lkmoctanFeeVerify')
-  String lkmoctanFeeVerify;
+  int lkmoctanFeeVerify;
 
   @JsonKey(name: 'lkmoctanFeeGst')
-  String lkmoctanFeeGst;
+  int lkmoctanFeeGst;
 
   @JsonKey(name: 'lkmoctanInterest')
-  String lkmoctanInterest;
+  int lkmoctanInterest;
 
   @JsonKey(name: 'lkmoctanOverdue')
   String lkmoctanOverdue;
 
   @JsonKey(name: 'lkmoctanRepayAmount')
-  String lkmoctanRepayAmount;
+  int lkmoctanRepayAmount;
 
-  ProductDetailModel(this.pkmrctoductId,this.pkmrctoductLogo,this.pkmrctoductName,this.lkmoctanAmount,this.lkmoctanOfDays,this.lkmoctanPayAmount,this.lkmoctanFeeVerify,this.lkmoctanFeeGst,this.lkmoctanInterest,this.lkmoctanOverdue,this.lkmoctanRepayAmount,);
+  ProductDetailModel(
+    this.pkmrctoductId,
+    this.pkmrctoductLogo,
+    this.pkmrctoductName,
+    this.lkmoctanAmount,
+    this.lkmoctanOfDays,
+    this.lkmoctanPayAmount,
+    this.lkmoctanFeeVerify,
+    this.lkmoctanFeeGst,
+    this.lkmoctanInterest,
+    this.lkmoctanOverdue,
+    this.lkmoctanRepayAmount,
+  );
 
-  factory ProductDetailModel.fromJson(Map<String, dynamic> srcJson) => _$ProductDetailModelFromJson(srcJson);
+  factory ProductDetailModel.fromJson(Map<String, dynamic> srcJson) =>
+      _$ProductDetailModelFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$ProductDetailModelToJson(this);
-
 }
-
-  
