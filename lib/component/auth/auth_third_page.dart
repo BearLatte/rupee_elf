@@ -68,7 +68,6 @@ class _AuthThirdPageState extends State<AuthThirdPage> {
     setState(() {
       _currentContactList.add(ContactModel());
     });
-    debugPrint('DEBUG: 添加按钮点击');
   }
 
   void itemRelationOnTap(int index) async {

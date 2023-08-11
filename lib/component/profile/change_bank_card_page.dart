@@ -14,9 +14,9 @@ class ChangeBankCardPage extends StatefulWidget {
 }
 
 class _ChangeBankCardPageState extends State<ChangeBankCardPage> {
-  String _accountNumber = '';
-  String _bankName = '';
-  String _ifscCode = '';
+  final String _accountNumber = '';
+  final String _bankName = '';
+  final String _ifscCode = '';
   @override
   Widget build(BuildContext context) {
     return HiddenKeyboardWrapper(
@@ -66,31 +66,16 @@ class _ChangeBankCardPageState extends State<ChangeBankCardPage> {
                 hintText: 'Account Number',
                 inputValue: _accountNumber,
                 keyboardType: TextInputType.number,
-                onValueChanged: (value) {
-                  setState(() {
-                    _accountNumber = value;
-                  });
-                },
               ),
               CommonFormItem(
                 type: FormType.input,
                 hintText: 'Bank Name',
                 inputValue: _bankName,
-                onValueChanged: (value) {
-                  setState(() {
-                    _bankName = value;
-                  });
-                },
               ),
               CommonFormItem(
                 type: FormType.input,
                 hintText: 'IFSC Code',
                 inputValue: _ifscCode,
-                onValueChanged: (value) {
-                  setState(() {
-                    _ifscCode = value;
-                  });
-                },
               ),
             ],
           ),

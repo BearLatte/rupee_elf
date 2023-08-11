@@ -11,7 +11,6 @@ class CommonFormItem extends StatelessWidget {
   final String inputValue;
   final TextInputType? keyboardType;
   final void Function()? onTap;
-  final void Function(String)? onValueChanged;
   final TextEditingController? editingController;
   final bool isMultiLine;
 
@@ -23,7 +22,6 @@ class CommonFormItem extends StatelessWidget {
     this.inputValue = '',
     this.keyboardType,
     this.onTap,
-    this.onValueChanged,
     this.editingController,
     this.isMultiLine = false,
   });
@@ -65,7 +63,6 @@ class CommonFormItem extends StatelessWidget {
             TextStyle(fontSize: 16.0, color: Constants.seconaryTextColor),
       ),
       keyboardType: keyboardType,
-      onChanged: onValueChanged,
       style: TextStyle(fontSize: 16.0, color: Constants.themeTextColor),
       onTap: onTap,
       maxLines: isMultiLine ? null : 1,

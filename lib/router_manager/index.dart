@@ -1,4 +1,3 @@
-
 import 'package:fluro/fluro.dart';
 import 'package:rupee_elf/component/auth/auth_fourth_page.dart';
 import 'package:rupee_elf/component/auth/auth_second_page.dart';
@@ -11,6 +10,7 @@ import 'package:rupee_elf/component/product/product_purchase_successed_page.dart
 import 'package:rupee_elf/component/profile/change_bank_card_page.dart';
 import 'package:rupee_elf/component/profile/profile_about_us_page.dart';
 import 'package:rupee_elf/component/profile/profile_page.dart';
+import 'package:rupee_elf/models/product_detail_model.dart';
 import 'package:rupee_elf/widgets/not_found_page.dart';
 import 'package:rupee_elf/component/auth/auth_first_page.dart';
 import 'package:rupee_elf/component/home/index.dart';
@@ -31,7 +31,7 @@ class RouterManager {
   static String authFace = '/faceAuth';
 
   // 产品相关
-  static String productDetail = '/productDetail/:productId';
+  static String productDetail = '/productDetail';
   static String productPurchaseSuccessed = '/productPurchaseSuccessed';
 
   // profile
@@ -94,9 +94,9 @@ class RouterManager {
   // 产品
   static final Handler _productDetailHandler =
       Handler(handlerFunc: (context, parametes) {
-    return ProductDetailPage(
-      productId: parametes['productId']![0],
-    );
+    ProductDetailModel detail =
+        context?.settings?.arguments as ProductDetailModel;
+    return ProductDetailPage(productDetail: detail);
   });
 
   static final Handler _productPurchaseSuccessedHandler =

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/models/product_detail_model.dart';
 import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  final String productId;
+  final ProductDetailModel productDetail;
 
-  const ProductDetailPage({super.key, required this.productId});
+  const ProductDetailPage({super.key, required this.productDetail});
+
 
   @override
   Widget build(BuildContext context) {

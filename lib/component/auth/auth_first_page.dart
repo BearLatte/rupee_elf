@@ -340,9 +340,6 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   onTap: () {
                     debugPrint('DEBUG: Detail Address 点击，此处要做埋点');
                   },
-                  onValueChanged: (value) {
-                    debugPrint('DEBUG: Detail Address 当前输入的文字$value');
-                  },
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 20.0)),
                 CanBgImageWidget(
@@ -359,9 +356,6 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   editingController: panNumberController,
                   onTap: () {
                     debugPrint('DEBUG: Pan Number 点击，此处要做埋点');
-                  },
-                  onValueChanged: (value) {
-                    debugPrint('DEBUG: Pan Number 当前输入的文字$value');
                   },
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 20.0)),

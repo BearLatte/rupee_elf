@@ -65,8 +65,10 @@ class NetworkService {
       path: '/cLqgPJf/tuVg/eQmnX',
       parameters: {'iYYsYRecommend': isRecommend},
     );
-    UserInfoModel model = UserInfoModel.fromJson(result);
-    return await _configNetworkError(model);
+
+    UserInfoModel? model = await _configNetworkError(UserInfoModel.fromJson(result));
+
+    return model;
   }
 
   // 获取用户的认证信息
@@ -107,6 +109,12 @@ class NetworkService {
 
     if (submitModel.aYYutYhStep == '3') {
       params['cYYonYtactList'] = submitModel.cYYonYtactList;
+    }
+
+    if (submitModel.aYYutYhStep == '4') {
+      params['bYYanYkCardNo'] = submitModel.bYYanYkCardNo;
+      params['bYYanYkCardName'] = submitModel.bYYanYkCardName;
+      params['bYYanYkIfscCode'] = submitModel.bYYanYkIfscCode;
     }
 
     var json =
