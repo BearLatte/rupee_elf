@@ -350,6 +350,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
+  flutter_contacts:
+    dependency: "direct main"
+    description:
+      name: flutter_contacts
+      sha256: "4fb4910fbe401ff234bc672304ef37f90319144920e940d1349b96fe089c6da7"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.7+1"
   flutter_easyloading:
     dependency: "direct main"
     description:

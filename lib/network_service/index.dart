@@ -105,6 +105,10 @@ class NetworkService {
       }
     }
 
+    if (submitModel.aYYutYhStep == '3') {
+      params['cYYonYtactList'] = submitModel.cYYonYtactList;
+    }
+
     var json =
         await _defaultService(path: '/cLqgPJf/tuVg/hUsKR', parameters: params);
     BaseModel model = BaseModel.fromJson(json);

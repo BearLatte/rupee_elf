@@ -6,126 +6,126 @@ part 'certification_info_model.g.dart';
 @JsonSerializable()
 class CertificationInfoModel extends BaseModel {
   @JsonKey(name: 'ckmoctntactNum')
-  int ckmoctntactNum;
+  int contactNum;
 
   @JsonKey(name: 'ikmmctageHttp')
-  String ikmmctageHttp;
+  String imageHttp;
 
   @JsonKey(name: 'fkmrctontImage')
-  String fkmrctontImage;
+  String frontImage;
 
   @JsonKey(name: 'bkmactckImage')
-  String bkmactckImage;
+  String backImage;
 
   @JsonKey(name: 'ukmscterNames')
-  String ukmscterNames;
+  String userNames;
 
   @JsonKey(name: 'akmactdhaarNumber')
-  String akmactdhaarNumber;
+  String aadhaarNumber;
 
   @JsonKey(name: 'dkmactteOfBirth')
-  String dkmactteOfBirth;
+  String dateOfBirth;
 
   @JsonKey(name: 'ukmscterGender')
-  String ukmscterGender;
+  String userGender;
 
   @JsonKey(name: 'mkmactrriageStatus')
-  String mkmactrriageStatus;
+  String marriageStatus;
 
   @JsonKey(name: 'ekmdctucation')
-  String ekmdctucation;
+  String education;
 
   @JsonKey(name: 'akmdctdressDetail')
-  String akmdctdressDetail;
+  String addressDetail;
 
   @JsonKey(name: 'ukmscterIndustry')
-  String ukmscterIndustry;
+  String userIndustry;
 
   @JsonKey(name: 'wkmoctrkTitle')
-  String wkmoctrkTitle;
+  String workTitle;
 
   @JsonKey(name: 'mkmoctnthlySalary')
-  String mkmoctnthlySalary;
+  String monthlySalary;
 
   @JsonKey(name: 'ukmscterEmail')
-  String ukmscterEmail;
+  String userEmail;
 
   @JsonKey(name: 'wkmhctatsAppAccount')
-  String wkmhctatsAppAccount;
+  String whatsAppAccount;
 
   @JsonKey(name: 'fkmactcebookId')
-  String fkmactcebookId;
+  String facebookId;
 
   @JsonKey(name: 'pkmactnCardImg')
-  String pkmactnCardImg;
+  String panCardImg;
 
   @JsonKey(name: 'pkmactnNumber')
-  String pkmactnNumber;
+  String panNumber;
 
   @JsonKey(name: 'ckmoctntactList')
-  String ckmoctntactList;
+  String contactList;
 
   @JsonKey(name: 'bkmactnkCardName')
-  String bkmactnkCardName;
+  String bankCardName;
 
   @JsonKey(name: 'bkmactnkCardNo')
-  String bkmactnkCardNo;
+  String bankCardNo;
 
   @JsonKey(name: 'bkmactnkIfscCode')
-  String bkmactnkIfscCode;
+  String bankIfscCode;
 
   @JsonKey(name: 'ukmscterGenderList')
-  List<String> ukmscterGenderList;
+  List<String> userGenderList;
 
   @JsonKey(name: 'ekmdctucationList')
-  List<String> ekmdctucationList;
+  List<String> educationList;
 
   @JsonKey(name: 'mkmactrriageStatusList')
-  List<String> mkmactrriageStatusList;
+  List<String> marriageStatusList;
 
   @JsonKey(name: 'wkmoctrkTitleList')
-  List<String> wkmoctrkTitleList;
+  List<String> workTitleList;
 
   @JsonKey(name: 'ikmnctdustryList')
-  List<String> ikmnctdustryList;
+  List<String> industryList;
 
   @JsonKey(name: 'mkmoctnthlySalaryList')
-  List<String> mkmoctnthlySalaryList;
+  List<String> monthlySalaryList;
 
   @JsonKey(name: 'rkmectlationList')
-  List<String> rkmectlationList;
+  List<String> relationList;
 
   CertificationInfoModel(
-    this.ckmoctntactNum,
-    this.ikmmctageHttp,
-    this.fkmrctontImage,
-    this.bkmactckImage,
-    this.ukmscterNames,
-    this.akmactdhaarNumber,
-    this.dkmactteOfBirth,
-    this.ukmscterGender,
-    this.mkmactrriageStatus,
-    this.ekmdctucation,
-    this.akmdctdressDetail,
-    this.ukmscterIndustry,
-    this.wkmoctrkTitle,
-    this.mkmoctnthlySalary,
-    this.ukmscterEmail,
-    this.wkmhctatsAppAccount,
-    this.fkmactcebookId,
-    this.pkmactnCardImg,
-    this.pkmactnNumber,
-    this.ckmoctntactList,
-    this.bkmactnkCardName,
-    this.bkmactnkCardNo,
-    this.bkmactnkIfscCode,
-    this.ukmscterGenderList,
-    this.ekmdctucationList,
-    this.mkmactrriageStatusList,
-    this.wkmoctrkTitleList,
-    this.ikmnctdustryList,
-    this.mkmoctnthlySalaryList,
-    this.rkmectlationList,
+    this.contactNum,
+    this.imageHttp,
+    this.frontImage,
+    this.backImage,
+    this.userNames,
+    this.aadhaarNumber,
+    this.dateOfBirth,
+    this.userGender,
+    this.marriageStatus,
+    this.education,
+    this.addressDetail,
+    this.userIndustry,
+    this.workTitle,
+    this.monthlySalary,
+    this.userEmail,
+    this.whatsAppAccount,
+    this.facebookId,
+    this.panCardImg,
+    this.panNumber,
+    this.contactList,
+    this.bankCardName,
+    this.bankCardNo,
+    this.bankIfscCode,
+    this.userGenderList,
+    this.educationList,
+    this.marriageStatusList,
+    this.workTitleList,
+    this.industryList,
+    this.monthlySalaryList,
+    this.relationList,
   ) : super(0, '');
 
   factory CertificationInfoModel.fromJson(Map<String, dynamic> srcJson) =>

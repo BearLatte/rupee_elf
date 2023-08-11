@@ -2,14 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 
-class ContactRelationItem extends StatefulWidget {
-  const ContactRelationItem({super.key});
+class ContactRelationItem extends StatelessWidget {
+  final Function() relationOnTap;
+  final Function()? numberOnTap;
+  final Function()? phoneBookOnTap;
+  final bool isNumberInputEnable;
+  final TextEditingController relationController;
+  final TextEditingController nameController;
+  final TextEditingController numberController;
 
-  @override
-  State<ContactRelationItem> createState() => _ContactRelationItemState();
-}
+  const ContactRelationItem({
+    super.key,
+    this.isNumberInputEnable = false,
+    required this.relationOnTap,
+    this.numberOnTap,
+    required this.relationController,
+    required this.nameController,
+    required this.numberController,
+    this.phoneBookOnTap,
+  });
 
-class _ContactRelationItemState extends State<ContactRelationItem> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,28 +29,45 @@ class _ContactRelationItemState extends State<ContactRelationItem> {
         const Padding(padding: EdgeInsets.only(top: 15.0)),
         _itemContainer(
           'Ralation',
-          Icon(
+          icon: Icon(
             Icons.keyboard_arrow_right,
             color: Constants.arrowColor,
             size: 16.0,
           ),
-          false,
+          isInputEnable: false,
+          onTap: relationOnTap,
+          controller: relationController,
         ),
         _itemContainer(
           'Name',
-          Icon(
-            IconFont.icon_dianhuabu,
-            color: Constants.themeColor,
-            size: 16.0,
+          icon: IconButton(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 0),
+            onPressed: phoneBookOnTap,
+            icon: Icon(
+              IconFont.icon_dianhuabu,
+              color: Constants.themeColor,
+              size: 16.0,
+            ),
           ),
-          true,
+          isInputEnable: true,
+          controller: nameController,
         ),
-        _itemContainer('Number', null, true)
+        _itemContainer(
+          'Number',
+          isInputEnable: isNumberInputEnable,
+          onTap: numberOnTap,
+          controller: numberController,
+        )
       ],
     );
   }
 
-  Widget _itemContainer(String hitText, Icon? icon, bool isInputEnable) {
+  Widget _itemContainer(String hitText,
+      {Widget? icon,
+      required bool isInputEnable,
+      Function()? onTap,
+      required TextEditingController controller}) {
     return Container(
       height: 45.0,
       decoration: BoxDecoration(
@@ -52,9 +81,8 @@ class _ContactRelationItemState extends State<ContactRelationItem> {
             child: TextField(
               // enabled: false,
               readOnly: !isInputEnable,
-              onTap: () {
-                debugPrint('这里点击选择关系');
-              },
+              onTap: onTap,
+              controller: controller,
               decoration: InputDecoration(
                 hintText: hitText,
                 hintStyle: TextStyle(

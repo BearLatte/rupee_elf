@@ -55,15 +55,15 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
     CertificationInfoModel? info = await NetworkService.getCertificationInfo();
     if (info != null) {
       setState(() {
-        _selectedFrontImage = '${info.ikmmctageHttp}/${info.fkmrctontImage}';
-        _selectedBackImage = '${info.ikmmctageHttp}/${info.bkmactckImage}';
-        _selectedPanImage = '${info.ikmmctageHttp}/${info.pkmactnCardImg}';
-        aadhaarNameController.text = info.ukmscterNames;
-        aadhaarNumberController.text = info.akmactdhaarNumber;
-        _selectedBirth = info.dkmactteOfBirth;
-        _selectedGender = info.ukmscterGender;
-        addressController.text = info.akmdctdressDetail;
-        panNumberController.text = info.pkmactnNumber;
+        _selectedFrontImage = '${info.imageHttp}/${info.frontImage}';
+        _selectedBackImage = '${info.imageHttp}/${info.backImage}';
+        _selectedPanImage = '${info.imageHttp}/${info.panCardImg}';
+        aadhaarNameController.text = info.userNames;
+        aadhaarNumberController.text = info.aadhaarNumber;
+        _selectedBirth = info.dateOfBirth;
+        _selectedGender = info.userGender;
+        addressController.text = info.addressDetail;
+        panNumberController.text = info.panNumber;
       });
     }
   }

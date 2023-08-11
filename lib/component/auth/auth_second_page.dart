@@ -41,19 +41,19 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
     CertificationInfoModel? info = await NetworkService.getCertificationInfo();
     if (info != null) {
       setState(() {
-        _marriageStatus = info.mkmactrriageStatus;
-        _education = info.ekmdctucation;
-        _industry = info.ukmscterIndustry;
-        _salary = info.mkmoctnthlySalary;
-        _workTitle = info.wkmoctrkTitle;
-        _whatAppAccountController.text = info.wkmhctatsAppAccount;
-        _emailController.text = info.ukmscterEmail;
-        _facebookIdController.text = info.fkmactcebookId;
-        _marriageList = info.mkmactrriageStatusList;
-        _educationList = info.ekmdctucationList;
-        _industryList = info.ikmnctdustryList;
-        _salaryList = info.mkmoctnthlySalaryList;
-        _workTitleList = info.wkmoctrkTitleList;
+        _marriageStatus = info.marriageStatus;
+        _education = info.education;
+        _industry = info.userIndustry;
+        _salary = info.monthlySalary;
+        _workTitle = info.workTitle;
+        _whatAppAccountController.text = info.whatsAppAccount;
+        _emailController.text = info.userEmail;
+        _facebookIdController.text = info.facebookId;
+        _marriageList = info.marriageStatusList;
+        _educationList = info.educationList;
+        _industryList = info.industryList;
+        _salaryList = info.monthlySalaryList;
+        _workTitleList = info.workTitleList;
       });
     }
   }
