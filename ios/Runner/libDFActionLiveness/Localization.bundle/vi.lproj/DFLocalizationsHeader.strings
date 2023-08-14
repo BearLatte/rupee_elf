@@ -1,0 +1,55 @@
+//
+//  DFLocalizationsHeader.h
+//  DFActionLiveness
+//
+//
+
+
+"DFLivenessDocTitle" = "Tài liệu SDK";
+
+"DFLivenessTitle" = "Hành động Liveness";
+"DFLivenessAntiReusltPass" = "Liveness đã được xác minh";
+"DFLivenessAntiReusltUnpass" = "Liveness thất bại";
+"DFLivenessConfirm" = "Xác nhận";
+"DFLivenessCancel" = "Hủy bỏ";
+"DFLivenessTryAgain" = "Thử lại";
+
+"DFLivenessTipInitFaild" = "Khởi tạo SDK không thành công";
+"DFLivenessTipCameraError" = "Không nhận được quyền đối với máy ảnh";
+"DFLivenessTipFaceChanged" = "Không phát hiện được khuôn mặt nào, vui lòng thử lại.";
+"DFLivenessTipTimeOut" = "Hết thời gian phát hiện";
+"DFLivenessTipWillResignActive" = "Ứng dụng sắp bị tạm ngưng";
+"DFLivenessTipInternalError" = "Lỗi bên trong";
+"DFLivenessTipBadJson" = "json xấu";
+"DFLivenessTipBundleIDError" = "Tên gói trong giấy phép không khớp với ID ứng dụng, vui lòng sử dụng đúng tệp giấy phép";
+"DFLivenessTipSequenceError" = "Lỗi chuỗi hành động";
+"DFLivenessTipAuthExpire" = "Thời gian thiết bị không nằm trong thời hạn hiệu lực của giấy phép, vui lòng sử dụng giấy phép hợp lệ";
+"DFLivenessTipLicenseInvalid" = "Tệp giấy phép không hợp lệ";
+"DFLivenessTipFaceMoreThanOneError" = "Đã phát hiện nhiều khuôn mặt, vui lòng thử lại";
+"DFLivenessDetectionErrorTipLight" = "Nhẹ";
+"DFLivenessDetectionErrorTipGlasses" = "Không có kính";
+"DFLivenessDetectionErrorTipTime" = "Chậm";
+
+"DFLiveFaceRectStatusTipSuccess" = "Giữ yên";
+"DFLiveFaceRectStatusTipFaceCountMoreThanOne" = "Hãy giữ một khuôn mặt trong vòng kết nối";
+"DFLiveFaceRectStatusTipFaceTooLarge" = "Vui lòng di chuyển ra khỏi màn hình";
+"DFLiveFaceRectStatusTipNoFace" = "Hãy đặt khuôn mặt của bạn vào bên trong vòng tròn";
+
+"DFAntihackStatusTip_INVALID_ARGUMENT" = "Lỗi tham số yêu cầu";
+"DFAntihackStatusTip_DETETION_FAILED" = "Không phát hiện được hình ảnh";
+"DFAntihackStatusTip_DOWNLOAD_ERROR" = "Tải xuống hình ảnh internet không thành công";
+"DFAntihackStatusTip_UNAUTHORIZED" = "Bỏ ủy quyền hoặc ủy quyền không thành công";
+"DFAntihackStatusTip_KEY_EXPIRED" = "ID API của bạn đã hết hạn";
+"DFAntihackStatusTip_NO_PERMISSION" = "Bạn không được phép sử dụng API này";
+"DFAntihackStatusTip_OUT_OF_QUOTA" = "Đã vượt quá hạn ngạch lệnh gọi API";
+"DFAntihackStatusTip_RATE_LIMIT_EXCEEDED" = "Số gọi ra ngoài giới hạn";
+"DFAntihackStatusTip_NOT_FOUND" = "Đường dẫn yêu cầu không được tìm thấy";
+"DFAntihackStatusTip_INTERNAL_ERROR" = "Các quy trình máy chủ không thành công";
+"DFAntihackStatusTip_NO_NETWORK" = "Không có mạng";
+"DFAntihackStatusTip_UNKNOWN" = "Lỗi không rõ";
+
+"DFLivenessDetectionTipHoldStill" = "Giữ yên";
+"DFLivenessDetectionTipYaw" = "Quay đầu sang trái và phải";
+"DFLivenessDetectionTipBlink" = "Nháy mắt bạn đi";
+"DFLivenessDetectionTipMouth" = "Mở và đóng miệng một vài lần";
+"DFLivenessDetectionTipNod" = "Quay đầu lên và xuống";

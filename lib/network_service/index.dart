@@ -9,6 +9,7 @@ import 'package:rupee_elf/models/aws_params_model.dart';
 import 'package:rupee_elf/models/base_model.dart';
 import 'package:rupee_elf/models/certification_info_model.dart';
 import 'package:rupee_elf/models/empty_network_result.dart';
+import 'package:rupee_elf/models/face_liveness_parameters.dart';
 import 'package:rupee_elf/models/login_model.dart';
 import 'package:rupee_elf/models/ocr_model.dart';
 import 'package:rupee_elf/models/product_list_model.dart';
@@ -134,8 +135,13 @@ class NetworkService {
     }
   }
 
-  // 人脸认证
-  // static 
+  // 人脸认证 SDK 参数获取
+  static Future<FaceLivenessParameters?> getFaceLivenessParams() async {
+    var json = await _defaultService(
+        path: '/cLqgPJf/tuVg/kBykM',
+        parameters: {'uYYseYrFaceStep': 'license'});
+    return _configNetworkError(FaceLivenessParameters.fromJson(json));
+  }
 
   // OCR 识别
   static Future<OcrModel?> ocrRecgonizer(

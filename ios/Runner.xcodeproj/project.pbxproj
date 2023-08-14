@@ -8,6 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		22F8D7762A8A180B00381E3E /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D7752A8A180B00381E3E /* VideoToolbox.framework */; };
+		22F8D7782A8A181A00381E3E /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D7772A8A181A00381E3E /* libbz2.tbd */; };
+		22F8D77A2A8A182700381E3E /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D7792A8A182700381E3E /* libiconv.tbd */; };
+		22F8D77C2A8A185700381E3E /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D77B2A8A185700381E3E /* libz.1.2.5.tbd */; };
+		22F8D7D72A8A1F0400381E3E /* libDFActionLivenessDetector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D7C22A8A1F0400381E3E /* libDFActionLivenessDetector.a */; };
+		22F8D7D82A8A1F0400381E3E /* Localization.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22F8D7C42A8A1F0400381E3E /* Localization.bundle */; };
+		22F8D7D92A8A1F0400381E3E /* DFLicense in Resources */ = {isa = PBXBuildFile; fileRef = 22F8D7C52A8A1F0400381E3E /* DFLicense */; };
+		22F8D7DA2A8A1F0400381E3E /* YFGIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D7C72A8A1F0400381E3E /* YFGIFImageView.m */; };
+		22F8D7DB2A8A1F0400381E3E /* DFActionfaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D7CC2A8A1F0400381E3E /* DFActionfaceViewController.m */; };
+		22F8D7DC2A8A1F0400381E3E /* DFActionLivenessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D7CD2A8A1F0400381E3E /* DFActionLivenessController.m */; };
+		22F8D7DD2A8A1F0400381E3E /* df_liveness_resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22F8D7D02A8A1F0400381E3E /* df_liveness_resource.bundle */; };
+		22F8D7DE2A8A1F0400381E3E /* NSBundle+Localization.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D7D32A8A1F0400381E3E /* NSBundle+Localization.m */; };
+		22F8D7DF2A8A1F0400381E3E /* NSObject+DFAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D7D42A8A1F0400381E3E /* NSObject+DFAccess.m */; };
+		22F8D7E02A8A1F0400381E3E /* DFCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D7D62A8A1F0400381E3E /* DFCircleView.m */; };
+		22F8D7E22A8A1F4A00381E3E /* FaceLivenessParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D7E12A8A1F4A00381E3E /* FaceLivenessParams.swift */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
@@ -44,6 +59,33 @@
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		22F8D7752A8A180B00381E3E /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		22F8D7772A8A181A00381E3E /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		22F8D7792A8A182700381E3E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		22F8D77B2A8A185700381E3E /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		22F8D7C12A8A1F0400381E3E /* DFActionfaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFActionfaceViewController.h; sourceTree = "<group>"; };
+		22F8D7C22A8A1F0400381E3E /* libDFActionLivenessDetector.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDFActionLivenessDetector.a; sourceTree = "<group>"; };
+		22F8D7C32A8A1F0400381E3E /* DFActionLivenessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFActionLivenessController.h; sourceTree = "<group>"; };
+		22F8D7C42A8A1F0400381E3E /* Localization.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Localization.bundle; sourceTree = "<group>"; };
+		22F8D7C52A8A1F0400381E3E /* DFLicense */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DFLicense; sourceTree = "<group>"; };
+		22F8D7C62A8A1F0400381E3E /* DFLocalizationsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLocalizationsHeader.h; sourceTree = "<group>"; };
+		22F8D7C72A8A1F0400381E3E /* YFGIFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFGIFImageView.m; sourceTree = "<group>"; };
+		22F8D7C82A8A1F0400381E3E /* DFCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCircleView.h; sourceTree = "<group>"; };
+		22F8D7C92A8A1F0400381E3E /* NSObject+DFAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DFAccess.h"; sourceTree = "<group>"; };
+		22F8D7CA2A8A1F0400381E3E /* NSBundle+Localization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Localization.h"; sourceTree = "<group>"; };
+		22F8D7CB2A8A1F0400381E3E /* DFLivenessEnumType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLivenessEnumType.h; sourceTree = "<group>"; };
+		22F8D7CC2A8A1F0400381E3E /* DFActionfaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFActionfaceViewController.m; sourceTree = "<group>"; };
+		22F8D7CD2A8A1F0400381E3E /* DFActionLivenessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFActionLivenessController.m; sourceTree = "<group>"; };
+		22F8D7CE2A8A1F0400381E3E /* YFGIFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFGIFImageView.h; sourceTree = "<group>"; };
+		22F8D7CF2A8A1F0400381E3E /* DFLivenessCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLivenessCommon.h; sourceTree = "<group>"; };
+		22F8D7D02A8A1F0400381E3E /* df_liveness_resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = df_liveness_resource.bundle; sourceTree = "<group>"; };
+		22F8D7D12A8A1F0400381E3E /* DFActionLivenessDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFActionLivenessDetector.h; sourceTree = "<group>"; };
+		22F8D7D22A8A1F0400381E3E /* DFActionLivenessDetectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFActionLivenessDetectorDelegate.h; sourceTree = "<group>"; };
+		22F8D7D32A8A1F0400381E3E /* NSBundle+Localization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Localization.m"; sourceTree = "<group>"; };
+		22F8D7D42A8A1F0400381E3E /* NSObject+DFAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DFAccess.m"; sourceTree = "<group>"; };
+		22F8D7D52A8A1F0400381E3E /* DFImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImage.h; sourceTree = "<group>"; };
+		22F8D7D62A8A1F0400381E3E /* DFCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCircleView.m; sourceTree = "<group>"; };
+		22F8D7E12A8A1F4A00381E3E /* FaceLivenessParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLivenessParams.swift; sourceTree = "<group>"; };
 		24FB8B2A33B9FBE39CF6E819 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2857994DFBB521567D9AD0E4 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
@@ -80,6 +122,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F8D77C2A8A185700381E3E /* libz.1.2.5.tbd in Frameworks */,
+				22F8D77A2A8A182700381E3E /* libiconv.tbd in Frameworks */,
+				22F8D7D72A8A1F0400381E3E /* libDFActionLivenessDetector.a in Frameworks */,
+				22F8D7782A8A181A00381E3E /* libbz2.tbd in Frameworks */,
+				22F8D7762A8A180B00381E3E /* VideoToolbox.framework in Frameworks */,
 				7845DFBD50734D9569D5D9AC /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +134,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22F8D7512A8A15AB00381E3E /* FaceAuth */ = {
+			isa = PBXGroup;
+			children = (
+				22F8D7E12A8A1F4A00381E3E /* FaceLivenessParams.swift */,
+			);
+			path = FaceAuth;
+			sourceTree = "<group>";
+		};
+		22F8D7C02A8A1F0400381E3E /* libDFActionLiveness */ = {
+			isa = PBXGroup;
+			children = (
+				22F8D7C12A8A1F0400381E3E /* DFActionfaceViewController.h */,
+				22F8D7C22A8A1F0400381E3E /* libDFActionLivenessDetector.a */,
+				22F8D7C32A8A1F0400381E3E /* DFActionLivenessController.h */,
+				22F8D7C42A8A1F0400381E3E /* Localization.bundle */,
+				22F8D7C52A8A1F0400381E3E /* DFLicense */,
+				22F8D7C62A8A1F0400381E3E /* DFLocalizationsHeader.h */,
+				22F8D7C72A8A1F0400381E3E /* YFGIFImageView.m */,
+				22F8D7C82A8A1F0400381E3E /* DFCircleView.h */,
+				22F8D7C92A8A1F0400381E3E /* NSObject+DFAccess.h */,
+				22F8D7CA2A8A1F0400381E3E /* NSBundle+Localization.h */,
+				22F8D7CB2A8A1F0400381E3E /* DFLivenessEnumType.h */,
+				22F8D7CC2A8A1F0400381E3E /* DFActionfaceViewController.m */,
+				22F8D7CD2A8A1F0400381E3E /* DFActionLivenessController.m */,
+				22F8D7CE2A8A1F0400381E3E /* YFGIFImageView.h */,
+				22F8D7CF2A8A1F0400381E3E /* DFLivenessCommon.h */,
+				22F8D7D02A8A1F0400381E3E /* df_liveness_resource.bundle */,
+				22F8D7D12A8A1F0400381E3E /* DFActionLivenessDetector.h */,
+				22F8D7D22A8A1F0400381E3E /* DFActionLivenessDetectorDelegate.h */,
+				22F8D7D32A8A1F0400381E3E /* NSBundle+Localization.m */,
+				22F8D7D42A8A1F0400381E3E /* NSObject+DFAccess.m */,
+				22F8D7D52A8A1F0400381E3E /* DFImage.h */,
+				22F8D7D62A8A1F0400381E3E /* DFCircleView.m */,
+			);
+			path = libDFActionLiveness;
+			sourceTree = "<group>";
+		};
 		331C8082294A63A400263BE5 /* RunnerTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +182,10 @@
 		374C1C3F8ADBB87076DBFFDE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22F8D77B2A8A185700381E3E /* libz.1.2.5.tbd */,
+				22F8D7792A8A182700381E3E /* libiconv.tbd */,
+				22F8D7772A8A181A00381E3E /* libbz2.tbd */,
+				22F8D7752A8A180B00381E3E /* VideoToolbox.framework */,
 				24FB8B2A33B9FBE39CF6E819 /* Pods_Runner.framework */,
 				93CF04D8C6063A405C6552E3 /* Pods_RunnerTests.framework */,
 			);
@@ -139,6 +227,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				22F8D7C02A8A1F0400381E3E /* libDFActionLiveness */,
+				22F8D7512A8A15AB00381E3E /* FaceAuth */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -258,10 +348,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F8D7D92A8A1F0400381E3E /* DFLicense in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
+				22F8D7DD2A8A1F0400381E3E /* df_liveness_resource.bundle in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+				22F8D7D82A8A1F0400381E3E /* Localization.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,8 +468,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F8D7E02A8A1F0400381E3E /* DFCircleView.m in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
+				22F8D7DA2A8A1F0400381E3E /* YFGIFImageView.m in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
+				22F8D7E22A8A1F4A00381E3E /* FaceLivenessParams.swift in Sources */,
+				22F8D7DC2A8A1F0400381E3E /* DFActionLivenessController.m in Sources */,
+				22F8D7DF2A8A1F0400381E3E /* NSObject+DFAccess.m in Sources */,
+				22F8D7DB2A8A1F0400381E3E /* DFActionfaceViewController.m in Sources */,
+				22F8D7DE2A8A1F0400381E3E /* NSBundle+Localization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +567,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7R9X78KKXW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -474,6 +575,63 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Runner/libDFActionLiveness",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Mantle\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Reachability\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageWebPCoder\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"Toast\"",
+					"-framework",
+					"\"advertising_id\"",
+					"-framework",
+					"\"camera_avfoundation\"",
+					"-framework",
+					"\"connectivity_plus\"",
+					"-framework",
+					"\"device_info_plus\"",
+					"-framework",
+					"\"flutter_contacts\"",
+					"-framework",
+					"\"flutter_image_compress_common\"",
+					"-framework",
+					"\"fluttertoast\"",
+					"-framework",
+					"\"image_picker_ios\"",
+					"-framework",
+					"\"libwebp\"",
+					"-framework",
+					"\"package_info\"",
+					"-framework",
+					"\"path_provider_foundation\"",
+					"-framework",
+					"\"permission_handler_apple\"",
+					"-framework",
+					"\"shared_preferences_foundation\"",
+					"-lstdc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.rupeeElf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -651,6 +809,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7R9X78KKXW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -658,6 +817,63 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Runner/libDFActionLiveness",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Mantle\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Reachability\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageWebPCoder\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"Toast\"",
+					"-framework",
+					"\"advertising_id\"",
+					"-framework",
+					"\"camera_avfoundation\"",
+					"-framework",
+					"\"connectivity_plus\"",
+					"-framework",
+					"\"device_info_plus\"",
+					"-framework",
+					"\"flutter_contacts\"",
+					"-framework",
+					"\"flutter_image_compress_common\"",
+					"-framework",
+					"\"fluttertoast\"",
+					"-framework",
+					"\"image_picker_ios\"",
+					"-framework",
+					"\"libwebp\"",
+					"-framework",
+					"\"package_info\"",
+					"-framework",
+					"\"path_provider_foundation\"",
+					"-framework",
+					"\"permission_handler_apple\"",
+					"-framework",
+					"\"shared_preferences_foundation\"",
+					"-lstdc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.rupeeElf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -679,6 +895,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7R9X78KKXW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -686,6 +903,63 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Runner/libDFActionLiveness",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Mantle\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Reachability\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageWebPCoder\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"Toast\"",
+					"-framework",
+					"\"advertising_id\"",
+					"-framework",
+					"\"camera_avfoundation\"",
+					"-framework",
+					"\"connectivity_plus\"",
+					"-framework",
+					"\"device_info_plus\"",
+					"-framework",
+					"\"flutter_contacts\"",
+					"-framework",
+					"\"flutter_image_compress_common\"",
+					"-framework",
+					"\"fluttertoast\"",
+					"-framework",
+					"\"image_picker_ios\"",
+					"-framework",
+					"\"libwebp\"",
+					"-framework",
+					"\"package_info\"",
+					"-framework",
+					"\"path_provider_foundation\"",
+					"-framework",
+					"\"permission_handler_apple\"",
+					"-framework",
+					"\"shared_preferences_foundation\"",
+					"-lstdc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.rupeeElf;
 				PRODUCT_NAME = "$(TARGET_NAME)";

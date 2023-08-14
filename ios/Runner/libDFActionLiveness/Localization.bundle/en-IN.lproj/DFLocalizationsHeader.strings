@@ -1,0 +1,55 @@
+//
+//  DFLocalizationsHeader.h
+//  DFActionLiveness
+//
+//
+
+"DFLivenessDocTitle" = "SDK Docs";
+
+"DFLivenessTitle" = "Action Liveness";
+"DFLivenessAntiReusltPass" = "Liveness verified";
+"DFLivenessAntiReusltUnpass" = "Liveness failed";
+"DFLivenessConfirm" = "Confirm";
+"DFLivenessCancel" = "Cancel";
+"DFLivenessTryAgain" = "Try again";
+
+"DFLivenessTipInitFaild" = "SDK initialization failed";
+"DFLivenessTipCameraError" = "Camera permission acquisition failed";
+"DFLivenessTipFaceChanged" = "No face detected,please try again.";
+"DFLivenessTipTimeOut" = "Detection timeout";
+"DFLivenessTipWillResignActive" = "App is about to be suspended";
+"DFLivenessTipInternalError" = "Internal error";
+"DFLivenessTipBadJson" = "bad json";
+"DFLivenessTipBundleIDError" = "The package name in the license does not match with application ID, please use the right license file";
+"DFLivenessTipSequenceError" = "Action sequence error";
+"DFLivenessTipAuthExpire" = "Device time is not within the validity period of the license, pls use the valid license";
+"DFLivenessTipFaceMoreThanOneError" = "Multiple faces detected, please try again";
+"DFLivenessTipLicenseInvalid" = "License file invalid";
+
+"DFLivenessDetectionErrorTipLight" = "Light";
+"DFLivenessDetectionErrorTipGlasses" = "No Glasses";
+"DFLivenessDetectionErrorTipTime" = "Slow";
+
+"DFLivenessDetectionTipYaw" = "Turn your head left and right";
+"DFLivenessDetectionTipBlink" = "Blink your eyes";
+"DFLivenessDetectionTipMouth" = "Open and close your mouth a few times";
+"DFLivenessDetectionTipNod" = "Turn your head up and down";
+"DFLivenessDetectionTipHoldStill" = "Hold still";
+
+"DFLiveFaceRectStatusTipSuccess" = "Hold still";
+"DFLiveFaceRectStatusTipFaceCountMoreThanOne" = "Please keep one face in the circle";
+"DFLiveFaceRectStatusTipFaceTooLarge" = "Please move away from the screen";
+"DFLiveFaceRectStatusTipNoFace" = "Please place your face inside the circle";
+
+"DFAntihackStatusTip_INVALID_ARGUMENT" = "The request parameter error";
+"DFAntihackStatusTip_DETETION_FAILED" = "Detect image failed";
+"DFAntihackStatusTip_DOWNLOAD_ERROR" = "Download internet image failed";
+"DFAntihackStatusTip_UNAUTHORIZED" = "Unauthorize or authorize failed";
+"DFAntihackStatusTip_KEY_EXPIRED" = "Your API ID has expired";
+"DFAntihackStatusTip_NO_PERMISSION" = "You are not authorized to use this API";
+"DFAntihackStatusTip_OUT_OF_QUOTA" = "API calls quota exceeded";
+"DFAntihackStatusTip_RATE_LIMIT_EXCEEDED" = "The invoke number is out of limitation";
+"DFAntihackStatusTip_NOT_FOUND" = "The request path is not found";
+"DFAntihackStatusTip_INTERNAL_ERROR" = "Server processes failed";
+"DFAntihackStatusTip_NO_NETWORK" = "No network";
+"DFAntihackStatusTip_UNKNOWN" = "Unknown error";

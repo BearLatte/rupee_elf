@@ -1,0 +1,55 @@
+//
+//  DFLocalizationsHeader.h
+//  DFActionLiveness
+//
+//
+
+
+"DFLivenessDocTitle" = "เอกสาร SDK";
+
+"DFLivenessTitle" = "แอคชั่น Liveness";
+"DFLivenessAntiReusltPass" = "ยืนยันความมีชีวิตชีวา";
+"DFLivenessAntiReusltUnpass" = "ความมีชีวิตชีวาล้มเหลว";
+"DFLivenessConfirm" = "ยืนยัน";
+"DFLivenessCancel" = "ยกเลิก";
+"DFLivenessTryAgain" = "ลองอีกครั้ง";
+
+"DFLivenessTipInitFaild" = "การเริ่มต้น SDK ล้มเหลว";
+"DFLivenessTipCameraError" = "การรับสิทธิ์เข้าถึงกล้องล้มเหลว";
+"DFLivenessTipFaceChanged" = "ไม่พบใบหน้า โปรดลองอีกครั้ง";
+"DFLivenessTipTimeOut" = "หมดเวลาการตรวจจับ";
+"DFLivenessTipWillResignActive" = "แอปกำลังจะถูกระงับ";
+"DFLivenessTipInternalError" = "ข้อผิดพลาดภายใน";
+"DFLivenessTipBadJson" = "แย่จัง";
+"DFLivenessTipBundleIDError" = "ชื่อแพ็คเกจในใบอนุญาตไม่ตรงกับ ID แอปพลิเคชัน โปรดใช้ไฟล์ใบอนุญาตที่ถูกต้อง";
+"DFLivenessTipSequenceError" = "ข้อผิดพลาดของลำดับการดำเนินการ";
+"DFLivenessTipAuthExpire" = "เวลาของอุปกรณ์ไม่อยู่ในระยะเวลาที่ถูกต้องของใบอนุญาต โปรดใช้ใบอนุญาตที่ถูกต้อง";
+"DFLivenessTipLicenseInvalid" = "ไฟล์ใบอนุญาตไม่ถูกต้อง";
+"DFLivenessTipFaceMoreThanOneError" = "ตรวจพบหลายใบหน้า โปรดลองอีกครั้ง";
+"DFLivenessDetectionErrorTipLight" = "แสงสว่าง";
+"DFLivenessDetectionErrorTipGlasses" = "ไม่มีแว่นตา";
+"DFLivenessDetectionErrorTipTime" = "ช้า";
+
+"DFLiveFaceRectStatusTipSuccess" = "นิ่งไว้";
+"DFLiveFaceRectStatusTipFaceCountMoreThanOne" = "กรุณาเก็บหน้าหนึ่งไว้ในวงกลม";
+"DFLiveFaceRectStatusTipFaceTooLarge" = "กรุณาย้ายออกไปจากหน้าจอ";
+"DFLiveFaceRectStatusTipNoFace" = "กรุณาวางใบหน้าของคุณไว้ในวงกลม";
+
+"DFAntihackStatusTip_INVALID_ARGUMENT" = "ข้อผิดพลาดพารามิเตอร์คำขอ";
+"DFAntihackStatusTip_DETETION_FAILED" = "ตรวจจับภาพล้มเหลว";
+"DFAntihackStatusTip_DOWNLOAD_ERROR" = "ดาวน์โหลดภาพอินเทอร์เน็ตล้มเหลว";
+"DFAntihackStatusTip_UNAUTHORIZED" = "ไม่ได้รับอนุญาตหรืออนุญาตล้มเหลว";
+"DFAntihackStatusTip_KEY_EXPIRED" = "API ID ของคุณหมดอายุแล้ว";
+"DFAntihackStatusTip_NO_PERMISSION" = "คุณไม่ได้รับอนุญาตให้ใช้ API นี้";
+"DFAntihackStatusTip_OUT_OF_QUOTA" = "เกินโควต้าการเรียก API";
+"DFAntihackStatusTip_RATE_LIMIT_EXCEEDED" = "เลขเรียกหมดเขตแล้ว";
+"DFAntihackStatusTip_NOT_FOUND" = "ไม่พบเส้นทางคำขอ";
+"DFAntihackStatusTip_INTERNAL_ERROR" = "กระบวนการเซิร์ฟเวอร์ล้มเหลว";
+"DFAntihackStatusTip_NO_NETWORK" = "ไม่มีเครือข่าย";
+"DFAntihackStatusTip_UNKNOWN" = "ข้อผิดพลาดที่ไม่รู้จัก";
+
+"DFLivenessDetectionTipHoldStill" = "นิ่งไว้";
+"DFLivenessDetectionTipYaw" = "หันหัวไปทางซ้ายและขวา";
+"DFLivenessDetectionTipBlink" = "ขยี้ตา";
+"DFLivenessDetectionTipMouth" = "เปิดและปิดปากของคุณสองสามครั้ง";
+"DFLivenessDetectionTipNod" = "หันหัวของคุณขึ้นและลง";

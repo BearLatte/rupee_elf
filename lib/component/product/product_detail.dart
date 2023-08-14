@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/models/face_liveness_parameters.dart';
 import 'package:rupee_elf/models/product_detail_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
@@ -9,11 +11,19 @@ import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
 
-class ProductDetailPage extends StatelessWidget {
+class ProductDetailPage extends StatefulWidget {
   final ProductDetailModel productDetail;
 
   const ProductDetailPage({super.key, required this.productDetail});
 
+  @override
+  State<ProductDetailPage> createState() => _ProductDetailPageState();
+}
+
+class _ProductDetailPageState extends State<ProductDetailPage> {
+  // 与原生通信的消息对象
+  final MethodChannel _methodChanel =
+      const MethodChannel('product_detail/authLiveness');
   @override
   Widget build(BuildContext context) {
     return BaseViewWidget(
@@ -49,12 +59,12 @@ class ProductDetailPage extends StatelessWidget {
           child: CommonImage(
             width: 66.0,
             height: 66.0,
-            src: productDetail.pkmrctoductLogo,
+            src: widget.productDetail.pkmrctoductLogo,
           ),
         ),
         const Padding(padding: EdgeInsets.only(bottom: 10.0)),
         Text(
-          productDetail.pkmrctoductName,
+          widget.productDetail.pkmrctoductName,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20.0,
@@ -74,27 +84,29 @@ class ProductDetailPage extends StatelessWidget {
           child: Column(
             children: [
               _itemCell(
-                  key: 'Amount :', value: ' ₹ ${productDetail.lkmoctanAmount}'),
+                  key: 'Amount :',
+                  value: ' ₹ ${widget.productDetail.lkmoctanAmount}'),
               _itemCell(
                   key: 'Terms :',
-                  value: ' ${productDetail.lkmoctanOfDays} Days'),
+                  value: ' ${widget.productDetail.lkmoctanOfDays} Days'),
               _itemCell(
                   key: 'Received Amount : ',
-                  value: ' ₹ ${productDetail.lkmoctanPayAmount}'),
+                  value: ' ₹ ${widget.productDetail.lkmoctanPayAmount}'),
               _itemCell(
                   key: 'Verification Fee :',
-                  value: ' ₹ ${productDetail.lkmoctanFeeVerify}'),
+                  value: ' ₹ ${widget.productDetail.lkmoctanFeeVerify}'),
               _itemCell(
-                  key: 'GST : ', value: ' ₹ ${productDetail.lkmoctanFeeGst}'),
+                  key: 'GST : ',
+                  value: ' ₹ ${widget.productDetail.lkmoctanFeeGst}'),
               _itemCell(
                   key: 'Interest :',
-                  value: ' ₹ ${productDetail.lkmoctanInterest}'),
+                  value: ' ₹ ${widget.productDetail.lkmoctanInterest}'),
               _itemCell(
                   key: 'Overdue Charge :',
-                  value: ' ${productDetail.lkmoctanOverdue}/day'),
+                  value: ' ${widget.productDetail.lkmoctanOverdue}/day'),
               _itemCell(
                 key: 'Repayment Amount :',
-                value: ' ₹ ${productDetail.lkmoctanRepayAmount}',
+                value: ' ₹ ${widget.productDetail.lkmoctanRepayAmount}',
                 valueColor: Constants.themeColor,
               ),
               const Padding(padding: EdgeInsets.only(bottom: 50.0)),
@@ -126,18 +138,27 @@ class ProductDetailPage extends StatelessWidget {
           message: 'Please upload a selfie photo before continuing.',
         );
         if (isOk && context.mounted) {
-          _go2Liveness(context);
+          _go2Liveness();
         }
       }
     }
   }
 
-  void _go2Liveness(BuildContext context) async {
+  void _go2Liveness() async {
     PermissionStatus state = await Permission.camera.request();
-    if (state == PermissionStatus.granted && context.mounted) {
-      Navigator.of(context).pushNamedAndRemoveUntil('/faceAuth', (route) {
-        return route.isFirst;
-      });
+    if (state == PermissionStatus.granted) {
+      // Navigator.of(context).pushNamedAndRemoveUntil('/faceAuth', (route) {
+      //   return route.isFirst;
+      // });
+      FaceLivenessParameters? params =
+          await NetworkService.getFaceLivenessParams();
+      if (params != null) {
+        _methodChanel.invokeMapMethod('go2authFace', {
+          'apiId': params.accuauthId,
+          'hostUrl': params.accuauthHostUrl,
+          'apiSecret': params.accuauthSecret
+        });
+      }
     } else {
       await CommonToast.showToast(
           'You did not allow us to access the camera, which will help you obtain a loan. Would you like to set up authorization.');

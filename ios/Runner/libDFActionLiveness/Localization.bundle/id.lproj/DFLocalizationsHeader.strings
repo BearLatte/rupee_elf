@@ -1,0 +1,56 @@
+//
+//  DFLocalizationsHeader.h
+//  DFActionLiveness
+//
+//
+
+
+"DFLivenessDocTitle" = "Dokumen SDK";
+
+"DFLivenessTitle" = "Keaktifan Aksi";
+"DFLivenessAntiReusltPass" = "Keaktifan diverifikasi";
+"DFLivenessAntiReusltUnpass" = "Liveness gagal";
+"DFLivenessConfirm" = "Mengonfirmasi";
+"DFLivenessCancel" = "Membatalkan";
+"DFLivenessTryAgain" = "Coba lagi";
+
+"DFLivenessTipInitFaild" = "Inisialisasi SDK gagal";
+"DFLivenessTipCameraError" = "Akuisisi izin kamera gagal";
+"DFLivenessTipFaceChanged" = "Tidak ada wajah yang terdeteksi, silakan coba lagi.";
+"DFLivenessTipTimeOut" = "Waktu deteksi habis";
+"DFLivenessTipWillResignActive" = "Aplikasi akan ditangguhkan";
+"DFLivenessTipInternalError" = "Kesalahan internal";
+"DFLivenessTipBadJson" = "buruk json";
+"DFLivenessTipBundleIDError" = "Nama paket dalam lisensi tidak sesuai dengan ID aplikasi, silakan gunakan file lisensi yang benar";
+"DFLivenessTipSequenceError" = "Kesalahan urutan tindakan";
+"DFLivenessTipAuthExpire" = "Waktu perangkat tidak dalam masa berlaku lisensi, mohon gunakan lisensi yang valid";
+"DFLivenessTipLicenseInvalid" = "File lisensi tidak valid";
+"DFLivenessTipFaceMoreThanOneError" = "Beberapa wajah terdeteksi, silakan coba lagi";
+"DFLivenessDetectionErrorTipLight" = "Lampu";
+"DFLivenessDetectionErrorTipGlasses" = "Tanpa Kacamata";
+"DFLivenessDetectionErrorTipTime" = "Lambat";
+
+"DFLiveFaceRectStatusTipSuccess" = "Diam";
+"DFLiveFaceRectStatusTipFaceCountMoreThanOne" = "Harap simpan satu wajah di dalam lingkaran";
+"DFLiveFaceRectStatusTipFaceTooLarge" = "Silakan menjauh dari layar";
+"DFLiveFaceRectStatusTipNoFace" = "Tolong tempatkan wajahmu di dalam lingkaran";
+
+"DFAntihackStatusTip_INVALID_ARGUMENT" = "Kesalahan parameter permintaan";
+"DFAntihackStatusTip_DETETION_FAILED" = "Deteksi gambar gagal";
+"DFAntihackStatusTip_DOWNLOAD_ERROR" = "Unduh gambar internet gagal";
+"DFAntihackStatusTip_UNAUTHORIZED" = "Batalkan otorisasi atau otorisasi gagal";
+"DFAntihackStatusTip_KEY_EXPIRED" = "ID API Anda telah kedaluwarsa";
+"DFAntihackStatusTip_NO_PERMISSION" = "Anda tidak diizinkan untuk menggunakan API ini";
+"DFAntihackStatusTip_OUT_OF_QUOTA" = "Kuota panggilan API terlampaui";
+"DFAntihackStatusTip_RATE_LIMIT_EXCEEDED" = "Nomor panggilan di luar batasan";
+"DFAntihackStatusTip_NOT_FOUND" = "Jalur permintaan tidak ditemukan";
+"DFAntihackStatusTip_INTERNAL_ERROR" = "Proses server gagal";
+"DFAntihackStatusTip_NO_NETWORK" = "Tidak ada jaringan";
+"DFAntihackStatusTip_UNKNOWN" = "Kesalahan yang tidak diketahui";
+
+"DFLivenessDetectionTipHoldStill" = "Diam";
+"DFLivenessDetectionTipYaw" = "Putar kepalamu ke kiri dan ke kanan";
+"DFLivenessDetectionTipBlink" = "Kedipkan matamu";
+"DFLivenessDetectionTipMouth" = "Buka dan tutup mulutmu beberapa kali";
+"DFLivenessDetectionTipNod" = "Putar kepala Anda ke atas dan ke bawah";
+

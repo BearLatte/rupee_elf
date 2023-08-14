@@ -1,0 +1,55 @@
+//
+//  DFLocalizationsHeader.h
+//  DFActionLiveness
+//
+//
+
+
+"DFLivenessDocTitle" = "SDK Documentos";
+
+"DFLivenessTitle" = "Acción Vivacidad";
+"DFLivenessAntiReusltPass" = "Liveness verified";
+"DFLivenessAntiReusltUnpass" = "La vivacidad falló";
+"DFLivenessConfirm" = "Confirmar";
+"DFLivenessCancel" = "Cancelar";
+"DFLivenessTryAgain" = "Intentar otra vez";
+
+"DFLivenessTipInitFaild" = "La inicialización del SDK falló";
+"DFLivenessTipCameraError" = "No se ha podido adquirir el permiso de la cámara";
+"DFLivenessTipFaceChanged" = "No se detectó ninguna cara, inténtalo de nuevo.";
+"DFLivenessTipTimeOut" = "Tiempo de espera de detección";
+"DFLivenessTipWillResignActive" = "La aplicación está a punto de ser suspendida";
+"DFLivenessTipInternalError" = "Error interno";
+"DFLivenessTipBadJson" = "json malo";
+"DFLivenessTipBundleIDError" = "El nombre del paquete en la licencia no coincide con la ID de la aplicación, use el archivo de licencia correcto";
+"DFLivenessTipSequenceError" = "Error de secuencia de acción";
+"DFLivenessTipAuthExpire" = "El tiempo del dispositivo no está dentro del período de validez de la licencia, utilice la licencia válida";
+"DFLivenessTipLicenseInvalid" = "Archivo de licencia inválido";
+"DFLivenessTipFaceMoreThanOneError" = "Se detectaron varias caras, inténtalo de nuevo.";
+"DFLivenessDetectionErrorTipLight" = "Ligero";
+"DFLivenessDetectionErrorTipGlasses" = "sin anteojos";
+"DFLivenessDetectionErrorTipTime" = "Lento";
+
+"DFLiveFaceRectStatusTipSuccess" = "quédate quieto";
+"DFLiveFaceRectStatusTipFaceCountMoreThanOne" = "Por favor, mantenga una cara en el círculo.";
+"DFLiveFaceRectStatusTipFaceTooLarge" = "Por favor, aléjate de la pantalla.";
+"DFLiveFaceRectStatusTipNoFace" = "Por favor, coloque su cara dentro del círculo.";
+
+"DFAntihackStatusTip_INVALID_ARGUMENT" = "El error del parámetro de solicitud";
+"DFAntihackStatusTip_DETETION_FAILED" = "No se pudo detectar la imagen";
+"DFAntihackStatusTip_DOWNLOAD_ERROR" = "Error al descargar la imagen de Internet";
+"DFAntihackStatusTip_UNAUTHORIZED" = "No autorizado o autorizado fallido";
+"DFAntihackStatusTip_KEY_EXPIRED" = "Su ID de API ha caducado";
+"DFAntihackStatusTip_NO_PERMISSION" = "No está autorizado para usar esta API";
+"DFAntihackStatusTip_OUT_OF_QUOTA" = "Se superó la cuota de llamadas a la API";
+"DFAntihackStatusTip_RATE_LIMIT_EXCEEDED" = "El número de invocación está fuera de limitación.";
+"DFAntihackStatusTip_NOT_FOUND" = "No se encuentra la ruta de solicitud";
+"DFAntihackStatusTip_INTERNAL_ERROR" = "Los procesos del servidor fallaron";
+"DFAntihackStatusTip_NO_NETWORK" = "Sin red";
+"DFAntihackStatusTip_UNKNOWN" = "Error desconocido";
+
+"DFLivenessDetectionTipHoldStill" = "Quédate quieto";
+"DFLivenessDetectionTipYaw" = "Gira la cabeza a la izquierda y a la derecha";
+"DFLivenessDetectionTipBlink" = "Parpadea tus ojos";
+"DFLivenessDetectionTipMouth" = "Abre y cierra la boca varias veces.";
+"DFLivenessDetectionTipNod" = "Gira la cabeza hacia arriba y hacia abajo";
