@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
@@ -10,9 +11,90 @@ class FaceAuthPage extends StatefulWidget {
   State<FaceAuthPage> createState() => _FaceAuthPageState();
 }
 
-class _FaceAuthPageState extends State<FaceAuthPage> {
+class _FaceAuthPageState extends State<FaceAuthPage>
+    with WidgetsBindingObserver {
   bool _isShowIndicator = true;
   bool _isShowBottomBar = false;
+
+  // 可用摄像头列表
+  List<CameraDescription> _cameras = [];
+  // 相机控制器
+  CameraController? _controller;
+  // 是否已初始化相机
+  bool _isCameraInitialized = false;
+  // 当前拍的照片对象
+  XFile? _currentImgFile;
+
+  @override
+  void initState() {
+    _configCamera();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  // 配置相机
+  _configCamera() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    _cameras = await availableCameras();
+
+    // 上一次使用的controller
+    final previousCameraController = _controller;
+    // 实例化控制器
+    final CameraController cameraController = CameraController(
+      _cameras[1],
+      ResolutionPreset.high,
+      imageFormatGroup: ImageFormatGroup.jpeg,
+    );
+
+    // 注销掉上一次使用的控制器
+    await previousCameraController?.dispose();
+
+    // 替换为新的控制器
+    if (mounted) {
+      setState(() {
+        _controller = cameraController;
+      });
+    }
+
+    // 更新UI页面
+    cameraController.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+
+    // 初始化相机控制器
+    await cameraController.initialize();
+    if (mounted) {
+      setState(() {
+        _isCameraInitialized = _controller?.value.isInitialized ?? false;
+      });
+    }
+  }
+
+  // 监听app的生命周期
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController? cameraController = _controller;
+
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      _configCamera();
+    }
+
+    super.didChangeAppLifecycleState(state);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseViewWidget(
@@ -37,17 +119,32 @@ class _FaceAuthPageState extends State<FaceAuthPage> {
                   : null,
             ),
             const Spacer(),
-            Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width - 2 * 20.0,
-              height: MediaQuery.of(context).size.width - 2 * 20.0,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(MediaQuery.of(context).size.width * 0.5),
-                ),
-              ),
-            ),
+            _isCameraInitialized
+                ? ClipOval(
+                    child: Transform.scale(
+                      scale: 1 +
+                          (MediaQuery.of(context).size.width - 40) /
+                              MediaQuery.of(context).size.width,
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Center(
+                          child: CameraPreview(_controller!),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width - 2 * 20.0,
+                    height: MediaQuery.of(context).size.width - 2 * 20.0,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                            MediaQuery.of(context).size.width * 0.5),
+                      ),
+                    ),
+                  ),
             const Spacer(),
             // 底部按钮
             _isShowBottomBar ? _bottomBar() : _takePhotoButton(),
@@ -57,8 +154,17 @@ class _FaceAuthPageState extends State<FaceAuthPage> {
     );
   }
 
-  void _takePhoto() {
-    debugPrint('DEBUG: 拍照上传');
+  void _takePhoto() async {
+    final CameraController? cameraController = _controller;
+
+    if (cameraController!.value.isTakingPicture) {
+      return;
+    }
+
+    XFile imgFile = await cameraController.takePicture();
+    _currentImgFile = imgFile;
+    cameraController.pausePreview();
+
     setState(() {
       _isShowIndicator = !_isShowIndicator;
       _isShowBottomBar = !_isShowBottomBar;
@@ -70,9 +176,18 @@ class _FaceAuthPageState extends State<FaceAuthPage> {
       _isShowIndicator = !_isShowIndicator;
       _isShowBottomBar = !_isShowBottomBar;
     });
+
+    _controller?.resumePreview();
   }
 
-  void _selectButtonOnPressed() {}
+  void _selectButtonOnPressed() {
+    if (_currentImgFile == null) {
+      _controller?.resumePreview();
+      return;
+    }
+
+    
+  }
 
   Widget _bottomBar() {
     return SizedBox(

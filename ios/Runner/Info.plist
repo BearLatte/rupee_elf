@@ -54,5 +54,7 @@
 	<string>Please allow us to use Contacts information, which will help you obtain a loan, otherwise you will not be able to apply for a loan.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>You did not allow us to access the Photo Library, which will help you obtain a loan. Would you like to set up authorization.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>You did not allow us to access the Microphone, which will help you obtain a loan. Would you like to set up authorization.</string>
 </dict>
 </plist>

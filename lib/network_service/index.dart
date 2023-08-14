@@ -66,7 +66,8 @@ class NetworkService {
       parameters: {'iYYsRYecommend': isRecommend},
     );
 
-    UserInfoModel? model = await _configNetworkError(UserInfoModel.fromJson(result));
+    UserInfoModel? model =
+        await _configNetworkError(UserInfoModel.fromJson(result));
 
     return model;
   }
@@ -76,6 +77,13 @@ class NetworkService {
     var result = await _defaultService(path: '/cLqgPJf/tuVg/IKVwHM');
     CertificationInfoModel info = CertificationInfoModel.fromJson(result);
     return await _configNetworkError(info);
+  }
+
+  // 检查用户是否做过活体
+  static Future<bool> checkUserLiveness() async {
+    UserInfoModel? info = await getUserInfo();
+    if (info == null) return false;
+    return info.ukmscterLiveness == 1;
   }
 
   // 用户认证信息提交
@@ -125,6 +133,9 @@ class NetworkService {
       success();
     }
   }
+
+  // 人脸认证
+  // static 
 
   // OCR 识别
   static Future<OcrModel?> ocrRecgonizer(
