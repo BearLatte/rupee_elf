@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		228D8CFC2A8B2996006698D6 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D8CFB2A8B2996006698D6 /* ErrorAlertView.swift */; };
 		22F8D7762A8A180B00381E3E /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D7752A8A180B00381E3E /* VideoToolbox.framework */; };
 		22F8D7782A8A181A00381E3E /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D7772A8A181A00381E3E /* libbz2.tbd */; };
 		22F8D77A2A8A182700381E3E /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D7792A8A182700381E3E /* libiconv.tbd */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		228D8CFB2A8B2996006698D6 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		22F8D7752A8A180B00381E3E /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		22F8D7772A8A181A00381E3E /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		22F8D7792A8A182700381E3E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				22F8D7E12A8A1F4A00381E3E /* FaceLivenessParams.swift */,
+				228D8CFB2A8B2996006698D6 /* ErrorAlertView.swift */,
 			);
 			path = FaceAuth;
 			sourceTree = "<group>";
@@ -146,8 +149,10 @@
 			isa = PBXGroup;
 			children = (
 				22F8D7C12A8A1F0400381E3E /* DFActionfaceViewController.h */,
-				22F8D7C22A8A1F0400381E3E /* libDFActionLivenessDetector.a */,
+				22F8D7CC2A8A1F0400381E3E /* DFActionfaceViewController.m */,
 				22F8D7C32A8A1F0400381E3E /* DFActionLivenessController.h */,
+				22F8D7CD2A8A1F0400381E3E /* DFActionLivenessController.m */,
+				22F8D7C22A8A1F0400381E3E /* libDFActionLivenessDetector.a */,
 				22F8D7C42A8A1F0400381E3E /* Localization.bundle */,
 				22F8D7C52A8A1F0400381E3E /* DFLicense */,
 				22F8D7C62A8A1F0400381E3E /* DFLocalizationsHeader.h */,
@@ -156,8 +161,6 @@
 				22F8D7C92A8A1F0400381E3E /* NSObject+DFAccess.h */,
 				22F8D7CA2A8A1F0400381E3E /* NSBundle+Localization.h */,
 				22F8D7CB2A8A1F0400381E3E /* DFLivenessEnumType.h */,
-				22F8D7CC2A8A1F0400381E3E /* DFActionfaceViewController.m */,
-				22F8D7CD2A8A1F0400381E3E /* DFActionLivenessController.m */,
 				22F8D7CE2A8A1F0400381E3E /* YFGIFImageView.h */,
 				22F8D7CF2A8A1F0400381E3E /* DFLivenessCommon.h */,
 				22F8D7D02A8A1F0400381E3E /* df_liveness_resource.bundle */,
@@ -474,6 +477,7 @@
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 				22F8D7E22A8A1F4A00381E3E /* FaceLivenessParams.swift in Sources */,
 				22F8D7DC2A8A1F0400381E3E /* DFActionLivenessController.m in Sources */,
+				228D8CFC2A8B2996006698D6 /* ErrorAlertView.swift in Sources */,
 				22F8D7DF2A8A1F0400381E3E /* NSObject+DFAccess.m in Sources */,
 				22F8D7DB2A8A1F0400381E3E /* DFActionfaceViewController.m in Sources */,
 				22F8D7DE2A8A1F0400381E3E /* NSBundle+Localization.m in Sources */,

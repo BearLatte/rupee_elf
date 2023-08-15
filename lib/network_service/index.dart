@@ -143,6 +143,20 @@ class NetworkService {
     return _configNetworkError(FaceLivenessParameters.fromJson(json));
   }
 
+  // 人脸认证图片上传 + 人脸认证第二步
+  static Future<BaseModel?> uploadImgAndAuthFace(String imgPath, String score) async {
+    EasyLoading.show(
+        status: 'Authenticating...', maskType: EasyLoadingMaskType.black);
+    String imageUrl = await awsImageUpload(imgPath);
+    var json = await _defaultService(path: '/cLqgPJf/tuVg/kBykM', parameters: {
+      'uYYseYrFaceStep': 'liveness',
+      'lYYivYenessImg': imageUrl,
+      'lYYivYenessScore': score
+    });
+    EasyLoading.dismiss();
+    return _configNetworkError(BaseModel.fromJson(json));
+  }
+
   // OCR 识别
   static Future<OcrModel?> ocrRecgonizer(
       String filePath, String ocrType) async {

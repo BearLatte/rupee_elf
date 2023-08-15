@@ -357,7 +357,9 @@
 {
     if (self.session && self.detector) {
         if (![self.session isRunning] ) {
-            [self.session startRunning];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [self.session startRunning];
+            });
         }
         [self.detector startDetection];
         [self livenessDectectingFaceCount:0 faceRectStatus:LivefaceRectStatusNone detectionType:[[_arrDetection firstObject] integerValue]];

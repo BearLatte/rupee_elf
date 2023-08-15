@@ -22,6 +22,7 @@ dependencies:
   fluttertoast: ^8.2.2
   image_picker: ^1.0.2
   package_info: ^2.0.2
+  path_provider: ^2.1.0
   advertising_id: ^2.4.0
   json_annotation: ^4.8.1
   pin_code_fields: ^8.0.1

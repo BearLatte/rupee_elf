@@ -6,73 +6,136 @@ import Flutter
     override func application( _ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GeneratedPluginRegistrant.register(with: self)
         
-        let vc = window.rootViewController as! FlutterViewController
+        currentController = window.rootViewController as? FlutterViewController
         
         // 创建一个接收 flutter 消息的通道
-        let methodChanel = FlutterMethodChannel(name: "product_detail/authLiveness", binaryMessenger: vc as! FlutterBinaryMessenger)
+        methodChanel = FlutterMethodChannel(name: "product_detail/authLiveness", binaryMessenger: currentController as! FlutterBinaryMessenger)
         methodChanel.setMethodCallHandler { call, result in
             if call.method == "go2authFace" {
                 let params = call.arguments as! [String : String]
                 FaceLivenessParams.instance.apiId = params["apiId"] ?? ""
                 FaceLivenessParams.instance.apiSecret = params["apiSecret"] ?? ""
                 FaceLivenessParams.instance.hostUrl = params["hostUrl"] ?? ""
-                self.go2faceLiveness(vc: vc)
+                self.go2faceLiveness()
             }
         }
         
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    private var livenessVC : DFActionfaceViewController!
+    private var livenessVC : DFActionLivenessController!
+    private var currentController : FlutterViewController!
+    private var methodChanel : FlutterMethodChannel!
 }
 
 extension AppDelegate {
     // 配置活体控制器
-    func go2faceLiveness(vc : UIViewController) {
-        // 资源路径
-        let sourcePath = Bundle.main.path(forResource: "df_liveness_resource", ofType: "bundle")
-        // 授权文件路径
-        let licensePath = Bundle.main.path(forResource: "DFLicense", ofType: "")
+    func go2faceLiveness() {
+        let outType = "multiImg"
+        let sequence = ["HOLDSTILL", "BLINK", "MOUTH", "NOD", "YAW"]
+        let threshold = [0.7, 0.7, 0.7, 0.7, 0.7]
+        let dict : [String : Any] = ["sequence" : sequence, "outType": outType, "threshold": threshold, "autoAntiHack" : true]
         
-        let arrLivenessSequence  = [0, 1, 2, 3, 4]
-        let arrThreshold = [0.7 , 0.7 , 0.7, 0.7 , 0.7]
-
-        // 创建控制器
-        guard let liveness = DFActionfaceViewController(duration: 10.0, resourcesBundlePath: sourcePath, licensePath: licensePath) else {return}
-        livenessVC = liveness
-        
-        livenessVC.setDelegate(self, callBack: DispatchQueue.main, detectionSequence: [], detectionThreshold: arrThreshold)
-        
-        livenessVC.setOutputType(.LIVE_OUTPUT_MULTI_IMAGE)
-        
-        livenessVC.view.backgroundColor = UIColor(red: 224.0 / 255.0, green: 101.0 / 255.0, blue: 44.0 / 255.0, alpha: 1)
-        
-      
-        let nav = UINavigationController(rootViewController: livenessVC)
-        nav.modalPresentationStyle = .fullScreen
-        
-        vc.present(nav, animated: true) {
-            self.livenessVC.startDetection()
+        guard let data = try? JSONSerialization.data(withJSONObject: dict),
+              let strJson = String(data: data, encoding: .utf8) else {
+            return
         }
-    }
-    
-    @objc func backBtnAction() {
-        livenessVC.dismiss(animated: true)
+        
+        livenessVC = DFActionLivenessController()
+        livenessVC.setJsonCommand(strJson)
+        livenessVC.delegate = self
+        livenessVC.modalPresentationStyle = .fullScreen
+        
+        currentController.present(livenessVC, animated: true) {
+            self.livenessVC.restart()
+        }
     }
 }
 
-extension AppDelegate: DFActionLivenessDetectorDelegate {
-    func livenessDidStartDetection(with iDetectionType: LivefaceDetectionType, detectionIndex iDetectionIndex: Int32) {
-        print("DEBUG: 开始活体检测")
-    }
-    func livenessDidSuccessfulGet(_ data: Data?, dfImages arrDFImage: [Any]?, dfVideoData: Data?) {
+extension AppDelegate: DFActionLivenessDelegate {
+    func actionLivenessDidSuccessfulGet(_ encryTarData: Data!, dfImages arrDFImage: [Any]!, dfVideoData: Data!, isHack: Bool) {
+        
     }
     
-    func livenessDidFailWith(_ iErrorType: LivefaceErrorType, detectionType iDetectionType: LivefaceDetectionType, detectionIndex iDetectionIndex: Int32, data: Data?, dfImages arrDFImage: [Any]?, dfVideoData: Data?) {
+    
+    func actionLivenessDidSuccessfulGet(_ encryTarData: Data!, dfImages arrDFImage: [Any]!, dfVideoData: Data!) {
+        
     }
     
-    func livenessDidCancel(with iDetectionType: LivefaceDetectionType, detectionIndex iDetectionIndex: Int32) {
-    }
-    
+    func actionLivenessDidSuccessful(withScore score: CGFloat, dfImages arrDFImage: [Any]!, errorTip: String!) {
+        DispatchQueue.main.async {
+            self.livenessVC.dismiss(animated: true)
+        }
 
+
+        if let image = (arrDFImage?.last as? DFImage)?.image,let data = image.jpegData(compressionQuality: 1) {
+            let imgPath = NSTemporaryDirectory() + "temp.jpg"
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: imgPath) {
+                // 删除文件
+                guard (try? fileManager.removeItem(atPath: imgPath)) != nil else {
+                    return
+                }
+            }
+
+            // 写入文件
+            let isSuccess = FileManager.default.createFile(atPath: imgPath, contents: data)
+
+            if(isSuccess) {
+                methodChanel.invokeMethod("livenessCompleted", arguments: ["imgPath": imgPath, "score": "\(score)"])
+            }
+        }
+    }
+    
+    func actionLivenessDidFail(withType iErrorType: DFActionLivenessError, detectionType iDetectionType: DFDetectionType, detectionIndex iIndex: Int, data encryTarData: Data!, dfImages arrDFImage: [Any]!, dfVideoData: Data!) {
+        if iErrorType == .faceChanged && iIndex == 0 {
+            livenessVC.restart()
+            return
+        }
+
+        switch iErrorType {
+        case .initFaild:
+            showAlert(message: "SDK initialization failed")
+        case .cameraError:
+            showAlert(message: "Camera permission acquisition failed")
+        case .faceChanged:
+            showAlert(message: "No face detected,please try again.")
+        case .timeOut:
+            showAlert(message: "Detection timeout")
+        case .willResignActive:
+            showAlert(message: "App is about to be suspended")
+        case .internalError:
+            showAlert(message: "Internal error")
+        case .bundleIDError:
+            showAlert(message: "The package name in the license does not match with application ID, please use the right license file")
+        case .sequenceError:
+            showAlert(message: "Action sequence error")
+        case .authExpire:
+            showAlert(message: "Device time is not within the validity period of the license, pls use the valid license")
+        case .faceMoreThanOneError:
+            showAlert(message: "Multiple faces detected, please try again")
+        case .licenseInvalid:
+            showAlert(message: "License file invalid")
+        case .badJson:
+            showAlert(message: "Bad json profile")
+        @unknown default:
+            break
+        }
+
+    }
+    
+    func actionLivenessDidCancel() {
+        methodChanel.invokeMethod("livenessCancel", arguments: nil)
+    }
+
+    private func showAlert(message: String) {
+        DispatchQueue.main.async {
+            ErrorAlertView.showAlert(with: message) {
+                self.livenessVC.dismiss(animated: true)
+                self.livenessVC.cancel()
+            } confirmAction: {
+                self.livenessVC.restart()
+            }
+        }
+    }
 }

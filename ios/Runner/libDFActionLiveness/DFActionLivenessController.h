@@ -97,6 +97,9 @@ typedef NS_ENUM(NSUInteger, DFActionLivenessError) {
                                dfVideoData:(NSData *)dfVideoData
                                     isHack:(BOOL)isHack;
 
+
+-(void)actionLivenessDidSuccessfulWithScore:(CGFloat)score dfImages: (NSArray *)arrDFImage errorTip:(NSString *)errorTip;
+
 /**
  *  Action detecting failed callback
  *

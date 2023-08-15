@@ -2,7 +2,6 @@ import 'package:fluro/fluro.dart';
 import 'package:rupee_elf/component/auth/auth_fourth_page.dart';
 import 'package:rupee_elf/component/auth/auth_second_page.dart';
 import 'package:rupee_elf/component/auth/auth_third_page.dart';
-import 'package:rupee_elf/component/auth/face_auth_page.dart';
 import 'package:rupee_elf/component/auth/simple_toast_page.dart';
 import 'package:rupee_elf/component/feedback/index.dart';
 import 'package:rupee_elf/component/order/index.dart';
@@ -28,7 +27,6 @@ class RouterManager {
   static String authThird = '/authThird';
   static String authFourth = '/authFourth';
   static String authSimple = '/authSimple';
-  static String authFace = '/faceAuth';
 
   // 产品相关
   static String productDetail = '/productDetail';
@@ -84,11 +82,6 @@ class RouterManager {
   static final Handler _authSimpleHandler =
       Handler(handlerFunc: (context, parametes) {
     return const SimpleToastPage();
-  });
-
-  static final Handler _authFaceHandler =
-      Handler(handlerFunc: (context, parametes) {
-    return const FaceAuthPage();
   });
 
   // 产品
@@ -181,12 +174,6 @@ class RouterManager {
     router.define(
       authFourth,
       handler: _authFourthHandler,
-      transitionType: TransitionType.cupertino,
-    );
-
-    router.define(
-      authFace,
-      handler: _authFaceHandler,
       transitionType: TransitionType.cupertino,
     );
 

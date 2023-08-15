@@ -57,6 +57,8 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithRed:(224.0 / 255.0) green:(101.0 / 255.0) blue:(44.0 / 255.0) alpha:1];
+    
     if (!self.livefaceVC || !_strJsonCommand) {
         [self callBackWithBadJsonError];
         return;
@@ -440,6 +442,13 @@
                     if ([errorTipDict objectForKey:status]) {
                         errorTip = errorTipDict[status];
                     }
+                }
+                
+                if(weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(actionLivenessDidSuccessfulWithScore:dfImages:errorTip:)]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [weakSelf.delegate actionLivenessDidSuccessfulWithScore:score dfImages:arrDFImage errorTip:errorTip];
+                    });
                 }
             }
         }

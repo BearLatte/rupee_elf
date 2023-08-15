@@ -1,3 +1,3 @@
 #import "GeneratedPluginRegistrant.h"
-#import "DFActionfaceViewController.h"
-#import "DFLivenessEnumType.h"
+#import "DFActionLivenessController.h"
+#import "DFImage.h"

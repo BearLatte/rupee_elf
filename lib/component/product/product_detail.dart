@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/models/base_model.dart';
 import 'package:rupee_elf/models/face_liveness_parameters.dart';
 import 'package:rupee_elf/models/product_detail_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
@@ -24,6 +26,22 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   // 与原生通信的消息对象
   final MethodChannel _methodChanel =
       const MethodChannel('product_detail/authLiveness');
+
+  @override
+  void initState() {
+    super.initState();
+    _methodChanel.setMethodCallHandler((call) async {
+      if (call.method == 'livenessCompleted') {
+        BaseModel? model = await NetworkService.uploadImgAndAuthFace(
+            call.arguments['imgPath'], call.arguments['score']);
+        bool isLiveness = await NetworkService.checkUserLiveness();
+        if (isLiveness) {
+          _configParamsAndPurchaseProduct();
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseViewWidget(
@@ -147,9 +165,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   void _go2Liveness() async {
     PermissionStatus state = await Permission.camera.request();
     if (state == PermissionStatus.granted) {
-      // Navigator.of(context).pushNamedAndRemoveUntil('/faceAuth', (route) {
-      //   return route.isFirst;
-      // });
       FaceLivenessParameters? params =
           await NetworkService.getFaceLivenessParams();
       if (params != null) {
@@ -165,7 +180,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     }
   }
 
-  void _configParamsAndPurchaseProduct() async {}
+  void _configParamsAndPurchaseProduct() async {
+    
+  }
 
   Widget _itemCell(
       {required String key, required String value, Color? valueColor}) {
