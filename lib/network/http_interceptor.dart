@@ -1,5 +1,5 @@
+import 'package:connection_network_type/connection_network_type.dart';
 import 'package:dio/dio.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 class ErrorInterceptor extends Interceptor {
   @override
@@ -10,8 +10,8 @@ class ErrorInterceptor extends Interceptor {
     /// dio默认的错误实例，如果是没有网络，只能得到一个未知错误，无法精准的得知是否是无网络的情况
     /// 这里对于断网的情况，给一个特殊的code和msg
     if (err.type == DioExceptionType.unknown) {
-      var connectivityResult = await (Connectivity().checkConnectivity());
-      if (connectivityResult == ConnectivityResult.none) {
+      var connectivityResult = await ConnectionNetworkType().currentNetworkStatus();
+      if (connectivityResult == NetworkStatus.unreachable) {
         httpException = HttpException(code: -100, msg: 'None Network.');
       }
     }

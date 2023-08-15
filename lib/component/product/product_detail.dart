@@ -1,6 +1,9 @@
-import 'dart:io';
+import 'package:battery_plus/battery_plus.dart';
+import 'package:devicelocale/devicelocale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/models/base_model.dart';
@@ -10,8 +13,10 @@ import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/constants.dart';
+import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final ProductDetailModel productDetail;
@@ -34,9 +39,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       if (call.method == 'livenessCompleted') {
         BaseModel? model = await NetworkService.uploadImgAndAuthFace(
             call.arguments['imgPath'], call.arguments['score']);
-        bool isLiveness = await NetworkService.checkUserLiveness();
-        if (isLiveness) {
-          _configParamsAndPurchaseProduct();
+        if (model != null) {
+          bool isLiveness = await NetworkService.checkUserLiveness();
+          if (isLiveness) {
+            _configParamsAndPurchaseProduct();
+          }
         }
       }
     });
@@ -181,7 +188,53 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   void _configParamsAndPurchaseProduct() async {
-    
+    Map<String, dynamic> params = {
+      'pYYroYductId': widget.productDetail.pkmrctoductId
+    };
+
+    Map<String, dynamic> loanData = {};
+
+    // 获取通讯录
+    if (Global.instance.currentAccount != Constants.CURRENT_PHONE_KEY) {
+      PermissionStatus state = await Permission.contacts.request();
+      if (state == PermissionStatus.granted) {
+        List<Contact> contacts =
+            await FlutterContacts.getContacts(withProperties: true);
+        List<Map<String, Object>> phoneList = contacts
+            .map((contact) =>
+                {'number': contact.phones.first, 'name': contact.displayName})
+            .toList();
+        loanData['phoneList'] = phoneList;
+      } else {
+        await CommonToast.showToast(
+            'You did not allow us to access the contacts. Allowing it will help you obtain a loan. Do you want to set up authorization.');
+        return;
+      }
+    }
+
+    Map<String, dynamic> userDevice = {};
+    userDevice['sysType'] = 'iOS';
+    userDevice['name'] = Global.instance.packageInfo.name;
+    userDevice['applyChannel'] = 'AppStore';
+    userDevice['idfa'] = Global.instance.idfa;
+    userDevice['udid'] = Global.instance.allDeviceInfo.identifierForVendor;
+    userDevice['idfv'] = Global.instance.allDeviceInfo.identifierForVendor;
+    userDevice['appOpenTime'] =
+        '${Global.instance.prefs.getInt(Constants.APP_LAUNCH_TIME)}';
+    userDevice['bootTime'] =
+        '${Global.instance.prefs.getInt(Constants.APP_LAUNCH_TIME)}';
+    userDevice['time'] =
+        '${DateTime.now().millisecond - Global.instance.prefs.getInt(Constants.APP_LAUNCH_TIME)}';
+    userDevice['languageList'] = await Devicelocale.preferredLanguages;
+    userDevice['timezone'] = await FlutterNativeTimezone.getLocalTimezone();
+    userDevice['lowPowerModeEnabled'] = await Battery().isInBatterySaveMode;
+    userDevice['autoBrightnessEnabled'] = await ScreenBrightness().isAutoReset;
+    userDevice['simulator'] = false;
+    userDevice['debug'] = false;
+    userDevice['denetworkTypebug'] = await Global.instance.getNetworkType;
+
+    loanData['userDevice'] = userDevice;
+    params['lYYoaYnData'] = loanData;
   }
 
   Widget _itemCell(

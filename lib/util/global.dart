@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:advertising_id/advertising_id.dart';
+import 'package:connection_network_type/connection_network_type.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
@@ -57,6 +58,27 @@ class Global {
     // 获取是否已经登录
     isLogin = prefs.getBool(Constants.LOGIN_KEY) ?? false;
     currentAccount = prefs.getString(Constants.CURRENT_PHONE_KEY) ?? '';
+  }
+
+  // 获取网络状态
+  Future<String> getNetworkType() async {
+    final networkType = await ConnectionNetworkType().currentNetworkStatus();
+    switch (networkType) {
+      case NetworkStatus.wifi:
+        return 'wifi';
+      case NetworkStatus.mobile2G:
+        return '2G';
+      case NetworkStatus.mobile3G:
+        return '3G';
+      case NetworkStatus.mobile4G:
+        return '4G';
+      case NetworkStatus.mobile5G:
+        return '5G';
+      case NetworkStatus.otherMobile:
+        return 'other';
+      default:
+        return 'none';
+    }
   }
 
   // 清除信息
