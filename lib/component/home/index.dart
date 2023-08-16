@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/component/home/product_item_cell.dart';
 import 'package:rupee_elf/models/product_model.dart';
+import 'package:rupee_elf/models/space_detail_model.dart';
 import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/common_alert.dart';
@@ -9,7 +10,6 @@ import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/home_menu/home_menu_widget.dart';
-import 'package:rupee_elf/widgets/theme_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,13 +37,6 @@ class _HomePageState extends State<HomePage> {
     return BaseViewWidget(
       title: 'Home Page',
       showBackButton: false,
-      floatingActionButton: ThemeButton(
-          width: 152.0,
-          height: 52.0,
-          title: 'test',
-          onPressed: () {
-            Navigator.of(context).pushNamed('authFourth');
-          }),
       child: ListView(
         children: [
           const CommonImage(
@@ -65,7 +58,9 @@ class _HomePageState extends State<HomePage> {
               return ProductItemCell(
                 isOdd: _products.indexOf(item) % 2 == 0,
                 product: item,
-                onTap: itemCellOnTap,
+                onTap: () {
+                  itemCellOnTap(item.pkmrctoductId.toString());
+                },
               );
             }).toList(),
           ),
@@ -104,9 +99,21 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void itemCellOnTap() {
+  void itemCellOnTap(String productId) async {
     if (Global.instance.isLogin && userInfo.userStatus == 2) {
-      debugPrint('DEBUG: 此处查询订单状态，跳转页面');
+      SpaceDetailModel? model =
+          await NetworkService.checkUserSpaceDetail(productId);
+      if (model == null) return;
+      if (model.spaceStatus == 2) {
+        if (context.mounted) {
+          Navigator.pushNamed(context, '/productDetail',
+              arguments: model.loanProduct);
+        }
+      } else {
+        if (context.mounted) {
+          debugPrint('DEBUG: 此处跳转到订单详情页面');
+        }
+      }
     } else if (!Global.instance.isLogin) {
       Navigator.of(context).pushNamed('/login').then((value) {
         loadData();
@@ -124,8 +131,8 @@ class _HomePageState extends State<HomePage> {
     await Global.instance.initConstants();
 
     // 保存启动时间，毫秒
-    Global.instance.prefs
-        .setInt(Constants.APP_LAUNCH_TIME, DateTime.now().millisecondsSinceEpoch);
+    Global.instance.prefs.setInt(
+        Constants.APP_LAUNCH_TIME, DateTime.now().millisecondsSinceEpoch);
 
     if (!_isSendedFirstLaunchRequest) {
       await NetworkService.firstLaunch();

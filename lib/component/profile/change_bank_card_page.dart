@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_form_item.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
+
+import '../../models/certification_info_model.dart';
+import '../../network_service/index.dart';
 
 class ChangeBankCardPage extends StatefulWidget {
   const ChangeBankCardPage({super.key});
@@ -14,9 +18,40 @@ class ChangeBankCardPage extends StatefulWidget {
 }
 
 class _ChangeBankCardPageState extends State<ChangeBankCardPage> {
-  final String _accountNumber = '';
-  final String _bankName = '';
-  final String _ifscCode = '';
+  final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _ifscController = TextEditingController();
+
+  @override
+  void initState() {
+    loadData();
+    super.initState();
+  }
+
+  loadData() async {
+    CertificationInfoModel? info = await NetworkService.getCertificationInfo();
+    if (info != null) {
+      setState(() {
+        _numberController.text = info.bankCardNo;
+        _nameController.text = info.bankCardName;
+        _ifscController.text = info.bankIfscCode;
+      });
+    }
+  }
+
+  submitOnPressed() async {
+    UserAuthSubmitModel model = UserAuthSubmitModel(
+      aYYutYhStep: '4',
+      bYYanYkCardName: _nameController.text,
+      bYYanYkCardNo: _numberController.text,
+      bYYanYkIfscCode: _ifscController.text,
+    );
+
+    NetworkService.userAuthSubmit(model, () {
+      Navigator.of(context).pop();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return HiddenKeyboardWrapper(
@@ -25,9 +60,7 @@ class _ChangeBankCardPageState extends State<ChangeBankCardPage> {
           width: 252.0,
           height: 52.0,
           title: 'Submit',
-          onPressed: () {
-            debugPrint('DEBUG: 提交按钮点击');
-          },
+          onPressed: submitOnPressed,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: AppBar(
@@ -64,18 +97,18 @@ class _ChangeBankCardPageState extends State<ChangeBankCardPage> {
               CommonFormItem(
                 type: FormType.input,
                 hintText: 'Account Number',
-                inputValue: _accountNumber,
                 keyboardType: TextInputType.number,
+                editingController: _numberController,
               ),
               CommonFormItem(
                 type: FormType.input,
                 hintText: 'Bank Name',
-                inputValue: _bankName,
+                editingController: _nameController,
               ),
               CommonFormItem(
                 type: FormType.input,
                 hintText: 'IFSC Code',
-                inputValue: _ifscCode,
+                editingController: _ifscController,
               ),
             ],
           ),

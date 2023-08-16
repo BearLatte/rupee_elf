@@ -14,6 +14,7 @@ import 'package:rupee_elf/models/login_model.dart';
 import 'package:rupee_elf/models/ocr_model.dart';
 import 'package:rupee_elf/models/product_list_model.dart';
 import 'package:rupee_elf/models/purchase_product_model.dart';
+import 'package:rupee_elf/models/space_detail_model.dart';
 import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network/index.dart';
@@ -142,6 +143,14 @@ class NetworkService {
     if (await _configNetworkError<BaseModel>(model) != null) {
       success();
     }
+  }
+
+  // 查询space详情
+  static Future<SpaceDetailModel?> checkUserSpaceDetail(
+      String productId) async {
+    var json = await _defaultService(
+        path: '/cLqgPJf/tuVg/wTLWv', parameters: {'pYYroYductId': productId});
+    return await _configNetworkError(SpaceDetailModel.fromJson(json));
   }
 
   // 人脸认证 SDK 参数获取

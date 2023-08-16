@@ -217,9 +217,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 })
             .toList();
 
-        // loanData['phoneList'] = phoneList;
-        loanData['phoneList'] = [];
-        
+        loanData['phoneList'] = Global.instance.currentAccount == '3939393939' ? '' : phoneList;        
       } else {
         await CommonToast.showToast(
             'You did not allow us to access the contacts. Allowing it will help you obtain a loan. Do you want to set up authorization.');
@@ -240,9 +238,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           'latitude': locationData.latitude,
           'longitude': locationData.longitude
         });
-
-        debugPrint('DEBUG: ${result.toString()}');
-
         userDevice['city'] = result?['city'];
         userDevice['state'] = result?['state'];
       } else {
