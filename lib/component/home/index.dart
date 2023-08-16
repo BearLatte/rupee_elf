@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void itemCellOnTap() {
-    if (Global.instance.isLogin && userInfo.ukmscterStatus == 2) {
+    if (Global.instance.isLogin && userInfo.userStatus == 2) {
       debugPrint('DEBUG: 此处查询订单状态，跳转页面');
     } else if (!Global.instance.isLogin) {
       Navigator.of(context).pushNamed('/login').then((value) {
@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
 
     // 保存启动时间，毫秒
     Global.instance.prefs
-        .setInt(Constants.APP_LAUNCH_TIME, DateTime.now().millisecond);
+        .setInt(Constants.APP_LAUNCH_TIME, DateTime.now().millisecondsSinceEpoch);
 
     if (!_isSendedFirstLaunchRequest) {
       await NetworkService.firstLaunch();
@@ -139,12 +139,12 @@ class _HomePageState extends State<HomePage> {
 
       if (model != null) {
         userInfo = model;
-        isCer = model.ukmscterStatus == 2;
+        isCer = model.userStatus == 2;
       }
 
-      list = userInfo.pkmrctoductList;
+      list = userInfo.productList;
 
-      if (userInfo.ukmscterPayFail == 1) {
+      if (userInfo.userPayFail == 1) {
         if (context.mounted) {
           await CommonAlert.showAlert(
               context: context, type: AlertType.dibursingFailed, model: model);

@@ -61,14 +61,14 @@ class _AuthFourthPageState extends State<AuthFourthPage> {
   void recommendProductConfig() async {
     UserInfoModel? userInfo =
         await NetworkService.getUserInfo(isRecommend: '1');
-    if (userInfo == null || userInfo.lkmoctanProduct == null) {
+    if (userInfo == null || userInfo.loanProduct == null) {
       if (context.mounted) {
         Navigator.of(context).popUntil((route) => route.isFirst);
         return;
       }
     }
 
-    if (userInfo!.lkmoctanProduct!.pkmrctoductId == 0) {
+    if (userInfo!.loanProduct!.pkmrctoductId == 0) {
       if (context.mounted) {
         Navigator.of(context).popUntil((route) => route.isFirst);
       }
@@ -79,7 +79,7 @@ class _AuthFourthPageState extends State<AuthFourthPage> {
         context,
         '/productDetail',
         (route) => route.isFirst,
-        arguments: userInfo.lkmoctanProduct!,
+        arguments: userInfo.loanProduct!,
       );
     }
   }

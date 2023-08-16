@@ -221,14 +221,14 @@ Future<bool> _showDisbursingFailAlert(
                   children: [
                     ClipOval(
                       child: CommonImage(
-                        src: model.pkmactyFailLogo,
+                        src: model.payFailLogo ?? '',
                         width: 40.0,
                         height: 40.0,
                       ),
                     ),
                     const Padding(padding: EdgeInsets.only(right: 14.0)),
                     Text(
-                      model.pkmactyFailLoanName,
+                      model.payFailLoanName!,
                       style: TextStyle(
                         fontSize: 20.0,
                         color: Constants.themeTextColor,
@@ -247,7 +247,7 @@ Future<bool> _showDisbursingFailAlert(
                       ),
                     ),
                     Text(
-                      model.pkmactyFailLoanNo,
+                      model.payFailLoanNo!,
                       style: TextStyle(
                         fontSize: 16.0,
                         color: Constants.themeTextColor,
@@ -256,7 +256,7 @@ Future<bool> _showDisbursingFailAlert(
                   ],
                 ),
                 Text(
-                  'Tips\n${model.pkmactyFailContent}',
+                  'Tips\n${model.payFailContent}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16.0,

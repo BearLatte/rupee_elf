@@ -1,5 +1,6 @@
 import UIKit
 import Flutter
+import CoreLocation
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -9,7 +10,7 @@ import Flutter
         currentController = window.rootViewController as? FlutterViewController
         
         // 创建一个接收 flutter 消息的通道
-        methodChanel = FlutterMethodChannel(name: "product_detail/authLiveness", binaryMessenger: currentController as! FlutterBinaryMessenger)
+        methodChanel = FlutterMethodChannel(name: "com.product.detail.MethodChanel", binaryMessenger: currentController as! FlutterBinaryMessenger)
         methodChanel.setMethodCallHandler { call, result in
             if call.method == "go2authFace" {
                 let params = call.arguments as! [String : String]
@@ -17,6 +18,32 @@ import Flutter
                 FaceLivenessParams.instance.apiSecret = params["apiSecret"] ?? ""
                 FaceLivenessParams.instance.hostUrl = params["hostUrl"] ?? ""
                 self.go2faceLiveness()
+            }
+            
+            
+            
+            
+            
+            if call.method == "getStoageInfo" {
+                let totalStorage = "\(UIDevice.current.totalDiskSpaceInBytes)"
+                let freeStorage = "\(UIDevice.current.freeDiskSpaceInBytes)"
+                let percentOfUsedStorage = Double(UIDevice.current.totalDiskSpaceInBytes - UIDevice.current.freeDiskSpaceInBytes) / Double(UIDevice.current.totalDiskSpaceInBytes) * 100
+                result(["internalTotalStorage": totalStorage, "internalUsableStorage":freeStorage, "percentValue" : "\(percentOfUsedStorage)%", "model":UIDevice.current.modelName, "brightness": String(format: "%.0f", UIScreen.main.brightness * 100.0)]);
+            }
+            
+            if call.method == "reverseGeocodeLocation" {
+                let params = call.arguments as! [String : Any]
+                let latitude = params["latitude"] as? Double
+                let longitude = params["longitude"] as? Double
+                let location = CLLocation(latitude: latitude ?? 0, longitude: longitude ?? 0)
+                let geoCoder = CLGeocoder();
+                geoCoder.reverseGeocodeLocation(location) { placemarks, error in
+                    guard let placemark = placemarks?.first else {return}
+                    DispatchQueue.main.async {
+                        result(["state" : placemark.administrativeArea,"city": placemark.locality])
+                    }
+                    
+                }
             }
         }
         

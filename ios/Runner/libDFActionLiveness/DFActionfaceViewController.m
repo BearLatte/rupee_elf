@@ -312,7 +312,7 @@
     if (!input) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(livenessDidFailWithErrorType:detectionType:detectionIndex:data:dfImages:dfVideoData:)]) {
             dispatch_async(_callBackQueue, ^{
-                [self.delegate livenessDidFailWithErrorType:LIVENESS_CAMERA_ERROR detectionType:[[_arrDetection firstObject] integerValue] detectionIndex:0 data:nil dfImages:nil dfVideoData:nil];
+                [self.delegate livenessDidFailWithErrorType:LIVENESS_CAMERA_ERROR detectionType:[[self->_arrDetection firstObject] integerValue] detectionIndex:0 data:nil dfImages:nil dfVideoData:nil];
             });
         }
         return NO;

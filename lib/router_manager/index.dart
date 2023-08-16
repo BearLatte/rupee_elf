@@ -10,6 +10,7 @@ import 'package:rupee_elf/component/profile/change_bank_card_page.dart';
 import 'package:rupee_elf/component/profile/profile_about_us_page.dart';
 import 'package:rupee_elf/component/profile/profile_page.dart';
 import 'package:rupee_elf/models/product_detail_model.dart';
+import 'package:rupee_elf/models/product_model.dart';
 import 'package:rupee_elf/widgets/not_found_page.dart';
 import 'package:rupee_elf/component/auth/auth_first_page.dart';
 import 'package:rupee_elf/component/home/index.dart';
@@ -94,7 +95,9 @@ class RouterManager {
 
   static final Handler _productPurchaseSuccessedHandler =
       Handler(handlerFunc: (context, parametes) {
-    return const ProductPurchaseSuccessedPage();
+    List<ProductModel> products =
+        context?.settings?.arguments as List<ProductModel>;
+    return ProductPurchaseSuccessedPage(products: products);
   });
 
   // Profile

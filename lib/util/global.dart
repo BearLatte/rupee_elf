@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:advertising_id/advertising_id.dart';
+import 'package:battery_plus/battery_plus.dart';
 import 'package:connection_network_type/connection_network_type.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class Global {
   // 本地存储 对象
   late SharedPreferences prefs;
 
+
   Future<void> initConstants() async {
     // 初始化 userdefaults
     prefs = await SharedPreferences.getInstance();
@@ -61,23 +63,39 @@ class Global {
   }
 
   // 获取网络状态
-  Future<String> getNetworkType() async {
+  getNetworkType() async {
     final networkType = await ConnectionNetworkType().currentNetworkStatus();
     switch (networkType) {
       case NetworkStatus.wifi:
         return 'wifi';
       case NetworkStatus.mobile2G:
-        return '2G';
+        return'2G';
       case NetworkStatus.mobile3G:
-        return '3G';
+        return'3G';
       case NetworkStatus.mobile4G:
-        return '4G';
+        return'4G';
       case NetworkStatus.mobile5G:
-        return '5G';
+        return'5G';
       case NetworkStatus.otherMobile:
-        return 'other';
+        return'other';
       default:
-        return 'none';
+        return'none';
+    }
+  }
+
+  // 获取电池状态
+  Future<String> getBatteryState() async {
+    BatteryState state = await Battery().batteryState;
+
+    switch (state) {
+      case BatteryState.full:
+        return '5';
+      case BatteryState.charging:
+        return '2';
+      case BatteryState.discharging:
+        return '3';
+      default:
+        return '4';
     }
   }
 

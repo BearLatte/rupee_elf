@@ -1,14 +1,19 @@
+import 'dart:convert';
+
 import 'package:battery_plus/battery_plus.dart';
 import 'package:devicelocale/devicelocale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/models/base_model.dart';
 import 'package:rupee_elf/models/face_liveness_parameters.dart';
 import 'package:rupee_elf/models/product_detail_model.dart';
+import 'package:rupee_elf/models/purchase_product_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/common_alert.dart';
@@ -30,11 +35,12 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage> {
   // 与原生通信的消息对象
   final MethodChannel _methodChanel =
-      const MethodChannel('product_detail/authLiveness');
+      const MethodChannel('com.product.detail.MethodChanel');
 
   @override
   void initState() {
     super.initState();
+
     _methodChanel.setMethodCallHandler((call) async {
       if (call.method == 'livenessCompleted') {
         BaseModel? model = await NetworkService.uploadImgAndAuthFace(
@@ -188,33 +194,75 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   void _configParamsAndPurchaseProduct() async {
+    EasyLoading.show(status: 'loading...', maskType: EasyLoadingMaskType.black);
+
     Map<String, dynamic> params = {
       'pYYroYductId': widget.productDetail.pkmrctoductId
     };
 
     Map<String, dynamic> loanData = {};
+    Map<String, dynamic> userDevice = {};
 
-    // 获取通讯录
+    // 获取通讯录和定位
     if (Global.instance.currentAccount != Constants.CURRENT_PHONE_KEY) {
-      PermissionStatus state = await Permission.contacts.request();
-      if (state == PermissionStatus.granted) {
+      var contactState = await Permission.contacts.request();
+      if (contactState == PermissionStatus.granted) {
         List<Contact> contacts =
             await FlutterContacts.getContacts(withProperties: true);
         List<Map<String, Object>> phoneList = contacts
-            .map((contact) =>
-                {'number': contact.phones.first, 'name': contact.displayName})
+            .map((contact) => {
+                  'number':
+                      contact.phones.isEmpty ? '' : contact.phones.first.number,
+                  'name': contact.displayName
+                })
             .toList();
-        loanData['phoneList'] = phoneList;
+
+        // loanData['phoneList'] = phoneList;
+        loanData['phoneList'] = [];
+        
       } else {
         await CommonToast.showToast(
             'You did not allow us to access the contacts. Allowing it will help you obtain a loan. Do you want to set up authorization.');
         return;
       }
+
+      var locationState = await Permission.location.request();
+      if (locationState == PermissionStatus.granted) {
+        userDevice['gpsEnabled'] = true;
+        Position locationData = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high);
+        userDevice['latitude'] = locationData.latitude;
+        userDevice['longitude'] = locationData.longitude;
+
+        // 反地理编码原生
+        var result = await _methodChanel.invokeMapMethod(
+            'reverseGeocodeLocation', {
+          'latitude': locationData.latitude,
+          'longitude': locationData.longitude
+        });
+
+        debugPrint('DEBUG: ${result.toString()}');
+
+        userDevice['city'] = result?['city'];
+        userDevice['state'] = result?['state'];
+      } else {
+        if (context.mounted) {
+          bool isOk = await CommonAlert.showAlert(
+            context: context,
+            type: AlertType.tips,
+            message:
+                'This feature requires you to authorize this app to open the location service\nHow to set it: open phone Settings -> Privacy -> Location service',
+          );
+          if (isOk) {
+            openAppSettings();
+          }
+        }
+        return;
+      }
     }
 
-    Map<String, dynamic> userDevice = {};
     userDevice['sysType'] = 'iOS';
-    userDevice['name'] = Global.instance.packageInfo.name;
+    userDevice['name'] = Global.instance.packageInfo.appName;
     userDevice['applyChannel'] = 'AppStore';
     userDevice['idfa'] = Global.instance.idfa;
     userDevice['udid'] = Global.instance.allDeviceInfo.identifierForVendor;
@@ -224,17 +272,72 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     userDevice['bootTime'] =
         '${Global.instance.prefs.getInt(Constants.APP_LAUNCH_TIME)}';
     userDevice['time'] =
-        '${DateTime.now().millisecond - Global.instance.prefs.getInt(Constants.APP_LAUNCH_TIME)}';
+        '${DateTime.now().millisecondsSinceEpoch - Global.instance.prefs.getInt(Constants.APP_LAUNCH_TIME)}';
     userDevice['languageList'] = await Devicelocale.preferredLanguages;
     userDevice['timezone'] = await FlutterNativeTimezone.getLocalTimezone();
     userDevice['lowPowerModeEnabled'] = await Battery().isInBatterySaveMode;
     userDevice['autoBrightnessEnabled'] = await ScreenBrightness().isAutoReset;
-    userDevice['simulator'] = false;
+
     userDevice['debug'] = false;
-    userDevice['denetworkTypebug'] = await Global.instance.getNetworkType;
+    userDevice['networkType'] = await Global.instance.getNetworkType();
+    userDevice['is4G'] = (await Global.instance.getNetworkType()) == '4G';
+    userDevice['is5G'] = (await Global.instance.getNetworkType()) == '5G';
+
+    // 从原生中获取设备存储信息
+    var info = await _methodChanel.invokeMapMethod('getStoageInfo');
+    userDevice['internalTotalStorage'] = info?['internalTotalStorage'];
+    userDevice['internalUsableStorage'] = info?['internalUsableStorage'];
+    userDevice['percentValue'] = info?['percentValue'];
+    userDevice['ramTotalSize'] = info?['internalTotalStorage'];
+    userDevice['ramTotalSize'] = info?['internalUsableStorage'];
+    userDevice['model'] = info?['model'];
+    userDevice['simulator'] = info?['model'] == 'Simulator';
+    userDevice['release'] = Global.instance.allDeviceInfo.systemVersion;
+    userDevice['versionCode'] = Global.instance.packageInfo.version;
+    userDevice['brightness'] = info?['brightness'];
+    if (context.mounted) {
+      Size screenSize = MediaQuery.of(context).size;
+      var ratio = MediaQuery.of(context).devicePixelRatio;
+      MediaQueryData? data = MediaQuery.maybeOf(context).nonEmptySizeOrNull();
+
+      userDevice['screenWidth'] = screenSize.width;
+      userDevice['screenHeight'] = screenSize.height;
+      userDevice['resolution'] =
+          '${screenSize.width * ratio} * ${screenSize.height * ratio}';
+      double deviceWidth = data?.size.width ?? 0;
+      double deviceHeight = data?.size.height ?? 0;
+      userDevice['physicalSize'] = '$deviceWidth*$deviceHeight';
+    }
+
+    userDevice['isPhone'] = Global.instance.allDeviceInfo.model == 'iPhone';
+    userDevice['isTablet'] = Global.instance.allDeviceInfo.model == 'iPad';
+    userDevice['batteryStatus'] = await Global.instance.getBatteryState();
+    if (info?['model'] != 'Simulator') {
+      int batteryLevel = await Battery().batteryLevel;
+      userDevice['batteryLevel'] = batteryLevel;
+      userDevice['batteryPct'] = '$batteryLevel%';
+    }
+    userDevice['batterySum'] = '100';
+    userDevice['isCharging'] = (await Global.instance.getBatteryState()) == '2';
 
     loanData['userDevice'] = userDevice;
-    params['lYYoaYnData'] = loanData;
+    params['lYYoaYnData'] = json.encode(loanData);
+
+    PurchaseProductModel? model = await NetworkService.purchaseProduct(params);
+    if (model != null) {
+      if (model.isFirstApply == 1) {
+        debugPrint('此处需要做首单埋点');
+      }
+
+      if (context.mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/productPurchaseSuccessed',
+          (route) => route.isFirst,
+          arguments: model.productList,
+        );
+      }
+    }
   }
 
   Widget _itemCell(
@@ -259,5 +362,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         )
       ],
     );
+  }
+}
+
+extension on MediaQueryData? {
+  MediaQueryData? nonEmptySizeOrNull() {
+    if (this?.size.isEmpty ?? true) {
+      return null;
+    } else {
+      return this;
+    }
   }
 }

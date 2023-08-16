@@ -13,6 +13,7 @@ import 'package:rupee_elf/models/face_liveness_parameters.dart';
 import 'package:rupee_elf/models/login_model.dart';
 import 'package:rupee_elf/models/ocr_model.dart';
 import 'package:rupee_elf/models/product_list_model.dart';
+import 'package:rupee_elf/models/purchase_product_model.dart';
 import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network/index.dart';
@@ -84,7 +85,15 @@ class NetworkService {
   static Future<bool> checkUserLiveness() async {
     UserInfoModel? info = await getUserInfo();
     if (info == null) return false;
-    return info.ukmscterLiveness == 1;
+    return info.userLiveness == 1;
+  }
+
+  // 生成借款订单并上传设备信息
+  static Future<PurchaseProductModel?> purchaseProduct(
+      Map<String, dynamic> params) async {
+    var json =
+        await _defaultService(path: '/cLqgPJf/tuVg/mxLKT', parameters: params);
+    return await _configNetworkError(PurchaseProductModel.fromJson(json));
   }
 
   // 用户认证信息提交
@@ -144,7 +153,8 @@ class NetworkService {
   }
 
   // 人脸认证图片上传 + 人脸认证第二步
-  static Future<BaseModel?> uploadImgAndAuthFace(String imgPath, String score) async {
+  static Future<BaseModel?> uploadImgAndAuthFace(
+      String imgPath, String score) async {
     EasyLoading.show(
         status: 'Authenticating...', maskType: EasyLoadingMaskType.black);
     String imageUrl = await awsImageUpload(imgPath);
@@ -290,7 +300,7 @@ class NetworkService {
     var mapString = '';
     for (int i = 0; i < allKeys.length; i++) {
       String key = allKeys[i];
-      String value = params[key];
+      String value = '${params[key]}';
 
       if (i == 0) {
         mapString = '$key=$value';

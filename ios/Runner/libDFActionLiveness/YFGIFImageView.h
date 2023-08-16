@@ -22,7 +22,7 @@
 
 #import <UIKit/UIImageView.h>
 
-typedef void(^YFGIFImageViewCompletionBlock)();
+typedef void(^YFGIFImageViewCompletionBlock)(void);
 
 @interface YFGIFImageView : UIImageView
 

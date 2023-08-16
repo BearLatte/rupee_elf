@@ -8,62 +8,62 @@ part 'user_info_model.g.dart';
 @JsonSerializable()
 class UserInfoModel extends BaseModel {
   @JsonKey(name: 'ukmscterStatus')
-  int? ukmscterStatus;
+  int? userStatus;
 
   @JsonKey(name: 'pkmhctotoContent')
-  String? pkmhctotoContent;
+  String? photoContent;
 
   @JsonKey(name: 'gkmpctsContent')
-  String? gkmpctsContent;
+  String? gpsContent;
 
   @JsonKey(name: 'pkmhctoneContent')
-  String? pkmhctoneContent;
+  String? phoneContent;
 
   @JsonKey(name: 'ckmoctntactNum')
-  int? ckmoctntactNum;
+  int? contactNum;
 
   @JsonKey(name: 'ukmscterLiveness')
-  int? ukmscterLiveness;
+  int? userLiveness;
 
   @JsonKey(name: 'tkmhctirdLiveness')
-  String tkmhctirdLiveness;
+  String? thirdLiveness;
 
   @JsonKey(name: 'ukmscterPayFail')
-  int? ukmscterPayFail;
+  int? userPayFail;
 
   @JsonKey(name: 'pkmactyFailLogo')
-  String pkmactyFailLogo;
+  String? payFailLogo;
 
   @JsonKey(name: 'pkmactyFailContent')
-  String pkmactyFailContent;
+  String? payFailContent;
 
   @JsonKey(name: 'pkmactyFailLoanName')
-  String pkmactyFailLoanName;
+  String? payFailLoanName;
 
   @JsonKey(name: 'pkmactyFailLoanNo')
-  String pkmactyFailLoanNo;
+  String? payFailLoanNo;
 
   @JsonKey(name: 'pkmrctoductList')
-  List<ProductModel>? pkmrctoductList;
+  List<ProductModel>? productList;
 
   @JsonKey(name: 'lkmoctanProduct')
-  ProductDetailModel? lkmoctanProduct;
+  ProductDetailModel? loanProduct;
 
   UserInfoModel(
-    this.ukmscterStatus,
-    this.pkmhctotoContent,
-    this.gkmpctsContent,
-    this.pkmhctoneContent,
-    this.ckmoctntactNum,
-    this.ukmscterLiveness,
-    this.tkmhctirdLiveness,
-    this.ukmscterPayFail,
-    this.pkmactyFailLogo,
-    this.pkmactyFailContent,
-    this.pkmactyFailLoanName,
-    this.pkmactyFailLoanNo,
-    this.pkmrctoductList,
-    this.lkmoctanProduct,
+    this.userStatus,
+    this.photoContent,
+    this.gpsContent,
+    this.phoneContent,
+    this.contactNum,
+    this.userLiveness,
+    this.thirdLiveness,
+    this.userPayFail,
+    this.payFailLogo,
+    this.payFailContent,
+    this.payFailLoanName,
+    this.payFailLoanNo,
+    this.productList,
+    this.loanProduct,
   ) : super(0, '');
 
   factory UserInfoModel.fromJson(Map<String, dynamic> srcJson) =>

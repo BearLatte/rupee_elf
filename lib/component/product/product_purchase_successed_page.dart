@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/models/product_model.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 
 class ProductPurchaseSuccessedPage extends StatelessWidget {
-  const ProductPurchaseSuccessedPage({super.key});
+  final List<ProductModel>? products;
+  const ProductPurchaseSuccessedPage({super.key, this.products});
 
   @override
   Widget build(BuildContext context) {

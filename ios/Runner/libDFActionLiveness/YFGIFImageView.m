@@ -138,9 +138,9 @@
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[YFGIFManager shared].gifViewHashTable addObject:self];
-                    _gifSourceRef = gifSourceRef;
-                    _frameCount = CGImageSourceGetCount(gifSourceRef);
-                    _gifPixelSize = [self GIFDimensionalSize];
+                    self->_gifSourceRef = gifSourceRef;
+                    self->_frameCount = CGImageSourceGetCount(gifSourceRef);
+                    self->_gifPixelSize = [self GIFDimensionalSize];
                 });
             }
         }
