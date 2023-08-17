@@ -43,38 +43,40 @@ class _HomePageState extends State<HomePage> {
         height: 52.0,
         title: 'Test',
         onPressed: () {
-          Navigator.of(context).pushNamed('/authSecond');
+          Navigator.of(context).pushNamed('/addFeedback');
         },
       ),
-      child: ListView(
-        children: [
-          const CommonImage(
-              src: 'static/images/home_not_certified_head_img.png'),
-          HomeMenuWidget(
-            isCertified: _isCerified,
-            bankCardChangeOnTap: () {
-              bankCardChangeItemClicked(context);
-            },
-            orderOnTap: () {
-              orderItemClicked(context);
-            },
-            profileOnTap: () {
-              profilItemClicked(context);
-            },
-          ),
-          Column(
-            children: _products.map((item) {
-              return ProductItemCell(
-                isOdd: _products.indexOf(item) % 2 == 0,
-                product: item,
-                onTap: () {
-                  itemCellOnTap(item.pkmrctoductId.toString());
+      child: RefreshIndicator(
+          onRefresh: loadData,
+          child: ListView(
+            children: [
+              const CommonImage(
+                  src: 'static/images/home_not_certified_head_img.png'),
+              HomeMenuWidget(
+                isCertified: _isCerified,
+                bankCardChangeOnTap: () {
+                  bankCardChangeItemClicked(context);
                 },
-              );
-            }).toList(),
-          ),
-        ],
-      ),
+                orderOnTap: () {
+                  orderItemClicked(context);
+                },
+                profileOnTap: () {
+                  profilItemClicked(context);
+                },
+              ),
+              Column(
+                children: _products.map((item) {
+                  return ProductItemCell(
+                    isOdd: _products.indexOf(item) % 2 == 0,
+                    product: item,
+                    onTap: () {
+                      itemCellOnTap(item.pkmrctoductId.toString());
+                    },
+                  );
+                }).toList(),
+              ),
+            ],
+          )),
     );
   }
 
@@ -177,11 +179,4 @@ class _HomePageState extends State<HomePage> {
       if (list != null) _products = list;
     });
   }
-}
-
-class TestModel {
-  String name;
-  String age;
-  String score;
-  TestModel(this.name, this.age, this.score);
 }

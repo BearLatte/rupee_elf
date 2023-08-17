@@ -7,30 +7,23 @@ part 'aws_params_model.g.dart';
 @JsonSerializable()
 class AwsParamsModel extends BaseModel {
   @JsonKey(name: 'akmwctsBucket')
-  String akmwctsBucket;
+  String awsBucket;
 
   @JsonKey(name: 'akmwctsRegion')
-  String akmwctsRegion;
-  
-  @JsonKey(name: 'ckmrctedentials')
-  AwsCredentials ckmrctedentials;
+  String awsRegion;
 
+  @JsonKey(name: 'ckmrctedentials')
+  AwsCredentials credentials;
 
   AwsParamsModel(
-    this.akmwctsBucket,
-    this.akmwctsRegion,
-    this.ckmrctedentials,
+    this.awsBucket,
+    this.awsRegion,
+    this.credentials,
   ) : super(0, '');
 
   factory AwsParamsModel.fromJson(Map<String, dynamic> srcJson) =>
       _$AwsParamsModelFromJson(srcJson);
 
+  @override
   Map<String, dynamic> toJson() => _$AwsParamsModelToJson(this);
 }
-
-  
-
-
-  
-
-

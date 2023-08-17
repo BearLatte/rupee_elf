@@ -234,12 +234,12 @@ class NetworkService {
     AwsParamsModel params = AwsParamsModel.fromJson(result);
 
     AwsClientCredentials credentials = AwsClientCredentials(
-      accessKey: params.ckmrctedentials.accessKeyId,
-      secretKey: params.ckmrctedentials.secretAccessKey,
-      sessionToken: params.ckmrctedentials.sessionToken,
+      accessKey: params.credentials.accessKeyId,
+      secretKey: params.credentials.secretAccessKey,
+      sessionToken: params.credentials.sessionToken,
     );
     S3 client = S3(
-      region: params.akmwctsRegion,
+      region: params.awsRegion,
       credentials: credentials,
     );
 
@@ -249,7 +249,7 @@ class NetworkService {
         'india/img/$date/${RandomUtil.generateRandomString(32)}.jpg';
     Uint8List imgData = await compressImageToLower200kB(filePath);
     PutObjectOutput _ = await client.putObject(
-      bucket: params.akmwctsBucket,
+      bucket: params.awsBucket,
       key: objectKey,
       body: imgData,
       contentType: 'image/jpeg',

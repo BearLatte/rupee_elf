@@ -19,7 +19,7 @@ Map<String, dynamic> _$AwsParamsModelToJson(AwsParamsModel instance) =>
     <String, dynamic>{
       'rkmectsultCode': instance.rkmectsultCode,
       'rkmectsultMsg': instance.rkmectsultMsg,
-      'akmwctsBucket': instance.akmwctsBucket,
-      'akmwctsRegion': instance.akmwctsRegion,
-      'ckmrctedentials': instance.ckmrctedentials,
+      'akmwctsBucket': instance.awsBucket,
+      'akmwctsRegion': instance.awsRegion,
+      'ckmrctedentials': instance.credentials,
     };

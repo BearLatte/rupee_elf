@@ -10,7 +10,7 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
       json['lkmoctanOrderNo'] as String,
       json['pkmrctoductLogo'] as String,
       json['pkmrctoductName'] as String,
-      json['lkmoctanAmount'] as String,
+      json['lkmoctanAmount'] as int,
       json['lkmoctanApplyDate'] as String,
       json['skmtctatus'] as int,
       json['ikmsctPayFail'] as int,

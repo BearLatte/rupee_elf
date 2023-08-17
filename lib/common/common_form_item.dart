@@ -13,24 +13,25 @@ class CommonFormItem extends StatelessWidget {
   final void Function()? onTap;
   final TextEditingController? editingController;
   final bool isMultiLine;
+  final EdgeInsets padding;
 
-  const CommonFormItem({
-    super.key,
-    this.minHeight = 50,
-    required this.type,
-    required this.hintText,
-    this.inputValue = '',
-    this.keyboardType,
-    this.onTap,
-    this.editingController,
-    this.isMultiLine = false,
-  });
+  const CommonFormItem(
+      {super.key,
+      this.minHeight = 50,
+      required this.type,
+      required this.hintText,
+      this.inputValue = '',
+      this.keyboardType,
+      this.onTap,
+      this.editingController,
+      this.isMultiLine = false,
+      this.padding = const EdgeInsets.only(left: 8.0, right: 8.0)});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+      padding: padding,
       constraints: BoxConstraints(
           minHeight: minHeight,
           maxWidth: MediaQuery.of(context).size.width - 40),

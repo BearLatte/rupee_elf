@@ -16,7 +16,7 @@ part 'order_model.g.dart';
   String productName;
 
   @JsonKey(name: 'lkmoctanAmount')
-  String loanAmount;
+  int loanAmount;
 
   @JsonKey(name: 'lkmoctanApplyDate')
   String loanApplyDate;

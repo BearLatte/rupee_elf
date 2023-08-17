@@ -217,7 +217,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 })
             .toList();
 
-        loanData['phoneList'] = Global.instance.currentAccount == '3939393939' ? '' : phoneList;        
+        loanData['phoneList'] =
+            Global.instance.currentAccount == '3939393939' ? [] : phoneList;
       } else {
         await CommonToast.showToast(
             'You did not allow us to access the contacts. Allowing it will help you obtain a loan. Do you want to set up authorization.');
@@ -268,7 +269,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         '${Global.instance.prefs.getInt(Constants.APP_LAUNCH_TIME)}';
     userDevice['time'] =
         '${DateTime.now().millisecondsSinceEpoch - Global.instance.prefs.getInt(Constants.APP_LAUNCH_TIME)}';
-    userDevice['languageList'] = await Devicelocale.preferredLanguages;
+    userDevice['languageList'] =
+        jsonEncode(await Devicelocale.preferredLanguages);
     userDevice['timezone'] = await FlutterNativeTimezone.getLocalTimezone();
     userDevice['lowPowerModeEnabled'] = await Battery().isInBatterySaveMode;
     userDevice['autoBrightnessEnabled'] = await ScreenBrightness().isAutoReset;
@@ -317,6 +319,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
     loanData['userDevice'] = userDevice;
     params['lYYoaYnData'] = json.encode(loanData);
+
+    debugPrint('DEBUG: 购买参数 $params}');
 
     PurchaseProductModel? model = await NetworkService.purchaseProduct(params);
     if (model != null) {

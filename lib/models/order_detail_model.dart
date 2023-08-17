@@ -1,11 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-  
+import 'package:json_annotation/json_annotation.dart';
+
 part 'order_detail_model.g.dart';
 
-
 @JsonSerializable()
-  class OrderDetailModel extends Object {
-
+class OrderDetailModel extends Object {
   @JsonKey(name: 'lkmoctanOrderNo')
   String loanOrderNo;
 
@@ -19,7 +17,7 @@ part 'order_detail_model.g.dart';
   String loanApplyDate;
 
   @JsonKey(name: 'lkmoctanAmount')
-  String loanAmount;
+  int loanAmount;
 
   @JsonKey(name: 'lkmoctanStatus')
   int loanStatus;
@@ -28,38 +26,53 @@ part 'order_detail_model.g.dart';
   String bankCardNo;
 
   @JsonKey(name: 'ikmsctPayFail')
-  int isPayFail;
+  int? isPayFail;
 
   @JsonKey(name: 'fkmrcteezeDays')
-  int freezeDays;
+  int? freezeDays;
 
   @JsonKey(name: 'lkmoctanPayAmount')
-  String loanPayAmount;
+  int? loanPayAmount;
 
   @JsonKey(name: 'lkmoctanPayDate')
-  String loanPayDate;
+  String? loanPayDate;
 
   @JsonKey(name: 'lkmoctanRepayAmount')
-  String loanRepayAmount;
+  int? loanRepayAmount;
 
   @JsonKey(name: 'lkmoctanRepayDate')
-  String loanRepayDate;
+  String? loanRepayDate;
 
   @JsonKey(name: 'ekmxcttendButton')
-  int extendButton;
+  int? extendButton;
 
   @JsonKey(name: 'okmvcterdueDays')
-  String overdueDays;
+  String? overdueDays;
 
   @JsonKey(name: 'okmvcterdueAmount')
-  String overdueAmount;
+  int? overdueAmount;
 
-  OrderDetailModel(this.loanOrderNo,this.productName,this.productLogo,this.loanApplyDate,this.loanAmount,this.loanStatus,this.bankCardNo,this.isPayFail,this.freezeDays,this.loanPayAmount,this.loanPayDate,this.loanRepayAmount,this.loanRepayDate,this.extendButton,this.overdueDays,this.overdueAmount,);
+  OrderDetailModel(
+    this.loanOrderNo,
+    this.productName,
+    this.productLogo,
+    this.loanApplyDate,
+    this.loanAmount,
+    this.loanStatus,
+    this.bankCardNo,
+    this.isPayFail,
+    this.freezeDays,
+    this.loanPayAmount,
+    this.loanPayDate,
+    this.loanRepayAmount,
+    this.loanRepayDate,
+    this.extendButton,
+    this.overdueDays,
+    this.overdueAmount,
+  );
 
-  factory OrderDetailModel.fromJson(Map<String, dynamic> srcJson) => _$OrderDetailModelFromJson(srcJson);
+  factory OrderDetailModel.fromJson(Map<String, dynamic> srcJson) =>
+      _$OrderDetailModelFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$OrderDetailModelToJson(this);
-
 }
-
-  

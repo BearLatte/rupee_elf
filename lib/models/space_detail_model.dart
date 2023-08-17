@@ -14,7 +14,7 @@ part 'space_detail_model.g.dart';
   int spaceStatus;
 
   @JsonKey(name: 'lkmoctanProduct')
-  ProductDetailModel loanProduct;
+  ProductDetailModel? loanProduct;
 
   @JsonKey(name: 'pkmrctoductList')
   List<ProductModel>? productList;
@@ -28,7 +28,6 @@ part 'space_detail_model.g.dart';
 
   @override
   Map<String, dynamic> toJson() => _$SpaceDetailModelToJson(this);
-
 }
 
   

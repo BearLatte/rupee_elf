@@ -9,8 +9,10 @@ part of 'space_detail_model.dart';
 SpaceDetailModel _$SpaceDetailModelFromJson(Map<String, dynamic> json) =>
     SpaceDetailModel(
       json['skmpctaceStatus'] as int,
-      ProductDetailModel.fromJson(
-          json['lkmoctanProduct'] as Map<String, dynamic>),
+      json['lkmoctanProduct'] == null
+          ? null
+          : ProductDetailModel.fromJson(
+              json['lkmoctanProduct'] as Map<String, dynamic>),
       (json['pkmrctoductList'] as List<dynamic>?)
           ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
           .toList(),
