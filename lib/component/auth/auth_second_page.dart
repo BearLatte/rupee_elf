@@ -5,6 +5,8 @@ import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/common_picker/index.dart';
+import 'package:rupee_elf/util/constants.dart';
+import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/auth_base_widget.dart';
 import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 
@@ -21,7 +23,11 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
   String _industry = '';
   String _salary = '';
   String _workTitle = '';
-  final TextEditingController _whatAppAccountController = TextEditingController();
+  int _minAmount = 0;
+  int _maxAmount = 0;
+  int _currentAmount = 0;
+  final TextEditingController _whatAppAccountController =
+      TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _facebookIdController = TextEditingController();
 
@@ -54,8 +60,35 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
         _industryList = info.industryList;
         _salaryList = info.monthlySalaryList;
         _workTitleList = info.workTitleList;
+        _minAmount = info.amountMin;
+        _maxAmount = info.amountMax;
+        _currentAmount = int.parse(info.applyAmount) == 0
+            ? (info.amountMax * 0.5).toInt()
+            : int.parse(info.applyAmount);
       });
     }
+  }
+
+  void amountIncrease() {
+    int amount = _currentAmount + 100;
+    if (amount > _maxAmount) {
+      amount = _maxAmount;
+    }
+
+    setState(() {
+      _currentAmount = amount;
+    });
+  }
+
+  void amountDecrease() {
+    int amount = _currentAmount - 100;
+    if (amount < _minAmount) {
+      amount = _minAmount;
+    }
+
+    setState(() {
+      _currentAmount = amount;
+    });
   }
 
   void _marriageOnTap() async {
@@ -157,6 +190,7 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
       wYYhaYtsAppAccount: _whatAppAccountController.text,
       uYYseYrEmail: _emailController.text,
       fYYacYebookId: _facebookIdController.text,
+      aYYppYlyAmount: '$_currentAmount',
     );
 
     await NetworkService.userAuthSubmit(model, () {
@@ -195,6 +229,109 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
             padding: const EdgeInsets.only(left: 12.0, right: 12.0),
             color: Colors.white,
             child: ListView(children: [
+              Container(
+                padding: const EdgeInsets.fromLTRB(20.0, 16.0, 20.0, 16.0),
+                margin: const EdgeInsets.only(bottom: 10.0),
+                decoration: BoxDecoration(
+                  color: Constants.themeColor,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Target amount',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 10.0),
+                      height: 44.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(22),
+                      ),
+                      child: Row(
+                        children: [
+                          TextButton(
+                            onPressed: amountDecrease,
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                  top: 4.0, bottom: 4.0, right: 16.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(
+                                      color: HexColor('#D2CECE'), width: 1),
+                                ),
+                              ),
+                              child: const Text(
+                                '—',
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w900),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                              child: Text(
+                            '₹ $_currentAmount',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w600,
+                              color: Constants.themeColor,
+                            ),
+                          )),
+                          TextButton(
+                            onPressed: amountIncrease,
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                  top: 4.0, bottom: 4.0, left: 16.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                    color: HexColor('#D2CECE'),
+                                    width: 1,
+                                  ),
+                                ),
+                              ),
+                              child: const Text(
+                                '+',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '₹ $_minAmount',
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text('₹ $_maxAmount',
+                            style: const TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                  ],
+                ),
+              ),
               CommonFormItem(
                 type: FormType.selecte,
                 hintText: 'Marriage Status',

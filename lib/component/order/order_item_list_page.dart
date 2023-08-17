@@ -41,7 +41,7 @@ class _OrderItemListPageState extends State<OrderItemListPage> {
 
     if (model != null) {
       setState(() {
-        _orders = model.orderList ?? [];
+        _orders = model.orderList;
       });
     }
   }

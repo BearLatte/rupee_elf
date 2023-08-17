@@ -21,8 +21,10 @@ class UserAuthSubmitModel {
   String bYYanYkCardName;
   String bYYanYkCardNo;
   String bYYanYkIfscCode;
-  
+  String aYYppYlyAmount;
+
   UserAuthSubmitModel({
+    this.aYYppYlyAmount = '',
     this.uYYseYrNames = '',
     this.aYYadYhaarNumber = '',
     this.fYYroYntImage = '',

@@ -5,6 +5,15 @@ part 'certification_info_model.g.dart';
 
 @JsonSerializable()
 class CertificationInfoModel extends BaseModel {
+  @JsonKey(name: 'akmmctountMin')
+  int amountMin;
+
+  @JsonKey(name: 'akmmctountMax')
+  int amountMax;
+
+  @JsonKey(name: 'akmpctplyAmount')
+  String applyAmount;
+
   @JsonKey(name: 'ckmoctntactNum')
   int contactNum;
 
@@ -96,6 +105,9 @@ class CertificationInfoModel extends BaseModel {
   List<String> relationList;
 
   CertificationInfoModel(
+    this.amountMin,
+    this.amountMax,
+    this.applyAmount,
     this.contactNum,
     this.imageHttp,
     this.frontImage,

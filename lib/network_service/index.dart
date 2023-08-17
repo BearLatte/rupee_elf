@@ -123,6 +123,7 @@ class NetworkService {
       params['wYYorYkTitle'] = submitModel.wYYorYkTitle;
       params['wYYhaYtsAppAccount'] = submitModel.wYYhaYtsAppAccount;
       params['uYYseYrEmail'] = submitModel.uYYseYrEmail;
+      params['aYYppYlyAmount'] = submitModel.aYYppYlyAmount;
       if (submitModel.fYYacYebookId.trim().isNotEmpty) {
         params['fYYacYebookId'] = submitModel.fYYacYebookId;
       }
