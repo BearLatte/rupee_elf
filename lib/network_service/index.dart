@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:rupee_elf/component/order/order_item_list_page.dart';
 import 'package:rupee_elf/models/aws_params_model.dart';
 import 'package:rupee_elf/models/base_model.dart';
 import 'package:rupee_elf/models/certification_info_model.dart';
@@ -12,6 +13,7 @@ import 'package:rupee_elf/models/empty_network_result.dart';
 import 'package:rupee_elf/models/face_liveness_parameters.dart';
 import 'package:rupee_elf/models/login_model.dart';
 import 'package:rupee_elf/models/ocr_model.dart';
+import 'package:rupee_elf/models/order_list_model.dart';
 import 'package:rupee_elf/models/product_list_model.dart';
 import 'package:rupee_elf/models/purchase_product_model.dart';
 import 'package:rupee_elf/models/space_detail_model.dart';
@@ -143,6 +145,35 @@ class NetworkService {
     if (await _configNetworkError<BaseModel>(model) != null) {
       success();
     }
+  }
+
+  // 获取订单列表
+  static Future<OrderListModel?> fetchOrderList(OrderType type) async {
+    String? orderStatus;
+    switch (type) {
+      case OrderType.all:
+        orderStatus = null;
+      case OrderType.pending:
+        orderStatus = '1';
+      case OrderType.disbursing:
+        orderStatus = '2';
+      case OrderType.unrepay:
+        orderStatus = '3';
+      case OrderType.repaied:
+        orderStatus = '4';
+      case OrderType.denied:
+      case OrderType.disbursingFail:
+        orderStatus = '5';
+      case OrderType.overdue:
+        orderStatus = '6';
+    }
+
+    var json = await _defaultService(
+      path: '/cLqgPJf/tuVg/UMxCO',
+      parameters: orderStatus != null ? {'oYYrdYerStatus': orderStatus} : null,
+    );
+
+    return await _configNetworkError(OrderListModel.fromJson(json));
   }
 
   // 查询space详情

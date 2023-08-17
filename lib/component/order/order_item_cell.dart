@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
-import 'package:rupee_elf/component/order/order_item_data.dart';
 import 'package:rupee_elf/component/order/order_item_list_page.dart';
+import 'package:rupee_elf/models/order_model.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 
 class OrderItemCell extends StatelessWidget {
-  final OrderItem item;
+  final OrderModel item;
   final bool isTopCornerRadius;
   final bool isBottomCornerRasius;
   final bool isHasDivider;
@@ -21,11 +21,28 @@ class OrderItemCell extends StatelessWidget {
     this.onTap,
   });
 
+  OrderType convertTypeWithStatus(int status) {
+    if (status == 1) {
+      return OrderType.pending;
+    } else if (status == 2) {
+      return OrderType.disbursing;
+    } else if (status == 3) {
+      return OrderType.unrepay;
+    } else if (status == 4) {
+      return OrderType.repaied;
+    } else if (status == 5) {
+      return OrderType.disbursingFail;
+    } else if (status == 6) {
+      return OrderType.overdue;
+    }
+    return OrderType.all;
+  }
+
   @override
   Widget build(BuildContext context) {
     String typeString = '';
     Color typeStringColor;
-    switch (item.type) {
+    switch (convertTypeWithStatus(item.status)) {
       case OrderType.pending:
         typeString = 'Pending';
         typeStringColor = HexColor('#0994F0');
@@ -72,7 +89,7 @@ class OrderItemCell extends StatelessWidget {
               children: [
                 ClipOval(
                   child: CommonImage(
-                    src: item.imgUrl,
+                    src: item.productLogo,
                     width: 40.0,
                     height: 40.0,
                     fit: BoxFit.cover,
@@ -80,7 +97,7 @@ class OrderItemCell extends StatelessWidget {
                 ),
                 const Padding(padding: EdgeInsets.only(right: 10.0)),
                 Text(
-                  item.loanName,
+                  item.productName,
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.w600,
@@ -110,7 +127,7 @@ class OrderItemCell extends StatelessWidget {
                         ),
                         const Padding(padding: EdgeInsets.only(left: 10.0)),
                         Text(
-                          item.loanDate,
+                          item.loanApplyDate,
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w600,
@@ -162,7 +179,7 @@ class OrderItemCell extends StatelessWidget {
                 const Padding(padding: EdgeInsets.only(left: 10.0)),
                 Expanded(
                   child: Text(
-                    item.orderNumber,
+                    item.loanOrderNo,
                     softWrap: true,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

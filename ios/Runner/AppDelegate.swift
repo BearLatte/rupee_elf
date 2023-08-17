@@ -20,10 +20,6 @@ import CoreLocation
                 self.go2faceLiveness()
             }
             
-            
-            
-            
-            
             if call.method == "getStoageInfo" {
                 let totalStorage = "\(UIDevice.current.totalDiskSpaceInBytes)"
                 let freeStorage = "\(UIDevice.current.freeDiskSpaceInBytes)"
