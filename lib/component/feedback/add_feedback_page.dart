@@ -1,6 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_form_item.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/models/base_model.dart';
+import 'package:rupee_elf/models/feedback_type_model.dart';
+import 'package:rupee_elf/models/order_model.dart';
+import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/commom_toast.dart';
+import 'package:rupee_elf/util/common_alert.dart';
+import 'package:rupee_elf/util/common_picker/index.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
@@ -9,22 +18,76 @@ import 'package:rupee_elf/widgets/hidden_keyboard_wraper.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
 
 class AddFeedbackPage extends StatefulWidget {
-  // final OrderItem order;
-  // final List<String> problemList;
-
-  const AddFeedbackPage({super.key});
+  final OrderModel orderInfo;
+  final List<FeedbackTypeModel> feedbackTypes;
+  const AddFeedbackPage({
+    super.key,
+    required this.feedbackTypes,
+    required this.orderInfo,
+  });
 
   @override
   State<AddFeedbackPage> createState() => _AddFeedbackPageState();
 }
 
 class _AddFeedbackPageState extends State<AddFeedbackPage> {
-  final String _productName = 'Freecash';
-  final String _orderNumber = ' JKD1232312312312312312';
+  late final String _productName;
+  late final String _orderNumber;
+  late final String _productLogo;
+  late final TextEditingController _descriptionController;
 
+  String _questionType = '';
   List<String> _images = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _descriptionController = TextEditingController();
+    setState(() {
+      _productLogo = widget.orderInfo.productLogo;
+      _productName = widget.orderInfo.productName;
+      _orderNumber = widget.orderInfo.loanOrderNo;
+    });
+  }
+
+  void chooseQuestionTypeAction() async {
+    List<String> options =
+        widget.feedbackTypes.map((type) => type.feedBacktype).toList();
+    var result = await CommonPicker.showPicker(
+        context: context, options: options, value: 0);
+    if (result != null) {
+      setState(() {
+        _questionType = options[result];
+      });
+    }
+  }
+
   void onSubmit() async {
-    debugPrint(_images.toString());
+    if (_questionType.trim().isEmpty) {
+      await CommonToast.showToast('Please choose type of question!');
+      return;
+    }
+
+    if (_descriptionController.text.trim().isEmpty) {
+      await CommonToast.showToast('Please describe your problem!');
+      return;
+    }
+
+    BaseModel? model = await NetworkService.submitFeedback(
+      orderNumber: _orderNumber,
+      feedBackType: _questionType,
+      feedBackContent: _descriptionController.text,
+      feedBackImg: jsonEncode(_images),
+    );
+
+    if (model != null) {
+      if (context.mounted) {
+        CommonAlert.showAlert(context: context, type: AlertType.succesed)
+            .then((value) {
+          Navigator.of(context).pop();
+        });
+      }
+    }
   }
 
   @override
@@ -88,13 +151,12 @@ class _AddFeedbackPageState extends State<AddFeedbackPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const ClipOval(
+              ClipOval(
                 child: CommonImage(
                     width: 36.0,
                     height: 36.0,
                     fit: BoxFit.cover,
-                    src:
-                        'https://image1.thenewslens.com/2019/4/vhk9rarzu429w308j0gvu87v5325lj.jpg?auto=compress&h=648&q=80&w=1080'),
+                    src: _productLogo),
               ),
               const Padding(padding: EdgeInsets.only(right: 8.0)),
               Text(
@@ -125,10 +187,12 @@ class _AddFeedbackPageState extends State<AddFeedbackPage> {
             ],
           ),
           const Padding(padding: EdgeInsets.only(bottom: 10.0)),
-          const CommonFormItem(
+          CommonFormItem(
             type: FormType.selecte,
             hintText: 'Types of question',
             padding: EdgeInsets.zero,
+            inputValue: _questionType,
+            onTap: chooseQuestionTypeAction,
           ),
           Container(
             margin: const EdgeInsets.only(top: 20.0),
@@ -137,9 +201,10 @@ class _AddFeedbackPageState extends State<AddFeedbackPage> {
               borderRadius: BorderRadius.circular(10.0),
               border: Border.all(color: Constants.borderColor, width: 1.0),
             ),
-            child: const TextField(
-              style: TextStyle(fontSize: 14.0),
-              decoration: InputDecoration(
+            child: TextField(
+              controller: _descriptionController,
+              style: const TextStyle(fontSize: 14.0),
+              decoration: const InputDecoration(
                 hintText: 'Please describe your problem.',
                 border: InputBorder.none,
               ),

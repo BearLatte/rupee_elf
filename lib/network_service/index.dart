@@ -13,6 +13,7 @@ import 'package:rupee_elf/models/empty_network_result.dart';
 import 'package:rupee_elf/models/face_liveness_parameters.dart';
 import 'package:rupee_elf/models/login_model.dart';
 import 'package:rupee_elf/models/ocr_model.dart';
+import 'package:rupee_elf/models/order_detail_page_model.dart';
 import 'package:rupee_elf/models/order_list_model.dart';
 import 'package:rupee_elf/models/product_list_model.dart';
 import 'package:rupee_elf/models/purchase_product_model.dart';
@@ -183,6 +184,32 @@ class NetworkService {
     var json = await _defaultService(
         path: '/cLqgPJf/tuVg/wTLWv', parameters: {'pYYroYductId': productId});
     return await _configNetworkError(SpaceDetailModel.fromJson(json));
+  }
+
+  static Future<OrderDetailPageModel?> getOrderDetail(
+      String orderNumber) async {
+    var json = await _defaultService(
+      path: '/cLqgPJf/tuVg/iuVeV',
+      parameters: {'lYYoaYnOrderNo': orderNumber},
+    );
+    return await _configNetworkError(OrderDetailPageModel.fromJson(json));
+  }
+
+  // 提交反馈
+  static Future<BaseModel?> submitFeedback({
+    required String orderNumber,
+    required String feedBackType,
+    required String feedBackContent,
+    required String feedBackImg,
+  }) async {
+    var json = await _defaultService(path: '/cLqgPJf/tuVg/iuVeV', parameters: {
+      'lYYoaYnOrderNo': orderNumber,
+      'fYYeeYdBackType': feedBackType,
+      'fYYeeYdBackContent': feedBackContent,
+      'fYYeeYdBackImg': feedBackImg,
+    });
+
+    return await _configNetworkError(BaseModel.fromJson(json));
   }
 
   // 人脸认证 SDK 参数获取

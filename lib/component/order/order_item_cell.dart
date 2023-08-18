@@ -11,6 +11,7 @@ class OrderItemCell extends StatelessWidget {
   final bool isBottomCornerRasius;
   final bool isHasDivider;
   final void Function()? onTap;
+  final void Function()? iconOnPressed;
 
   const OrderItemCell({
     super.key,
@@ -19,9 +20,10 @@ class OrderItemCell extends StatelessWidget {
     required this.isBottomCornerRasius,
     required this.isHasDivider,
     this.onTap,
+    this.iconOnPressed,
   });
 
-  OrderType convertTypeWithStatus(int? status) {
+  OrderType convertTypeWithStatus(int status) {
     if (status == 1) {
       return OrderType.pending;
     } else if (status == 2) {
@@ -42,7 +44,7 @@ class OrderItemCell extends StatelessWidget {
   Widget build(BuildContext context) {
     String typeString = '';
     Color typeStringColor;
-    switch (convertTypeWithStatus(item.status)) {
+    switch (convertTypeWithStatus(item.loanStatus)) {
       case OrderType.pending:
         typeString = 'Pending';
         typeStringColor = HexColor('#0994F0');
@@ -83,6 +85,7 @@ class OrderItemCell extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: onTap,
+        behavior: HitTestBehavior.translucent,
         child: Column(
           children: [
             Row(
@@ -159,9 +162,7 @@ class OrderItemCell extends StatelessWidget {
                   ],
                 ),
                 TextButton(
-                  onPressed: () {
-                    debugPrint('DEBUG: 此处跳转到添加feedback页面');
-                  },
+                  onPressed: iconOnPressed,
                   child: const CommonImage(
                       src: 'static/icons/order_earphone_icon.png'),
                 ),

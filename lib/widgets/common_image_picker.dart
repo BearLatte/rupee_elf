@@ -72,22 +72,52 @@ class _CommonImagePickerState extends State<CommonImagePicker> {
       ),
     );
 
-    Widget wrapper(File file) {
-      return Container(
-        width: width,
-        height: height,
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
-        child: Image.file(
-          file,
-          fit: BoxFit.cover,
+    Widget wrapper(File file, {Function()? onTap}) {
+      return GestureDetector(
+        onTap: onTap,
+        child: Container(
+          width: width,
+          height: height,
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+          child: Image.file(
+            file,
+            fit: BoxFit.cover,
+          ),
         ),
       );
     }
 
+    void imageOnTap(int index) {
+      void imagesChanged(int deletedIndex, List<File> imageFils) {
+        setState(() {
+          files = imageFils;
+        });
+        uploadedImages.removeAt(deletedIndex);
+        if (widget.onChanged != null) {
+          widget.onChanged!(uploadedImages);
+        }
+      }
+
+      Navigator.of(context).pushNamed('/photoPreview', arguments: {
+        'currentIndex': index,
+        'images': files,
+        'valueChanged': imagesChanged
+      });
+    }
+
     List<Widget> getList() {
       if (widget.isUpload) {
-        List<Widget> widgets = files.map((file) => wrapper(file)).toList();
+        List<Widget> widgets = files
+            .map(
+              (file) => wrapper(
+                file,
+                onTap: () {
+                  imageOnTap(files.indexOf(file));
+                },
+              ),
+            )
+            .toList();
 
         if (widgets.length < 9) {
           widgets = widgets..add(addButton);

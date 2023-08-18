@@ -14,7 +14,7 @@ OrderDetailModel _$OrderDetailModelFromJson(Map<String, dynamic> json) =>
       json['lkmoctanApplyDate'] as String,
       json['lkmoctanAmount'] as int,
       json['lkmoctanStatus'] as int,
-      json['bkmactnkCardNo'] as String,
+      json['bkmactnkCardNo'] as String?,
       json['ikmsctPayFail'] as int?,
       json['fkmrcteezeDays'] as int?,
       json['lkmoctanPayAmount'] as int?,

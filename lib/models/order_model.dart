@@ -1,11 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-  
+import 'package:json_annotation/json_annotation.dart';
+
 part 'order_model.g.dart';
 
-
 @JsonSerializable()
-  class OrderModel extends Object {
-
+class OrderModel extends Object {
   @JsonKey(name: 'lkmoctanOrderNo')
   String loanOrderNo;
 
@@ -21,18 +19,24 @@ part 'order_model.g.dart';
   @JsonKey(name: 'lkmoctanApplyDate')
   String loanApplyDate;
 
-  @JsonKey(name: 'skmtctatus')
-  int? status;
+  @JsonKey(name: 'lkmoctanStatus')
+  int loanStatus;
 
   @JsonKey(name: 'ikmsctPayFail')
   int? isPayFail;
 
-  OrderModel(this.loanOrderNo,this.productLogo,this.productName,this.loanAmount,this.loanApplyDate,this.status,this.isPayFail,);
+  OrderModel(
+    this.loanOrderNo,
+    this.productLogo,
+    this.productName,
+    this.loanAmount,
+    this.loanApplyDate,
+    this.loanStatus,
+    this.isPayFail,
+  );
 
-  factory OrderModel.fromJson(Map<String, dynamic> srcJson) => _$OrderModelFromJson(srcJson);
+  factory OrderModel.fromJson(Map<String, dynamic> srcJson) =>
+      _$OrderModelFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$OrderModelToJson(this);
-
 }
-
-  

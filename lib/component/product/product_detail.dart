@@ -320,8 +320,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     loanData['userDevice'] = userDevice;
     params['lYYoaYnData'] = json.encode(loanData);
 
-    debugPrint('DEBUG: 购买参数 $params}');
-
     PurchaseProductModel? model = await NetworkService.purchaseProduct(params);
     if (model != null) {
       if (model.isFirstApply == 1) {

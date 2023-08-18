@@ -8,13 +8,16 @@ class BaseViewWidget extends StatelessWidget {
   final Widget? child;
   final bool showBackButton;
   final Widget? floatingActionButton;
+  final List<Widget>? actions;
 
-  const BaseViewWidget(
-      {super.key,
-      required this.title,
-      this.child,
-      this.showBackButton = true,
-      this.floatingActionButton});
+  const BaseViewWidget({
+    super.key,
+    required this.title,
+    this.child,
+    this.showBackButton = true,
+    this.floatingActionButton,
+    this.actions,
+  });
 
   Widget? backButton(BuildContext context) {
     if (showBackButton) {
@@ -44,6 +47,7 @@ class BaseViewWidget extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: backButton(context),
+          actions: actions,
         ),
         body: child,
         backgroundColor: Constants.themeColor,

@@ -23,7 +23,7 @@ class OrderDetailModel extends Object {
   int loanStatus;
 
   @JsonKey(name: 'bkmactnkCardNo')
-  String bankCardNo;
+  String? bankCardNo;
 
   @JsonKey(name: 'ikmsctPayFail')
   int? isPayFail;

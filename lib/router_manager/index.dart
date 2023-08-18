@@ -1,15 +1,21 @@
+import 'dart:io';
+
 import 'package:fluro/fluro.dart';
 import 'package:rupee_elf/component/auth/auth_fourth_page.dart';
 import 'package:rupee_elf/component/auth/auth_second_page.dart';
 import 'package:rupee_elf/component/auth/auth_third_page.dart';
 import 'package:rupee_elf/component/auth/simple_toast_page.dart';
 import 'package:rupee_elf/component/feedback/add_feedback_page.dart';
+import 'package:rupee_elf/component/feedback/feedback_image_preview.dart';
 import 'package:rupee_elf/component/feedback/index.dart';
 import 'package:rupee_elf/component/order/index.dart';
+import 'package:rupee_elf/component/order/order_detail_page.dart';
 import 'package:rupee_elf/component/product/product_purchase_successed_page.dart';
 import 'package:rupee_elf/component/profile/change_bank_card_page.dart';
 import 'package:rupee_elf/component/profile/profile_about_us_page.dart';
 import 'package:rupee_elf/component/profile/profile_page.dart';
+import 'package:rupee_elf/models/feedback_type_model.dart';
+import 'package:rupee_elf/models/order_model.dart';
 import 'package:rupee_elf/models/product_detail_model.dart';
 import 'package:rupee_elf/models/product_model.dart';
 import 'package:rupee_elf/widgets/not_found_page.dart';
@@ -41,10 +47,12 @@ class RouterManager {
 
   // Orders
   static String orderList = '/order';
+  static String orderDetail = '/orderDetail/:orderNumber';
 
   // Feedback
   static String feedbackList = '/feedback';
   static String addFeedback = '/addFeedback';
+  static String photosPreview = '/photoPreview';
 
   // 定义路由处理函数
 
@@ -123,6 +131,11 @@ class RouterManager {
     return const OrderListPage();
   });
 
+  static final Handler _orderDetailHandler =
+      Handler(handlerFunc: (context, parametes) {
+    return OrderDetailPage(orderNumber: parametes['orderNumber']![0]);
+  });
+
   // feedback
   static final Handler _feedbackListHandler =
       Handler(handlerFunc: (context, parameters) {
@@ -131,7 +144,25 @@ class RouterManager {
 
   static final Handler _addFeebackHandler =
       Handler(handlerFunc: (context, parameters) {
-    return const AddFeedbackPage();
+    Map<String, dynamic> arguments =
+        context?.settings?.arguments as Map<String, dynamic>;
+    List<FeedbackTypeModel> types = arguments['feedbackTypes'];
+    OrderModel orderInfo = arguments['orderInfo'];
+    return AddFeedbackPage(feedbackTypes: types, orderInfo: orderInfo);
+  });
+
+  static final Handler _feedbackImagesPreviewHandler =
+      Handler(handlerFunc: (context, parameters) {
+    Map<String, dynamic> arguments =
+        context?.settings?.arguments as Map<String, dynamic>;
+    int currentIndex = arguments['currentIndex'];
+    List<File> images = arguments['images'];
+    var valueChanged = arguments['valueChanged'];
+    return FeedbackImagePreview(
+      currentIndex: currentIndex,
+      images: images,
+      onValueChanged: valueChanged,
+    );
   });
 
   // 404
@@ -210,6 +241,12 @@ class RouterManager {
       transitionType: TransitionType.cupertino,
     );
 
+    router.define(
+      orderDetail,
+      handler: _orderDetailHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
     // feedback
     router.define(
       feedbackList,
@@ -221,6 +258,11 @@ class RouterManager {
       addFeedback,
       handler: _addFeebackHandler,
       transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      photosPreview,
+      handler: _feedbackImagesPreviewHandler,
     );
 
     router.define(

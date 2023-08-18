@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/component/order/order_item_cell.dart';
+import 'package:rupee_elf/models/feedback_type_model.dart';
 import 'package:rupee_elf/models/order_list_model.dart';
 import 'package:rupee_elf/models/order_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
@@ -28,6 +29,7 @@ class OrderItemListPage extends StatefulWidget {
 class _OrderItemListPageState extends State<OrderItemListPage> {
   late final OrderType _type;
   List<OrderModel> _orders = [];
+  List<FeedbackTypeModel> _feedbackTypes = [];
 
   @override
   void initState() {
@@ -40,6 +42,7 @@ class _OrderItemListPageState extends State<OrderItemListPage> {
     OrderListModel? model = await NetworkService.fetchOrderList(_type);
 
     if (model != null) {
+      _feedbackTypes = model.feedBackTypes;
       setState(() {
         _orders = model.orderList;
       });
@@ -50,17 +53,27 @@ class _OrderItemListPageState extends State<OrderItemListPage> {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.only(top: 10.0, left: 12.0, right: 12.0),
-      children: List.generate(
-        _orders.length,
-        (index) {
-          return OrderItemCell(
-            item: _orders[index],
-            isTopCornerRadius: index == 0,
-            isBottomCornerRasius: index == (_orders.length - 1),
-            isHasDivider: index != (_orders.length - 1),
-          );
-        },
-      ),
+      children: _orders
+          .map(
+            (order) => OrderItemCell(
+              item: order,
+              isTopCornerRadius: _orders.indexOf(order) == 0,
+              isBottomCornerRasius:
+                  _orders.indexOf(order) == _orders.length - 1,
+              isHasDivider: _orders.indexOf(order) != _orders.length - 1,
+              onTap: () {
+                Navigator.of(context)
+                    .pushNamed('/orderDetail/${order.loanOrderNo}');
+              },
+              iconOnPressed: () {
+                Navigator.of(context).pushNamed('/addFeedback', arguments: {
+                  'feedbackTypes': _feedbackTypes,
+                  'orderInfo': order
+                });
+              },
+            ),
+          )
+          .toList(),
     );
   }
 }
