@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                     isOdd: _products.indexOf(item) % 2 == 0,
                     product: item,
                     onTap: () {
-                      itemCellOnTap(item.pkmrctoductId.toString());
+                      itemCellOnTap(item.productId.toString());
                     },
                   );
                 }).toList(),

@@ -21,7 +21,7 @@ class OrderItemCell extends StatelessWidget {
     this.onTap,
   });
 
-  OrderType convertTypeWithStatus(int status) {
+  OrderType convertTypeWithStatus(int? status) {
     if (status == 1) {
       return OrderType.pending;
     } else if (status == 2) {

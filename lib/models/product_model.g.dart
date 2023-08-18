@@ -17,10 +17,10 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
-      'pkmrctoductId': instance.pkmrctoductId,
-      'pkmrctoductLogo': instance.pkmrctoductLogo,
-      'pkmrctoductName': instance.pkmrctoductName,
-      'pkmrctoductDays': instance.pkmrctoductDays,
-      'pkmrctoductAmount': instance.pkmrctoductAmount,
-      'pkmrctoductRate': instance.pkmrctoductRate,
+      'pkmrctoductId': instance.productId,
+      'pkmrctoductLogo': instance.productLogo,
+      'pkmrctoductName': instance.productName,
+      'pkmrctoductDays': instance.productDays,
+      'pkmrctoductAmount': instance.productAmount,
+      'pkmrctoductRate': instance.productRate,
     };

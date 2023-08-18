@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
+import 'package:rupee_elf/component/home/product_item_cell.dart';
 import 'package:rupee_elf/models/product_model.dart';
+import 'package:rupee_elf/models/space_detail_model.dart';
+import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 
-class ProductPurchaseSuccessedPage extends StatelessWidget {
-  final List<ProductModel>? products;
-  const ProductPurchaseSuccessedPage({super.key, this.products});
+class ProductPurchaseSuccessedPage extends StatefulWidget {
+  final List<ProductModel> products;
+  const ProductPurchaseSuccessedPage({super.key, this.products = const []});
+
+  @override
+  State<ProductPurchaseSuccessedPage> createState() =>
+      _ProductPurchaseSuccessedPageState();
+}
+
+class _ProductPurchaseSuccessedPageState
+    extends State<ProductPurchaseSuccessedPage> {
+  void itemCellOnTap(String productId) async {
+    SpaceDetailModel? model =
+        await NetworkService.checkUserSpaceDetail(productId);
+    if (model == null) return;
+    if (model.spaceStatus == 2) {
+      if (context.mounted) {
+        Navigator.pushNamed(context, '/productDetail',
+            arguments: model.loanProduct);
+      }
+    } else {
+      if (context.mounted) {
+        debugPrint('DEBUG: 此处跳转到订单详情页面');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +89,17 @@ class ProductPurchaseSuccessedPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView(
-                    children: List.generate(5, (index) {
-                      return Container();
-                    }).toList(),
-                  ),
+                      children: widget.products
+                          .map(
+                            (item) => ProductItemCell(
+                              isOdd: widget.products.indexOf(item) % 2 == 0,
+                              product: item,
+                              onTap: () {
+                                itemCellOnTap(item.productId.toString());
+                              },
+                            ),
+                          )
+                          .toList()),
                 )
               ],
             ),

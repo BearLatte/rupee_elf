@@ -12,8 +12,8 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
       json['pkmrctoductName'] as String,
       json['lkmoctanAmount'] as int,
       json['lkmoctanApplyDate'] as String,
-      json['skmtctatus'] as int,
-      json['ikmsctPayFail'] as int,
+      json['skmtctatus'] as int?,
+      json['ikmsctPayFail'] as int?,
     );
 
 Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>

@@ -46,7 +46,7 @@ class ProductItemCell extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                product.pkmrctoductName,
+                                product.productName,
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Constants.themeTextColor,
@@ -91,7 +91,7 @@ class ProductItemCell extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '₹ ${product.pkmrctoductAmount}',
+                          '₹ ${product.productAmount}',
                           style: TextStyle(
                             fontSize: 30.0,
                             fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ class ProductItemCell extends StatelessWidget {
               right: isOdd ? null : 24,
               child: ClipOval(
                 child: CommonImage(
-                  src: product.pkmrctoductLogo,
+                  src: product.productLogo,
                   width: 68.0,
                   height: 68.0,
                   fit: BoxFit.cover,

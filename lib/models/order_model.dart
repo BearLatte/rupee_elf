@@ -22,10 +22,10 @@ part 'order_model.g.dart';
   String loanApplyDate;
 
   @JsonKey(name: 'skmtctatus')
-  int status;
+  int? status;
 
   @JsonKey(name: 'ikmsctPayFail')
-  int isPayFail;
+  int? isPayFail;
 
   OrderModel(this.loanOrderNo,this.productLogo,this.productName,this.loanAmount,this.loanApplyDate,this.status,this.isPayFail,);
 

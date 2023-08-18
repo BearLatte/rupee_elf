@@ -7,24 +7,24 @@ part 'product_model.g.dart';
   class ProductModel extends Object {
 
   @JsonKey(name: 'pkmrctoductId')
-  int pkmrctoductId;
+  int productId;
 
   @JsonKey(name: 'pkmrctoductLogo')
-  String pkmrctoductLogo;
+  String productLogo;
 
   @JsonKey(name: 'pkmrctoductName')
-  String pkmrctoductName;
+  String productName;
 
   @JsonKey(name: 'pkmrctoductDays')
-  String pkmrctoductDays;
+  String productDays;
 
   @JsonKey(name: 'pkmrctoductAmount')
-  String pkmrctoductAmount;
+  String productAmount;
 
   @JsonKey(name: 'pkmrctoductRate')
-  String pkmrctoductRate;
+  String productRate;
 
-  ProductModel(this.pkmrctoductId,this.pkmrctoductLogo,this.pkmrctoductName,this.pkmrctoductDays,this.pkmrctoductAmount,this.pkmrctoductRate,);
+  ProductModel(this.productId,this.productLogo,this.productName,this.productDays,this.productAmount,this.productRate,);
 
   factory ProductModel.fromJson(Map<String, dynamic> srcJson) => _$ProductModelFromJson(srcJson);
 
