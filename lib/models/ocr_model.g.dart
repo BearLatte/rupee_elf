@@ -16,12 +16,12 @@ OcrModel _$OcrModelFromJson(Map<String, dynamic> json) => OcrModel(
       json['akmdctdressDetail'] as String?,
       json['pkmactnNumber'] as String?,
     )
-      ..rkmectsultCode = json['rkmectsultCode'] as int
-      ..rkmectsultMsg = json['rkmectsultMsg'] as String;
+      ..resultCode = json['rkmectsultCode'] as int
+      ..resultMsg = json['rkmectsultMsg'] as String;
 
 Map<String, dynamic> _$OcrModelToJson(OcrModel instance) => <String, dynamic>{
-      'rkmectsultCode': instance.rkmectsultCode,
-      'rkmectsultMsg': instance.rkmectsultMsg,
+      'rkmectsultCode': instance.resultCode,
+      'rkmectsultMsg': instance.resultMsg,
       'ikmmctageHttp': instance.ikmmctageHttp,
       'ikmmctagePath': instance.ikmmctagePath,
       'ukmscterNames': instance.ukmscterNames,

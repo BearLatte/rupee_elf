@@ -6,6 +6,7 @@ import 'package:rupee_elf/component/auth/auth_second_page.dart';
 import 'package:rupee_elf/component/auth/auth_third_page.dart';
 import 'package:rupee_elf/component/auth/simple_toast_page.dart';
 import 'package:rupee_elf/component/feedback/add_feedback_page.dart';
+import 'package:rupee_elf/component/feedback/feedback_detail_page.dart';
 import 'package:rupee_elf/component/feedback/feedback_image_preview.dart';
 import 'package:rupee_elf/component/feedback/index.dart';
 import 'package:rupee_elf/component/order/index.dart';
@@ -14,6 +15,7 @@ import 'package:rupee_elf/component/product/product_purchase_successed_page.dart
 import 'package:rupee_elf/component/profile/change_bank_card_page.dart';
 import 'package:rupee_elf/component/profile/profile_about_us_page.dart';
 import 'package:rupee_elf/component/profile/profile_page.dart';
+import 'package:rupee_elf/models/feedback_item_model.dart';
 import 'package:rupee_elf/models/feedback_type_model.dart';
 import 'package:rupee_elf/models/order_model.dart';
 import 'package:rupee_elf/models/product_detail_model.dart';
@@ -53,6 +55,7 @@ class RouterManager {
   static String feedbackList = '/feedback';
   static String addFeedback = '/addFeedback';
   static String photosPreview = '/photoPreview';
+  static String feedbackDetail = '/feedbackDetail';
 
   // 定义路由处理函数
 
@@ -165,6 +168,12 @@ class RouterManager {
     );
   });
 
+  static final Handler _feedbackDetailHandler =
+      Handler(handlerFunc: (context, parameters) {
+    FeedbackItemModel item = context?.settings?.arguments as FeedbackItemModel;
+    return FeedbackDetailPage(item: item);
+  });
+
   // 404
   static final Handler _notFoundHandler =
       Handler(handlerFunc: (context, parameters) {
@@ -263,6 +272,12 @@ class RouterManager {
     router.define(
       photosPreview,
       handler: _feedbackImagesPreviewHandler,
+    );
+
+    router.define(
+      feedbackDetail,
+      handler: _feedbackDetailHandler,
+      transitionType: TransitionType.cupertino,
     );
 
     router.define(

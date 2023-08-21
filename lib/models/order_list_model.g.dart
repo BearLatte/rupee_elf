@@ -17,13 +17,13 @@ OrderListModel _$OrderListModelFromJson(Map<String, dynamic> json) =>
           .map((e) => FeedbackTypeModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     )
-      ..rkmectsultCode = json['rkmectsultCode'] as int
-      ..rkmectsultMsg = json['rkmectsultMsg'] as String;
+      ..resultCode = json['rkmectsultCode'] as int
+      ..resultMsg = json['rkmectsultMsg'] as String;
 
 Map<String, dynamic> _$OrderListModelToJson(OrderListModel instance) =>
     <String, dynamic>{
-      'rkmectsultCode': instance.rkmectsultCode,
-      'rkmectsultMsg': instance.rkmectsultMsg,
+      'rkmectsultCode': instance.resultCode,
+      'rkmectsultMsg': instance.resultMsg,
       'okmrctderGroup': instance.orderGroup,
       'okmrctderList': instance.orderList,
       'fkmectedBackTypes': instance.feedBackTypes,

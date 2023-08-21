@@ -21,13 +21,13 @@ SpaceDetailModel _$SpaceDetailModelFromJson(Map<String, dynamic> json) =>
           : OrderDetailModel.fromJson(
               json['okmrctderInfo'] as Map<String, dynamic>),
     )
-      ..rkmectsultCode = json['rkmectsultCode'] as int
-      ..rkmectsultMsg = json['rkmectsultMsg'] as String;
+      ..resultCode = json['rkmectsultCode'] as int
+      ..resultMsg = json['rkmectsultMsg'] as String;
 
 Map<String, dynamic> _$SpaceDetailModelToJson(SpaceDetailModel instance) =>
     <String, dynamic>{
-      'rkmectsultCode': instance.rkmectsultCode,
-      'rkmectsultMsg': instance.rkmectsultMsg,
+      'rkmectsultCode': instance.resultCode,
+      'rkmectsultMsg': instance.resultMsg,
       'skmpctaceStatus': instance.spaceStatus,
       'lkmoctanProduct': instance.loanProduct,
       'pkmrctoductList': instance.productList,

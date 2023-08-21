@@ -14,14 +14,14 @@ PurchaseProductModel _$PurchaseProductModelFromJson(
           ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     )
-      ..rkmectsultCode = json['rkmectsultCode'] as int
-      ..rkmectsultMsg = json['rkmectsultMsg'] as String;
+      ..resultCode = json['rkmectsultCode'] as int
+      ..resultMsg = json['rkmectsultMsg'] as String;
 
 Map<String, dynamic> _$PurchaseProductModelToJson(
         PurchaseProductModel instance) =>
     <String, dynamic>{
-      'rkmectsultCode': instance.rkmectsultCode,
-      'rkmectsultMsg': instance.rkmectsultMsg,
+      'rkmectsultCode': instance.resultCode,
+      'rkmectsultMsg': instance.resultMsg,
       'ikmsctFirstApply': instance.isFirstApply,
       'pkmrctoductList': instance.productList,
     };

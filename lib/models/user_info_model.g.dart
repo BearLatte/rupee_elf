@@ -28,13 +28,13 @@ UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
           : ProductDetailModel.fromJson(
               json['lkmoctanProduct'] as Map<String, dynamic>),
     )
-      ..rkmectsultCode = json['rkmectsultCode'] as int
-      ..rkmectsultMsg = json['rkmectsultMsg'] as String;
+      ..resultCode = json['rkmectsultCode'] as int
+      ..resultMsg = json['rkmectsultMsg'] as String;
 
 Map<String, dynamic> _$UserInfoModelToJson(UserInfoModel instance) =>
     <String, dynamic>{
-      'rkmectsultCode': instance.rkmectsultCode,
-      'rkmectsultMsg': instance.rkmectsultMsg,
+      'rkmectsultCode': instance.resultCode,
+      'rkmectsultMsg': instance.resultMsg,
       'ukmscterStatus': instance.userStatus,
       'pkmhctotoContent': instance.photoContent,
       'gkmpctsContent': instance.gpsContent,

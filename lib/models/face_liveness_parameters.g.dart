@@ -13,14 +13,14 @@ FaceLivenessParameters _$FaceLivenessParametersFromJson(
       json['akmcctcuauthSecret'] as String,
       json['akmcctcuauthHostUrl'] as String,
     )
-      ..rkmectsultCode = json['rkmectsultCode'] as int
-      ..rkmectsultMsg = json['rkmectsultMsg'] as String;
+      ..resultCode = json['rkmectsultCode'] as int
+      ..resultMsg = json['rkmectsultMsg'] as String;
 
 Map<String, dynamic> _$FaceLivenessParametersToJson(
         FaceLivenessParameters instance) =>
     <String, dynamic>{
-      'rkmectsultCode': instance.rkmectsultCode,
-      'rkmectsultMsg': instance.rkmectsultMsg,
+      'rkmectsultCode': instance.resultCode,
+      'rkmectsultMsg': instance.resultMsg,
       'akmcctcuauthId': instance.accuauthId,
       'akmcctcuauthSecret': instance.accuauthSecret,
       'akmcctcuauthHostUrl': instance.accuauthHostUrl,

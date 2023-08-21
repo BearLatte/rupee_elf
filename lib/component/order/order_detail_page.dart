@@ -13,7 +13,7 @@ class OrderDetailPage extends StatefulWidget {
 }
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
-  String _title = '';
+  final String _title = '';
   // OrderType _type = OrderType.denied;
 
   @override
@@ -25,9 +25,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   void loadOrderDetail() async {
     OrderDetailPageModel? model =
         await NetworkService.getOrderDetail(widget.orderNumber);
-    if(model != null) {
-      
-    }
+    if (model != null) {}
   }
 
   @override

@@ -82,7 +82,10 @@ class _AddFeedbackPageState extends State<AddFeedbackPage> {
 
     if (model != null) {
       if (context.mounted) {
-        CommonAlert.showAlert(context: context, type: AlertType.succesed)
+        CommonAlert.showAlert(
+                context: context,
+                type: AlertType.succesed,
+                message: 'Submitted successfully')
             .then((value) {
           Navigator.of(context).pop();
         });

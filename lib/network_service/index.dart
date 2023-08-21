@@ -11,6 +11,7 @@ import 'package:rupee_elf/models/base_model.dart';
 import 'package:rupee_elf/models/certification_info_model.dart';
 import 'package:rupee_elf/models/empty_network_result.dart';
 import 'package:rupee_elf/models/face_liveness_parameters.dart';
+import 'package:rupee_elf/models/feedback_list_model.dart';
 import 'package:rupee_elf/models/login_model.dart';
 import 'package:rupee_elf/models/ocr_model.dart';
 import 'package:rupee_elf/models/order_detail_page_model.dart';
@@ -54,7 +55,7 @@ class NetworkService {
   static logout(Function() success) async {
     var result = await _defaultService(path: '/cLqgPJf/HJKfYM');
     var model = BaseModel.fromJson(result);
-    if (model.rkmectsultCode == 1) {
+    if (model.resultCode == 1) {
       success();
     }
   }
@@ -202,7 +203,7 @@ class NetworkService {
     required String feedBackContent,
     required String feedBackImg,
   }) async {
-    var json = await _defaultService(path: '/cLqgPJf/tuVg/iuVeV', parameters: {
+    var json = await _defaultService(path: '/cLqgPJf/tuVg/yMpgc', parameters: {
       'lYYoaYnOrderNo': orderNumber,
       'fYYeeYdBackType': feedBackType,
       'fYYeeYdBackContent': feedBackContent,
@@ -210,6 +211,13 @@ class NetworkService {
     });
 
     return await _configNetworkError(BaseModel.fromJson(json));
+  }
+
+  // 反馈列表
+  static Future<FeedbackListModel?> getFeedbackList() async {
+    var json = await _defaultService(path: '/cLqgPJf/tuVg/muQPD');
+    FeedbackListModel model = FeedbackListModel.frontJson(json);
+    return await _configNetworkError(model);
   }
 
   // 人脸认证 SDK 参数获取
@@ -303,11 +311,11 @@ class NetworkService {
 
   // 处理 API 内部报错
   static Future<T?> _configNetworkError<T extends BaseModel>(T model) async {
-    if (model.rkmectsultCode == 1) {
+    if (model.resultCode == 1) {
       return model;
     }
 
-    if (model.rkmectsultCode == -1) {
+    if (model.resultCode == -1) {
       // 去登录页面
       BuildContext? context = NavigatorKey.navKey.currentState?.context;
       if (context != null) {
@@ -316,8 +324,8 @@ class NetworkService {
       }
     }
 
-    if (model.rkmectsultCode == 0) {
-      await CommonToast.showToast(model.rkmectsultMsg);
+    if (model.resultCode == 0) {
+      await CommonToast.showToast(model.resultMsg);
       return null;
     }
 

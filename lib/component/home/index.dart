@@ -37,14 +37,6 @@ class _HomePageState extends State<HomePage> {
     return BaseViewWidget(
       title: 'Home Page',
       showBackButton: false,
-      // floatingActionButton: ThemeButton(
-      //   width: 152.0,
-      //   height: 52.0,
-      //   title: 'Test',
-      //   onPressed: () {
-      //     Navigator.of(context).pushNamed('/addFeedback');
-      //   },
-      // ),
       child: RefreshIndicator(
           onRefresh: loadData,
           child: ListView(

@@ -57,14 +57,14 @@ CertificationInfoModel _$CertificationInfoModelFromJson(
           .map((e) => e as String)
           .toList(),
     )
-      ..rkmectsultCode = json['rkmectsultCode'] as int
-      ..rkmectsultMsg = json['rkmectsultMsg'] as String;
+      ..resultCode = json['rkmectsultCode'] as int
+      ..resultMsg = json['rkmectsultMsg'] as String;
 
 Map<String, dynamic> _$CertificationInfoModelToJson(
         CertificationInfoModel instance) =>
     <String, dynamic>{
-      'rkmectsultCode': instance.rkmectsultCode,
-      'rkmectsultMsg': instance.rkmectsultMsg,
+      'rkmectsultCode': instance.resultCode,
+      'rkmectsultMsg': instance.resultMsg,
       'akmmctountMin': instance.amountMin,
       'akmmctountMax': instance.amountMax,
       'akmpctplyAmount': instance.applyAmount,

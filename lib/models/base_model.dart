@@ -7,12 +7,12 @@ part 'base_model.g.dart';
   class BaseModel extends Object {
 
   @JsonKey(name: 'rkmectsultCode')
-  int rkmectsultCode;
+  int resultCode;
 
   @JsonKey(name: 'rkmectsultMsg')
-  String rkmectsultMsg;
+  String resultMsg;
 
-  BaseModel(this.rkmectsultCode,this.rkmectsultMsg,);
+  BaseModel(this.resultCode,this.resultMsg,);
 
   factory BaseModel.fromJson(Map<String, dynamic> srcJson) => _$BaseModelFromJson(srcJson);
 

@@ -12,6 +12,6 @@ BaseModel _$BaseModelFromJson(Map<String, dynamic> json) => BaseModel(
     );
 
 Map<String, dynamic> _$BaseModelToJson(BaseModel instance) => <String, dynamic>{
-      'rkmectsultCode': instance.rkmectsultCode,
-      'rkmectsultMsg': instance.rkmectsultMsg,
+      'rkmectsultCode': instance.resultCode,
+      'rkmectsultMsg': instance.resultMsg,
     };
