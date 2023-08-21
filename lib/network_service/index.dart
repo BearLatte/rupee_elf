@@ -187,7 +187,8 @@ class NetworkService {
     return await _configNetworkError(SpaceDetailModel.fromJson(json));
   }
 
-  static Future<OrderDetailPageModel?> getOrderDetail(
+  // 借款单详情
+  static Future<OrderDetailPageModel?> fetchOrderDetail(
       String orderNumber) async {
     var json = await _defaultService(
       path: '/cLqgPJf/tuVg/iuVeV',

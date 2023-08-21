@@ -17,13 +17,13 @@ OrderDetailModel _$OrderDetailModelFromJson(Map<String, dynamic> json) =>
       json['bkmactnkCardNo'] as String?,
       json['ikmsctPayFail'] as int?,
       json['fkmrcteezeDays'] as int?,
-      json['lkmoctanPayAmount'] as int?,
+      (json['lkmoctanPayAmount'] as num?)?.toDouble(),
       json['lkmoctanPayDate'] as String?,
-      json['lkmoctanRepayAmount'] as int?,
+      (json['lkmoctanRepayAmount'] as num?)?.toDouble(),
       json['lkmoctanRepayDate'] as String?,
       json['ekmxcttendButton'] as int?,
-      json['okmvcterdueDays'] as String?,
-      json['okmvcterdueAmount'] as int?,
+      json['okmvcterdueDays'] as int?,
+      (json['okmvcterdueAmount'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$OrderDetailModelToJson(OrderDetailModel instance) =>

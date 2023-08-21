@@ -32,13 +32,13 @@ class OrderDetailModel extends Object {
   int? freezeDays;
 
   @JsonKey(name: 'lkmoctanPayAmount')
-  int? loanPayAmount;
+  double? loanPayAmount;
 
   @JsonKey(name: 'lkmoctanPayDate')
   String? loanPayDate;
 
   @JsonKey(name: 'lkmoctanRepayAmount')
-  int? loanRepayAmount;
+  double? loanRepayAmount;
 
   @JsonKey(name: 'lkmoctanRepayDate')
   String? loanRepayDate;
@@ -47,10 +47,10 @@ class OrderDetailModel extends Object {
   int? extendButton;
 
   @JsonKey(name: 'okmvcterdueDays')
-  String? overdueDays;
+  int? overdueDays;
 
   @JsonKey(name: 'okmvcterdueAmount')
-  int? overdueAmount;
+  double? overdueAmount;
 
   OrderDetailModel(
     this.loanOrderNo,
