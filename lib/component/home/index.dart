@@ -113,7 +113,11 @@ class _HomePageState extends State<HomePage> {
         }
       } else {
         if (context.mounted) {
-          debugPrint('DEBUG: 此处跳转到订单详情页面');
+          Navigator.of(context)
+              .pushNamed('/orderDetail/${model.orderInfo?.loanOrderNo}')
+              .then((_) {
+            loadData();
+          });
         }
       }
     } else if (!Global.instance.isLogin) {

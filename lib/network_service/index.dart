@@ -18,6 +18,8 @@ import 'package:rupee_elf/models/order_detail_page_model.dart';
 import 'package:rupee_elf/models/order_list_model.dart';
 import 'package:rupee_elf/models/product_list_model.dart';
 import 'package:rupee_elf/models/purchase_product_model.dart';
+import 'package:rupee_elf/models/repay_extension_model.dart';
+import 'package:rupee_elf/models/repay_model.dart';
 import 'package:rupee_elf/models/space_detail_model.dart';
 import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/models/user_info_model.dart';
@@ -195,6 +197,28 @@ class NetworkService {
       parameters: {'lYYoaYnOrderNo': orderNumber},
     );
     return await _configNetworkError(OrderDetailPageModel.fromJson(json));
+  }
+
+  // 获取还款路径
+  static Future<RepayModel?> fetchRepayPath(
+      String orderNumber, String type, String repayDate) async {
+    var json = await _defaultService(path: '/cLqgPJf/tuVg/xUNXE', parameters: {
+      'lYYoaYnOrderNo': orderNumber,
+      'rYYepYayType': type,
+      'lYYoaYnRepayDate': repayDate
+    });
+    return await _configNetworkError(RepayModel.fromJson(json));
+  }
+
+  static Future<RepayExtensionModel?> fetchExtensionRepayDetail(
+      String orderNumber) async {
+    var json = await _defaultService(
+      path: '/cLqgPJf/tuVg/JBTpeN',
+      parameters: {
+        'lYYoaYnOrderNo': orderNumber,
+      },
+    );
+    return await _configNetworkError(RepayExtensionModel.fromJson(json));
   }
 
   // 提交反馈

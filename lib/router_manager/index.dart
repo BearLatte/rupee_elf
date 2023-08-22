@@ -9,6 +9,7 @@ import 'package:rupee_elf/component/feedback/add_feedback_page.dart';
 import 'package:rupee_elf/component/feedback/feedback_detail_page.dart';
 import 'package:rupee_elf/component/feedback/feedback_image_preview.dart';
 import 'package:rupee_elf/component/feedback/index.dart';
+import 'package:rupee_elf/component/order/extension_repay_page.dart';
 import 'package:rupee_elf/component/order/index.dart';
 import 'package:rupee_elf/component/order/order_detail_page.dart';
 import 'package:rupee_elf/component/product/product_purchase_successed_page.dart';
@@ -50,6 +51,7 @@ class RouterManager {
   // Orders
   static String orderList = '/order';
   static String orderDetail = '/orderDetail/:orderNumber';
+  static String extentsionRepay = '/extensionRepay/:orderNumber';
 
   // Feedback
   static String feedbackList = '/feedback';
@@ -137,6 +139,11 @@ class RouterManager {
   static final Handler _orderDetailHandler =
       Handler(handlerFunc: (context, parametes) {
     return OrderDetailPage(orderNumber: parametes['orderNumber']![0]);
+  });
+
+  static final Handler _extensionRepayHandler =
+      Handler(handlerFunc: (context, parameters) {
+    return ExtensionRepayPage(orderNumber: parameters['orderNumber']![0]);
   });
 
   // feedback
@@ -253,6 +260,12 @@ class RouterManager {
     router.define(
       orderDetail,
       handler: _orderDetailHandler,
+      transitionType: TransitionType.cupertino,
+    );
+
+    router.define(
+      extentsionRepay,
+      handler: _extensionRepayHandler,
       transitionType: TransitionType.cupertino,
     );
 

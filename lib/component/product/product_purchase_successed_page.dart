@@ -30,7 +30,8 @@ class _ProductPurchaseSuccessedPageState
       }
     } else {
       if (context.mounted) {
-        debugPrint('DEBUG: 此处跳转到订单详情页面');
+        Navigator.of(context)
+            .pushNamed('/orderDetail/${model.orderInfo?.loanOrderNo}');
       }
     }
   }

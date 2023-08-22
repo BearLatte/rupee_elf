@@ -4,10 +4,14 @@ import 'package:rupee_elf/component/home/product_item_cell.dart';
 import 'package:rupee_elf/models/order_detail_model.dart';
 import 'package:rupee_elf/models/order_detail_page_model.dart';
 import 'package:rupee_elf/models/product_model.dart';
+import 'package:rupee_elf/models/repay_model.dart';
+import 'package:rupee_elf/models/space_detail_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../util/hexcolor.dart';
 
@@ -31,7 +35,8 @@ class OrderDetailPage extends StatefulWidget {
   State<OrderDetailPage> createState() => _OrderDetailPageState();
 }
 
-class _OrderDetailPageState extends State<OrderDetailPage> {
+class _OrderDetailPageState extends State<OrderDetailPage>
+    with WidgetsBindingObserver {
   String _title = '';
   OrderDetailPageType _type = OrderDetailPageType.pending;
   OrderDetailModel? _orderInfo;
@@ -41,6 +46,25 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   void initState() {
     loadOrderDetail();
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        loadOrderDetail();
+        break;
+      default:
+        break;
+    }
   }
 
   void loadOrderDetail() async {
@@ -97,11 +121,27 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   }
 
   void repayAction() async {
-    debugPrint('DEBUG: 马上还款');
+    if (_orderInfo == null) return;
+    RepayModel? model = await NetworkService.fetchRepayPath(
+        _orderInfo!.loanOrderNo, 'all', _orderInfo!.loanPayDate!);
+
+    if (model != null) {
+      if (await canLaunchUrlString(model.repayPath)) {
+        await launchUrlString(model.repayPath,
+            mode: LaunchMode.externalApplication);
+      } else {
+        await CommonToast.showToast('Can not open the repay address!');
+      }
+    }
   }
 
   void extensionRepayAction() {
-    debugPrint('DEBUG: 展期还款');
+    if (_orderInfo == null) return;
+    Navigator.of(context)
+        .pushNamed('/extensionRepay/${_orderInfo!.loanOrderNo}')
+        .then((_) {
+      loadOrderDetail();
+    });
   }
 
   @override
@@ -258,13 +298,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               ),
             if (type != OrderDetailPageType.disbursingFailed)
               Expanded(
-                child: ListView.builder(
-                  itemCount: _products?.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ProductItemCell(
-                        isOdd: index / 2 == 0, product: _products![index]);
-                  },
-                ),
+                child: productListView(),
               ),
           ],
         ),
@@ -313,13 +347,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               'Repayment Amount : ', '₹ ${_orderInfo!.loanRepayAmount}'),
           _itemRowWith('Repayment Date :', _orderInfo!.loanRepayDate ?? ''),
           Expanded(
-            child: ListView.builder(
-              itemCount: _products?.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ProductItemCell(
-                    isOdd: index / 2 == 0, product: _products![index]);
-              },
-            ),
+            child: productListView(),
           )
         ],
       ),
@@ -410,5 +438,38 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         )
       ]),
     );
+  }
+
+  Widget productListView() {
+    if (_products == null) return Container();
+    return ListView.builder(
+      itemCount: _products?.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ProductItemCell(
+          isOdd: index / 2 == 0,
+          product: _products![index],
+          onTap: () {
+            itemCellOnTap(_products![index].productId.toString());
+          },
+        );
+      },
+    );
+  }
+
+  void itemCellOnTap(String productId) async {
+    SpaceDetailModel? model =
+        await NetworkService.checkUserSpaceDetail(productId);
+    if (model == null) return;
+    if (model.spaceStatus == 2) {
+      if (context.mounted) {
+        Navigator.pushNamed(context, '/productDetail',
+            arguments: model.loanProduct);
+      }
+    } else {
+      if (context.mounted) {
+        Navigator.of(context)
+            .pushNamed('/orderDetail/${model.orderInfo?.loanOrderNo}');
+      }
+    }
   }
 }
