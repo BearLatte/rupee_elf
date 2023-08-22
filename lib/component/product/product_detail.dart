@@ -19,6 +19,7 @@ import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/constants.dart';
+import 'package:rupee_elf/util/facebook_track_tool.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/theme_button.dart';
@@ -337,7 +338,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     PurchaseProductModel? model = await NetworkService.purchaseProduct(params);
     if (model != null) {
       if (model.isFirstApply == 1) {
-        debugPrint('此处需要做首单埋点');
+        ADJustTrackTool.trackWith('eqmzq8');
+        FacebookTrankTool.trackWith(FacebookTrackType.addToCard);
       }
 
       if (context.mounted) {

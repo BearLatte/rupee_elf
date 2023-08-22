@@ -1,3 +1,4 @@
+import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/constants.dart';
+import 'package:rupee_elf/util/facebook_track_tool.dart';
 import 'package:rupee_elf/util/global.dart';
 import 'package:rupee_elf/util/iconfont.dart';
 import 'package:rupee_elf/widgets/count_down_button.dart';
@@ -379,7 +381,8 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     if (model.ikmsctRegistered == 1) {
-      debugPrint('DEBUG: 注册，此处需要做埋点');
+      ADJustTrackTool.trackWith('ikcepo');
+      FacebookTrankTool.trackWith(FacebookTrackType.registration);
     }
 
     // 保存登录数据

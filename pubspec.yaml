@@ -37,6 +37,7 @@ dependencies:
   shared_preferences: ^2.2.0
   permission_handler: ^10.4.3
   flutter_screenutil: ^5.8.4
+  facebook_app_events: ^0.19.0
   flutter_easyloading: ^3.0.5
   flutter_image_compress: ^2.0.4
   flutter_native_timezone: ^2.0.0

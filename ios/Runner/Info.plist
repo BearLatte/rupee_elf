@@ -56,5 +56,11 @@
 	<string>You did not allow us to access the Photo Library, which will help you obtain a loan. Would you like to set up authorization.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>You did not allow us to access the Microphone, which will help you obtain a loan. Would you like to set up authorization.</string>
+    <key>FacebookAppID</key>
+    <string></string>
+    <key>FacebookClientToken</key>
+    <string></string>
+    <key>FacebookDisplayName</key>
+    <string>Rupee Elf</string>
 </dict>
 </plist>
