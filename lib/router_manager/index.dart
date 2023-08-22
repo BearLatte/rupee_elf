@@ -102,9 +102,12 @@ class RouterManager {
   // 产品
   static final Handler _productDetailHandler =
       Handler(handlerFunc: (context, parametes) {
-    ProductDetailModel detail =
-        context?.settings?.arguments as ProductDetailModel;
-    return ProductDetailPage(productDetail: detail);
+    Map<String, dynamic> arguments =
+        context?.settings?.arguments as Map<String, dynamic>;
+    ProductDetailModel detail = arguments['product'];
+    bool isRecommend = arguments['isRecommend'];
+
+    return ProductDetailPage(productDetail: detail, isRecommend: isRecommend);
   });
 
   static final Handler _productPurchaseSuccessedHandler =

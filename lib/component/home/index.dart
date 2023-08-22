@@ -1,3 +1,4 @@
+import 'package:adjust_sdk/adjust.dart';
 import 'package:flutter/material.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/component/home/product_item_cell.dart';
@@ -5,6 +6,7 @@ import 'package:rupee_elf/models/product_model.dart';
 import 'package:rupee_elf/models/space_detail_model.dart';
 import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
@@ -18,7 +20,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   var isShowMenu = false;
   List<ProductModel> _products = [];
   bool _isSendedFirstLaunchRequest = false;
@@ -30,6 +32,30 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     loadData();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        Adjust.onResume();
+        break;
+      case AppLifecycleState.paused:
+        Adjust.onPause();
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.detached:
+        break;
+    }
   }
 
   @override
@@ -72,6 +98,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void bankCardChangeItemClicked(BuildContext context) {
+    ADJustTrackTool.trackWith('nnpu5i');
     if (Global.instance.isLogin) {
       Navigator.of(context).pushNamed('/changeBankInfo').then((value) {
         loadData();
@@ -84,6 +111,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void orderItemClicked(BuildContext context) {
+    ADJustTrackTool.trackWith('i1r2og');
     if (Global.instance.isLogin) {
       Navigator.of(context).pushNamed('/order').then((value) {
         loadData();
@@ -96,6 +124,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void profilItemClicked(BuildContext context) {
+    if (!_isCerified) {
+      ADJustTrackTool.trackWith('jgsfy8');
+    }
     Navigator.of(context).pushNamed('/profile').then((value) {
       loadData();
     });
@@ -103,13 +134,14 @@ class _HomePageState extends State<HomePage> {
 
   void itemCellOnTap(String productId) async {
     if (Global.instance.isLogin && userInfo.userStatus == 2) {
+      ADJustTrackTool.trackWith('3q7cqp');
       SpaceDetailModel? model =
           await NetworkService.checkUserSpaceDetail(productId);
       if (model == null) return;
       if (model.spaceStatus == 2) {
         if (context.mounted) {
           Navigator.pushNamed(context, '/productDetail',
-              arguments: model.loanProduct);
+              arguments: {'product': model.loanProduct, 'isRecommend': false});
         }
       } else {
         if (context.mounted) {
@@ -125,6 +157,7 @@ class _HomePageState extends State<HomePage> {
         loadData();
       });
     } else {
+      ADJustTrackTool.trackWith('3r5683');
       Navigator.pushNamed(context, 'authFirst').then((value) {
         loadData();
       });

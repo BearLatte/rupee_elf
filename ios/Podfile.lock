@@ -1,4 +1,10 @@
 PODS:
+  - Adjust (4.33.4):
+    - Adjust/Core (= 4.33.4)
+  - Adjust/Core (4.33.4)
+  - adjust_sdk (4.33.1):
+    - Adjust (= 4.33.4)
+    - Flutter
   - advertising_id (0.0.1):
     - Flutter
   - battery_plus (1.0.0):
@@ -68,6 +74,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - adjust_sdk (from `.symlinks/plugins/adjust_sdk/ios`)
   - advertising_id (from `.symlinks/plugins/advertising_id/ios`)
   - battery_plus (from `.symlinks/plugins/battery_plus/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
@@ -90,6 +97,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Adjust
     - libwebp
     - Mantle
     - ReachabilitySwift
@@ -98,6 +106,8 @@ SPEC REPOS:
     - Toast
 
 EXTERNAL SOURCES:
+  adjust_sdk:
+    :path: ".symlinks/plugins/adjust_sdk/ios"
   advertising_id:
     :path: ".symlinks/plugins/advertising_id/ios"
   battery_plus:
@@ -138,6 +148,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  Adjust: 4690e07ea401ee56d4d3f4f5bdad86c94f51903f
+  adjust_sdk: 77c1d3cc6df375bd089ebe969d65bc2aaa448100
   advertising_id: 31c738918c2e04d86d80c293357e61e06e87df74
   battery_plus: 9bff772a7e5e4d5381ca3ca92a97373a3d8b2738
   camera_avfoundation: 3125e8cd1a4387f6f31c6c63abb8a55892a9eeeb

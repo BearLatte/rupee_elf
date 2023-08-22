@@ -7,6 +7,7 @@ class BaseViewWidget extends StatelessWidget {
   final String title;
   final Widget? child;
   final bool showBackButton;
+  final Function()? backButtonAction;
   final Widget? floatingActionButton;
   final List<Widget>? actions;
 
@@ -15,6 +16,7 @@ class BaseViewWidget extends StatelessWidget {
     required this.title,
     this.child,
     this.showBackButton = true,
+    this.backButtonAction,
     this.floatingActionButton,
     this.actions,
   });
@@ -23,6 +25,9 @@ class BaseViewWidget extends StatelessWidget {
     if (showBackButton) {
       return IconButton(
           onPressed: () {
+            if (backButtonAction != null) {
+              backButtonAction!();
+            }
             Navigator.of(context).pop();
           },
           icon: const Icon(

@@ -3,6 +3,7 @@ import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/models/repay_extension_model.dart';
 import 'package:rupee_elf/models/repay_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/hexcolor.dart';
@@ -57,6 +58,7 @@ class _ExtensionRepayPageState extends State<ExtensionRepayPage>
   }
 
   void go2extension() async {
+    ADJustTrackTool.trackWith('ks0x5b');
     if (_extensionDetail == null) return;
     RepayModel? model = await NetworkService.fetchRepayPath(
       _extensionDetail!.loanOrderNo,

@@ -10,6 +10,7 @@ import 'package:rupee_elf/component/auth/contact_relation_item.dart';
 import 'package:rupee_elf/models/contact_model.dart';
 import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/common_picker/index.dart';
 import 'package:rupee_elf/util/constants.dart';
@@ -71,6 +72,20 @@ class _AuthThirdPageState extends State<AuthThirdPage> {
   }
 
   void itemRelationOnTap(int index) async {
+    switch (index) {
+      case 0:
+      case 1:
+        break;
+      case 2:
+        ADJustTrackTool.trackWith('ds7028');
+        break;
+      case 3:
+        ADJustTrackTool.trackWith('oj1h79');
+        break;
+      case 4:
+        ADJustTrackTool.trackWith('7av4jz');
+        break;
+    }
     var result = await CommonPicker.showPicker(
       context: context,
       options: _relationList,
@@ -86,6 +101,23 @@ class _AuthThirdPageState extends State<AuthThirdPage> {
   }
 
   void itemNumberOnTap(int index) async {
+    switch (index) {
+      case 0:
+        ADJustTrackTool.trackWith('13udb5');
+        break;
+      case 1:
+        ADJustTrackTool.trackWith('ngctqv');
+        break;
+      case 2:
+        ADJustTrackTool.trackWith('ds7028');
+        break;
+      case 3:
+        ADJustTrackTool.trackWith('oj1h79');
+        break;
+      case 4:
+        ADJustTrackTool.trackWith('8xr00x');
+        break;
+    }
     PermissionStatus state = await Permission.contacts.request();
     if (state == PermissionStatus.granted) {
       List<Contact> contacts =
@@ -115,8 +147,28 @@ class _AuthThirdPageState extends State<AuthThirdPage> {
     }
   }
 
+  void itemNameOnTap(int index) {
+    switch (index) {
+      case 0:
+        ADJustTrackTool.trackWith('7yxyxm');
+        break;
+      case 1:
+        ADJustTrackTool.trackWith('1qwzi6');
+        break;
+      case 2:
+        ADJustTrackTool.trackWith('w19z5o');
+        break;
+      case 3:
+        ADJustTrackTool.trackWith('7av4jz');
+        break;
+      case 4:
+        ADJustTrackTool.trackWith('vglfpo');
+        break;
+    }
+  }
+
   void nextBtnOnPressed() async {
-    debugPrint('DEBUG:认证第三步提交 此处需要做埋点');
+    ADJustTrackTool.trackWith('94z8a1');
 
     List<Map<String, String>> contactList = [];
     for (ContactModel contact in _currentContactList) {
@@ -140,7 +192,7 @@ class _AuthThirdPageState extends State<AuthThirdPage> {
     UserAuthSubmitModel model = UserAuthSubmitModel(
         aYYutYhStep: '3', cYYonYtactList: jsonEncode(contactList));
 
-   NetworkService.userAuthSubmit(model, () {
+    NetworkService.userAuthSubmit(model, () {
       Navigator.of(context).pushNamed('/authFourth');
     });
   }
@@ -187,6 +239,9 @@ class _AuthThirdPageState extends State<AuthThirdPage> {
                   Widget item = ContactRelationItem(
                     relationOnTap: () {
                       itemRelationOnTap(index);
+                    },
+                    nameOnTap: () {
+                      itemNameOnTap(index);
                     },
                     phoneBookOnTap: () => itemNumberOnTap(index),
                     relationController:

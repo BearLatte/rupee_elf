@@ -7,6 +7,7 @@ import 'package:rupee_elf/models/product_model.dart';
 import 'package:rupee_elf/models/repay_model.dart';
 import 'package:rupee_elf/models/space_detail_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
@@ -121,6 +122,14 @@ class _OrderDetailPageState extends State<OrderDetailPage>
   }
 
   void repayAction() async {
+    if (_type == OrderDetailPageType.unrepay) {
+      ADJustTrackTool.trackWith('pgszkb');
+    }
+
+    if (_type == OrderDetailPageType.overdue) {
+      ADJustTrackTool.trackWith('bgjuhh');
+    }
+
     if (_orderInfo == null) return;
     RepayModel? model = await NetworkService.fetchRepayPath(
         _orderInfo!.loanOrderNo, 'all', _orderInfo!.loanPayDate!);
@@ -136,6 +145,13 @@ class _OrderDetailPageState extends State<OrderDetailPage>
   }
 
   void extensionRepayAction() {
+    if (_type == OrderDetailPageType.unrepay) {
+      ADJustTrackTool.trackWith('aio98u');
+    }
+
+    if (_type == OrderDetailPageType.overdue) {
+      ADJustTrackTool.trackWith('onsfr2');
+    }
     if (_orderInfo == null) return;
     Navigator.of(context)
         .pushNamed('/extensionRepay/${_orderInfo!.loanOrderNo}')

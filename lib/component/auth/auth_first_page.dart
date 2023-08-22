@@ -10,6 +10,7 @@ import 'package:rupee_elf/models/certification_info_model.dart';
 import 'package:rupee_elf/models/ocr_model.dart';
 import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/constants.dart';
@@ -69,6 +70,7 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
   }
 
   void cardFrontOnTap() async {
+    ADJustTrackTool.trackWith('75otwp');
     var result = await Navigator.of(context).pushNamed('authSimple');
     if (result != null) {
       configCameraParams(OcrType.AADHAAR_FRONT);
@@ -76,14 +78,17 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
   }
 
   void cardBackOnTap() {
+    ADJustTrackTool.trackWith('ylz56g');
     configCameraParams(OcrType.AADHAAR_BACK);
   }
 
   void panCardOnTap() {
+    ADJustTrackTool.trackWith('hiwgx9');
     configCameraParams(OcrType.PAN_FRONT);
   }
 
   void birthItemOnTap() async {
+    ADJustTrackTool.trackWith('pl0vlp');
     var selectedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -97,11 +102,10 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
             formatDate(selectedDate, ['yyyy', '-', 'mm', '-', 'dd']);
       });
     }
-
-    debugPrint('DEBUG: Date of Birth 点击，此处要做埋点');
   }
 
   void nextOnTap() async {
+    ADJustTrackTool.trackWith('q5ros0');
     var status = await Permission.locationWhenInUse.request();
     if (status != PermissionStatus.granted) {
       if (context.mounted) {
@@ -189,8 +193,6 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
         Navigator.of(context).pushNamed('authSecond');
       }
     });
-
-    debugPrint('DEBUG: Next 按钮 点击，此处要做埋点');
   }
 
   void configCameraParams(OcrType type) async {
@@ -293,9 +295,7 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   hintText: 'Aadhaar Name',
                   keyboardType: TextInputType.name,
                   editingController: aadhaarNameController,
-                  onTap: () {
-                    debugPrint('DEBUG: 点击了 Aadhaar Name 选项，此处要做埋点');
-                  },
+                  onTap: () {},
                 ),
                 CommonFormItem(
                   type: FormType.input,
@@ -303,7 +303,7 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   keyboardType: TextInputType.number,
                   editingController: aadhaarNumberController,
                   onTap: () {
-                    debugPrint('DEBUG: 点击了 Aadhaar Number 选项，此处要做埋点');
+                    ADJustTrackTool.trackWith('rzut9o');
                   },
                 ),
                 CommonFormItem(
@@ -316,11 +316,10 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   height: 50.0,
                   selectedValue: _selectedGender,
                   onTap: () {
-                    debugPrint('DEBUG: 选择了性别，此处需要做埋点');
+                    ADJustTrackTool.trackWith('mgyu9x');
                   },
                   onValueChanged: (selectedGender) {
                     _selectedGender = selectedGender;
-                    debugPrint('DEBUG: 当前选中的性别是$selectedGender');
                   },
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 20.0)),
@@ -338,7 +337,7 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   editingController: addressController,
                   isMultiLine: true,
                   onTap: () {
-                    debugPrint('DEBUG: Detail Address 点击，此处要做埋点');
+                    ADJustTrackTool.trackWith('2jofjo');
                   },
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 20.0)),
@@ -355,7 +354,7 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
                   hintText: 'Pan Number',
                   editingController: panNumberController,
                   onTap: () {
-                    debugPrint('DEBUG: Pan Number 点击，此处要做埋点');
+                    ADJustTrackTool.trackWith('7yxyxm');
                   },
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 20.0)),

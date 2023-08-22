@@ -15,6 +15,7 @@ import 'package:rupee_elf/models/face_liveness_parameters.dart';
 import 'package:rupee_elf/models/product_detail_model.dart';
 import 'package:rupee_elf/models/purchase_product_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/constants.dart';
@@ -25,8 +26,13 @@ import 'package:screen_brightness/screen_brightness.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final ProductDetailModel productDetail;
+  final bool isRecommend;
 
-  const ProductDetailPage({super.key, required this.productDetail});
+  const ProductDetailPage({
+    super.key,
+    required this.productDetail,
+    required this.isRecommend,
+  });
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -59,6 +65,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Widget build(BuildContext context) {
     return BaseViewWidget(
       title: 'Detail',
+      backButtonAction: () {
+        if (widget.isRecommend) {
+          debugPrint('DEBUG: 返回按钮点击');
+          ADJustTrackTool.trackWith('jypn48');
+        }
+      },
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -157,7 +169,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   void _loanNowBtnOnPressed(BuildContext context) async {
-    debugPrint('DEBUG: 此处为下单逻辑，需要做埋点');
+    if (widget.isRecommend) {
+      ADJustTrackTool.trackWith('avxlgc');
+    }
     bool isLiveness = await NetworkService.checkUserLiveness();
     if (isLiveness) {
       _configParamsAndPurchaseProduct();

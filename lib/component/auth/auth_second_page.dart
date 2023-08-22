@@ -3,6 +3,7 @@ import 'package:rupee_elf/common/common_form_item.dart';
 import 'package:rupee_elf/models/certification_info_model.dart';
 import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/common_picker/index.dart';
 import 'package:rupee_elf/util/constants.dart';
@@ -92,6 +93,7 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
   }
 
   void _marriageOnTap() async {
+    ADJustTrackTool.trackWith('6y32j7');
     String? selectedValue =
         await _showPickerWith(_marriageList, _marriageStatus);
     if (selectedValue != null) {
@@ -99,21 +101,20 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
         _marriageStatus = selectedValue;
       });
     }
-
-    debugPrint('DEBUG: Marriage Status 点击，此处需要做埋点');
   }
 
   void _educationOnTap() async {
+    ADJustTrackTool.trackWith('qqvf3v');
     String? selectedValue = await _showPickerWith(_educationList, _education);
     if (selectedValue != null) {
       setState(() {
         _education = selectedValue;
       });
     }
-    debugPrint('DEBUG: Education点击，此处需要做埋点');
   }
 
   void _industryOnTap() async {
+    ADJustTrackTool.trackWith('mmxshd');
     String? selectedValue = await _showPickerWith(_industryList, _industry);
     if (selectedValue != null) {
       setState(() {
@@ -124,27 +125,27 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
   }
 
   void _salaryOnTap() async {
+    ADJustTrackTool.trackWith('2kvi2o');
     String? selectedValue = await _showPickerWith(_salaryList, _salary);
     if (selectedValue != null) {
       setState(() {
         _salary = selectedValue;
       });
     }
-    debugPrint('DEBUG: Monthly Salary 点击，此处需要做埋点');
   }
 
   void _workTitleOnTap() async {
+    ADJustTrackTool.trackWith('mmxshd');
     String? selectedValue = await _showPickerWith(_workTitleList, _workTitle);
     if (selectedValue != null) {
       setState(() {
         _workTitle = selectedValue;
       });
     }
-    debugPrint('DEBUG: Work Title 点击，此处需要做埋点');
   }
 
   void _nextBtnClicked() async {
-    debugPrint('DEBUG: Next 按钮 点击，此处要做埋点');
+    ADJustTrackTool.trackWith('hbpns1');
     if (_marriageStatus.trim().isEmpty) {
       await CommonToast.showToast('Please select your Marriage State!');
       return;
@@ -374,7 +375,9 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
                 hintText: 'E-mail',
                 keyboardType: TextInputType.emailAddress,
                 editingController: _emailController,
-                onTap: () {},
+                onTap: () {
+                  ADJustTrackTool.trackWith('hpcu39');
+                },
               ),
               CommonFormItem(
                 type: FormType.input,

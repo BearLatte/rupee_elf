@@ -5,6 +5,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:rupee_elf/common/common_image.dart';
 import 'package:rupee_elf/models/login_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
@@ -249,6 +250,9 @@ class _LoginPageState extends State<LoginPage> {
               padding:
                   const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
               child: PinCodeTextField(
+                onTap: () {
+                  ADJustTrackTool.trackWith('ovbicn');
+                },
                 length: 6,
                 appContext: context,
                 textStyle: TextStyle(
@@ -338,6 +342,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void countDownButtonClicked(CountDownButtonState state) async {
+    ADJustTrackTool.trackWith('fkk3qc');
     if (currentPhoneNumber.length < 10) {
       await CommonToast.showToast('Please enter a 10-digit mobile number');
       return;
@@ -362,6 +367,8 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
+    ADJustTrackTool.trackWith('qjcgnq');
+
     // 发送登录请求
     LoginModel model =
         await NetworkService.login(currentPhoneNumber, currentSmsCode);
@@ -379,7 +386,8 @@ class _LoginPageState extends State<LoginPage> {
     Global.instance.isLogin = true;
     Global.instance.prefs.setBool(Constants.LOGIN_KEY, true);
     Global.instance.prefs.setString(Constants.TOKEN_KEY, model.lkmoctginToken);
-    Global.instance.prefs.setString(Constants.CURRENT_PHONE_KEY, currentPhoneNumber);
+    Global.instance.prefs
+        .setString(Constants.CURRENT_PHONE_KEY, currentPhoneNumber);
 
     if (context.mounted) {
       Navigator.of(context).pop('successed');

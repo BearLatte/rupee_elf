@@ -19,6 +19,7 @@ dependencies:
   camera: ^0.10.5+3
   geolocator: ^9.0.2
   aws_s3_api: ^2.0.0
+  adjust_sdk: ^4.33.1
   date_format: ^2.0.7
   fluttertoast: ^8.2.2
   url_launcher: ^6.1.12

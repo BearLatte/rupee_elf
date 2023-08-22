@@ -3,6 +3,7 @@ import 'package:rupee_elf/common/common_form_item.dart';
 import 'package:rupee_elf/models/user_auth_submit_model.dart';
 import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
 import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/widgets/auth_base_widget.dart';
@@ -22,6 +23,7 @@ class _AuthFourthPageState extends State<AuthFourthPage> {
   final TextEditingController _ifscCodeController = TextEditingController();
 
   void submitBtnOnPressed(BuildContext context) async {
+    ADJustTrackTool.trackWith('usbtiy');
     if (_bankCardNumberController.text.trim().isEmpty) {
       await CommonToast.showToast('Account Number can not be empty.');
       return;
@@ -79,7 +81,7 @@ class _AuthFourthPageState extends State<AuthFourthPage> {
         context,
         '/productDetail',
         (route) => route.isFirst,
-        arguments: userInfo.loanProduct!,
+        arguments: {'product': userInfo.loanProduct!, 'isRecommend': true},
       );
     }
   }
@@ -104,7 +106,7 @@ class _AuthFourthPageState extends State<AuthFourthPage> {
                   hintText: 'Account Number',
                   keyboardType: TextInputType.number,
                   onTap: () {
-                    debugPrint('DEBUG: 点击银行卡, 此处需要做埋点');
+                    ADJustTrackTool.trackWith('t8nt4w');
                   },
                   editingController: _bankCardNumberController,
                 ),
@@ -113,7 +115,7 @@ class _AuthFourthPageState extends State<AuthFourthPage> {
                   hintText: 'Bank Name',
                   keyboardType: TextInputType.name,
                   onTap: () {
-                    debugPrint('DEBUG: 点击银行名称, 此处需要做埋点');
+                    ADJustTrackTool.trackWith('ty0zia');
                   },
                   editingController: _bankNameController,
                 ),
@@ -121,7 +123,7 @@ class _AuthFourthPageState extends State<AuthFourthPage> {
                   type: FormType.input,
                   hintText: 'IFSC Code',
                   onTap: () {
-                    debugPrint('DEBUG: 点击银行卡, 此处需要做埋点');
+                    ADJustTrackTool.trackWith('e6nyzd');
                   },
                   editingController: _ifscCodeController,
                 ),

@@ -4,6 +4,7 @@ import 'package:rupee_elf/models/feedback_type_model.dart';
 import 'package:rupee_elf/models/order_list_model.dart';
 import 'package:rupee_elf/models/order_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
+import 'package:rupee_elf/util/adjust_track_tool.dart';
 
 // 订单状态 1待审核  2待放款  3待还款 4已还款 5失败 6已逾期
 enum OrderType {
@@ -62,6 +63,7 @@ class _OrderItemListPageState extends State<OrderItemListPage> {
                   _orders.indexOf(order) == _orders.length - 1,
               isHasDivider: _orders.indexOf(order) != _orders.length - 1,
               onTap: () {
+                ADJustTrackTool.trackWith('9zq922');
                 Navigator.of(context)
                     .pushNamed('/orderDetail/${order.loanOrderNo}');
               },

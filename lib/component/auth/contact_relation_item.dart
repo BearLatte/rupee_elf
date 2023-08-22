@@ -6,6 +6,7 @@ class ContactRelationItem extends StatelessWidget {
   final Function() relationOnTap;
   final Function()? numberOnTap;
   final Function()? phoneBookOnTap;
+  final Function()? nameOnTap;
   final bool isNumberInputEnable;
   final TextEditingController relationController;
   final TextEditingController nameController;
@@ -15,6 +16,7 @@ class ContactRelationItem extends StatelessWidget {
     super.key,
     this.isNumberInputEnable = false,
     required this.relationOnTap,
+    this.nameOnTap,
     this.numberOnTap,
     required this.relationController,
     required this.nameController,
@@ -50,6 +52,7 @@ class ContactRelationItem extends StatelessWidget {
               size: 16.0,
             ),
           ),
+          onTap: nameOnTap,
           isInputEnable: true,
           controller: nameController,
         ),
