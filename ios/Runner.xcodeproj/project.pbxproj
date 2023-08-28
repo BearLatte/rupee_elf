@@ -13,7 +13,6 @@
 		228D8CFC2A8B2996006698D6 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D8CFB2A8B2996006698D6 /* ErrorAlertView.swift */; };
 		22DF960F2A9475B3005CFAE9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DF960E2A9475B3005CFAE9 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		22DF96112A9475BE005CFAE9 /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DF96102A9475BE005CFAE9 /* AdServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		22DF96132A9475CA005CFAE9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DF96122A9475CA005CFAE9 /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		22DF96152A9475D4005CFAE9 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DF96142A9475D4005CFAE9 /* AppTrackingTransparency.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		22F8D7762A8A180B00381E3E /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D7752A8A180B00381E3E /* VideoToolbox.framework */; };
 		22F8D7782A8A181A00381E3E /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F8D7772A8A181A00381E3E /* libbz2.tbd */; };
@@ -70,7 +69,6 @@
 		228D8CFB2A8B2996006698D6 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		22DF960E2A9475B3005CFAE9 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		22DF96102A9475BE005CFAE9 /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdServices.framework; path = System/Library/Frameworks/AdServices.framework; sourceTree = SDKROOT; };
-		22DF96122A9475CA005CFAE9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		22DF96142A9475D4005CFAE9 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		22F8D7752A8A180B00381E3E /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		22F8D7772A8A181A00381E3E /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
@@ -136,7 +134,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22DF96152A9475D4005CFAE9 /* AppTrackingTransparency.framework in Frameworks */,
-				22DF96132A9475CA005CFAE9 /* StoreKit.framework in Frameworks */,
 				22DF96112A9475BE005CFAE9 /* AdServices.framework in Frameworks */,
 				22DF960F2A9475B3005CFAE9 /* AdSupport.framework in Frameworks */,
 				22F8D77C2A8A185700381E3E /* libz.1.2.5.tbd in Frameworks */,
@@ -202,7 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				22DF96142A9475D4005CFAE9 /* AppTrackingTransparency.framework */,
-				22DF96122A9475CA005CFAE9 /* StoreKit.framework */,
 				22DF96102A9475BE005CFAE9 /* AdServices.framework */,
 				22DF960E2A9475B3005CFAE9 /* AdSupport.framework */,
 				22F8D77B2A8A185700381E3E /* libz.1.2.5.tbd */,

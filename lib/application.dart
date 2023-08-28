@@ -18,6 +18,7 @@ class Application extends StatelessWidget {
     RouterManager.defineRoutes(router);
     initAdjust();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: router.generator,
       theme: ThemeData(
         colorScheme:
