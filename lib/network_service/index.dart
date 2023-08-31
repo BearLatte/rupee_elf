@@ -88,13 +88,6 @@ class NetworkService {
     return await _configNetworkError(info);
   }
 
-  // 检查用户是否做过活体
-  static Future<bool> checkUserLiveness() async {
-    UserInfoModel? info = await getUserInfo();
-    if (info == null) return false;
-    return info.userLiveness == 1;
-  }
-
   // 生成借款订单并上传设备信息
   static Future<PurchaseProductModel?> purchaseProduct(
       Map<String, dynamic> params) async {
@@ -248,8 +241,9 @@ class NetworkService {
   // 人脸认证 SDK 参数获取
   static Future<FaceLivenessParameters?> getFaceLivenessParams() async {
     var json = await _defaultService(
-        path: '/cLqgPJf/tuVg/kBykM',
-        parameters: {'uYYseYrFaceStep': 'license'});
+      path: '/cLqgPJf/tuVg/kBykM',
+      parameters: {'uYYseYrFaceStep': 'license'},
+    );
     return _configNetworkError(FaceLivenessParameters.fromJson(json));
   }
 

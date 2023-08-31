@@ -49,7 +49,7 @@ class ContactRelationItem extends StatelessWidget {
             icon: Icon(
               IconFont.icon_dianhuabu,
               color: Constants.themeColor,
-              size: 16.0,
+              size: 20.0,
             ),
           ),
           onTap: nameOnTap,

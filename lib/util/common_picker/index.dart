@@ -35,7 +35,7 @@ class CommonPicker {
                             Navigator.of(context).pop();
                           },
                           child: Text(
-                            '取消',
+                            'Cancel',
                             style: textStyle,
                           )),
                       TextButton(
@@ -43,7 +43,7 @@ class CommonPicker {
                             Navigator.of(context).pop(controller.selectedItem);
                           },
                           child: Text(
-                            '确定',
+                            'Ok',
                             style: textStyle,
                           )),
                     ],

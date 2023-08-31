@@ -12,7 +12,8 @@ class HttpOptions {
 
   static get instance => _instance ?? HttpOptions._internal();
 
-  String baseUrl = 'https://api.newapisys.com/';
+  // String baseUrl = 'https://api.newapisys.com/';
+  String baseUrl = 'http://8.215.46.156:1360';
   int connectTimeout = 15000;
   int receiveTimeout = 15000;
   int sendTimeout = 15000;

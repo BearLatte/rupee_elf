@@ -63,9 +63,14 @@ class _AuthSecondPageState extends State<AuthSecondPage> {
         _workTitleList = info.workTitleList;
         _minAmount = info.amountMin;
         _maxAmount = info.amountMax;
-        _currentAmount = int.parse(info.applyAmount) == 0
-            ? (info.amountMax * 0.5).toInt()
-            : int.parse(info.applyAmount);
+
+        if (info.applyAmount.trim().isEmpty) {
+          _currentAmount = (info.amountMax * 0.5).toInt();
+        } else {
+          _currentAmount = int.parse(info.applyAmount) == 0
+              ? (info.amountMax * 0.5).toInt()
+              : int.parse(info.applyAmount);
+        }
       });
     }
   }

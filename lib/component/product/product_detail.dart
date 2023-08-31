@@ -14,6 +14,7 @@ import 'package:rupee_elf/models/base_model.dart';
 import 'package:rupee_elf/models/face_liveness_parameters.dart';
 import 'package:rupee_elf/models/product_detail_model.dart';
 import 'package:rupee_elf/models/purchase_product_model.dart';
+import 'package:rupee_elf/models/user_info_model.dart';
 import 'package:rupee_elf/network_service/index.dart';
 import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/commom_toast.dart';
@@ -53,7 +54,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         BaseModel? model = await NetworkService.uploadImgAndAuthFace(
             call.arguments['imgPath'], call.arguments['score']);
         if (model != null) {
-          bool isLiveness = await NetworkService.checkUserLiveness();
+          UserInfoModel? info = await NetworkService.getUserInfo();
+          bool isLiveness = info?.userLiveness == 1;
           if (isLiveness) {
             _configParamsAndPurchaseProduct();
           }
@@ -173,8 +175,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     if (widget.isRecommend) {
       ADJustTrackTool.trackWith('avxlgc');
     }
-    bool isLiveness = await NetworkService.checkUserLiveness();
-    if (isLiveness) {
+    // bool isLiveness = await NetworkService.checkUserLiveness();
+    UserInfoModel? model = await NetworkService.getUserInfo();
+
+    if (model == null) return;
+
+    if (model.userLiveness == 1) {
       _configParamsAndPurchaseProduct();
     } else {
       if (context.mounted) {
@@ -184,27 +190,41 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           message: 'Please upload a selfie photo before continuing.',
         );
         if (isOk && context.mounted) {
-          _go2Liveness();
+          PermissionStatus state = await Permission.camera.request();
+          if (state == PermissionStatus.granted) {
+            if (model.thirdLiveness == 'BJX') {
+              _go2takePhotoLiveness();
+            } else {
+              _go2Liveness();
+            }
+          } else {
+            await CommonToast.showToast(
+                'You did not allow us to access the camera, which will help you obtain a loan. Would you like to set up authorization.');
+          }
         }
       }
     }
   }
 
+  void _go2takePhotoLiveness() async {
+    var filePath = await Navigator.of(context).pushNamed('/faceAuth');
+    BaseModel? model =
+        await NetworkService.uploadImgAndAuthFace(filePath.toString(), '5');
+    UserInfoModel? info = await NetworkService.getUserInfo();
+    if (model != null && info?.userLiveness == 1) {
+      _configParamsAndPurchaseProduct();
+    }
+  }
+
   void _go2Liveness() async {
-    PermissionStatus state = await Permission.camera.request();
-    if (state == PermissionStatus.granted) {
-      FaceLivenessParameters? params =
-          await NetworkService.getFaceLivenessParams();
-      if (params != null) {
-        _methodChanel.invokeMapMethod('go2authFace', {
-          'apiId': params.accuauthId,
-          'hostUrl': params.accuauthHostUrl,
-          'apiSecret': params.accuauthSecret
-        });
-      }
-    } else {
-      await CommonToast.showToast(
-          'You did not allow us to access the camera, which will help you obtain a loan. Would you like to set up authorization.');
+    FaceLivenessParameters? params =
+        await NetworkService.getFaceLivenessParams();
+    if (params != null) {
+      _methodChanel.invokeMapMethod('go2authFace', {
+        'apiId': params.accuauthId,
+        'hostUrl': params.accuauthHostUrl,
+        'apiSecret': params.accuauthSecret
+      });
     }
   }
 
@@ -237,6 +257,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       } else {
         await CommonToast.showToast(
             'You did not allow us to access the contacts. Allowing it will help you obtain a loan. Do you want to set up authorization.');
+        EasyLoading.dismiss();
         return;
       }
 

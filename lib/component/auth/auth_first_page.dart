@@ -56,9 +56,10 @@ class _AuthFirstPageState extends State<AuthFirstPage> {
     CertificationInfoModel? info = await NetworkService.getCertificationInfo();
     if (info != null) {
       setState(() {
-        _selectedFrontImage = '${info.imageHttp}/${info.frontImage}';
-        _selectedBackImage = '${info.imageHttp}/${info.backImage}';
-        _selectedPanImage = '${info.imageHttp}/${info.panCardImg}';
+        
+        _selectedFrontImage = info.frontImage.trim().isEmpty ? null : '${info.imageHttp}/${info.frontImage}';
+        _selectedBackImage = info.backImage.trim().isEmpty ? null : '${info.imageHttp}/${info.backImage}';
+        _selectedPanImage = info.panCardImg.trim().isEmpty ? null : '${info.imageHttp}/${info.panCardImg}';
         aadhaarNameController.text = info.userNames;
         aadhaarNumberController.text = info.aadhaarNumber;
         _selectedBirth = info.dateOfBirth;

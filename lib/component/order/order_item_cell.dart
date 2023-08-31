@@ -150,7 +150,7 @@ class OrderItemCell extends StatelessWidget {
                         ),
                         const Padding(padding: EdgeInsets.only(left: 10.0)),
                         Text(
-                          '${item.loanAmount}',
+                          '₹ ${item.loanAmount}',
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w600,

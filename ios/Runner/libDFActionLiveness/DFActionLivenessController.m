@@ -31,6 +31,8 @@
 
 @property (nonatomic, strong) UIImageView *loadingView;
 
+@property (nonatomic, strong) UIButton *backBtn;
+
 @end
 
 @implementation DFActionLivenessController
@@ -64,8 +66,22 @@
         return;
     }
     
+    
+    
+    
     [self addChildViewController:self.livefaceVC];
     [self.view addSubview:self.livefaceVC.view];
+    
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [self.view addSubview:backBtn];
+    self.backBtn = backBtn;
+    [backBtn addTarget:self action:@selector(dismissController) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    self.backBtn.frame = CGRectMake(0, self.view.safeAreaInsets.top, 44.0, 44.0);
 }
 
 #pragma mark - Public Methods
@@ -114,6 +130,10 @@
     self.bVoicePromptOn = bVoicePrompt;
     if (self.livefaceVC) {
     }
+}
+
+- (void)dismissController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Private Methods
