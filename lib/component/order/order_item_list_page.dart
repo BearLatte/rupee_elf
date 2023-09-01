@@ -39,7 +39,7 @@ class _OrderItemListPageState extends State<OrderItemListPage> {
     _getOrders();
   }
 
-  void _getOrders() async {
+  Future<void> _getOrders() async {
     OrderListModel? model = await NetworkService.fetchOrderList(_type);
 
     if (model != null) {
@@ -52,30 +52,33 @@ class _OrderItemListPageState extends State<OrderItemListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 10.0, left: 12.0, right: 12.0),
-      children: _orders
-          .map(
-            (order) => OrderItemCell(
-              item: order,
-              isTopCornerRadius: _orders.indexOf(order) == 0,
-              isBottomCornerRasius:
-                  _orders.indexOf(order) == _orders.length - 1,
-              isHasDivider: _orders.indexOf(order) != _orders.length - 1,
-              onTap: () {
-                ADJustTrackTool.trackWith('9zq922');
-                Navigator.of(context)
-                    .pushNamed('/orderDetail/${order.loanOrderNo}');
-              },
-              iconOnPressed: () {
-                Navigator.of(context).pushNamed('/addFeedback', arguments: {
-                  'feedbackTypes': _feedbackTypes,
-                  'orderInfo': order
-                });
-              },
-            ),
-          )
-          .toList(),
+    return RefreshIndicator(
+      onRefresh: _getOrders,
+      child: ListView(
+        padding: const EdgeInsets.only(top: 10.0, left: 12.0, right: 12.0),
+        children: _orders
+            .map(
+              (order) => OrderItemCell(
+                item: order,
+                isTopCornerRadius: _orders.indexOf(order) == 0,
+                isBottomCornerRasius:
+                    _orders.indexOf(order) == _orders.length - 1,
+                isHasDivider: _orders.indexOf(order) != _orders.length - 1,
+                onTap: () {
+                  ADJustTrackTool.trackWith('9zq922');
+                  Navigator.of(context)
+                      .pushNamed('/orderDetail/${order.loanOrderNo}');
+                },
+                iconOnPressed: () {
+                  Navigator.of(context).pushNamed('/addFeedback', arguments: {
+                    'feedbackTypes': _feedbackTypes,
+                    'orderInfo': order
+                  });
+                },
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }

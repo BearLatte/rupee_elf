@@ -326,42 +326,53 @@ class _OrderDetailPageState extends State<OrderDetailPage>
     if (_orderInfo == null) return Container();
     return Container(
       color: Constants.seconaryBackgroundColor,
-      padding: const EdgeInsets.all(20.0),
-      child: ListView(
+      // padding: const EdgeInsets.all(20.0),
+      child: Column(
         children: [
-          Row(
-            children: [
-              ClipOval(
-                child: CommonImage(
-                  src: _orderInfo!.productLogo,
-                  width: 40.0,
-                  height: 40.0,
+          Container(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    ClipOval(
+                      child: CommonImage(
+                        src: _orderInfo!.productLogo,
+                        width: 40.0,
+                        height: 40.0,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.only(right: 14.0)),
+                    Text(
+                      _orderInfo!.productName,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Constants.themeTextColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              const Padding(padding: EdgeInsets.only(right: 14.0)),
-              Text(
-                _orderInfo!.productName,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Constants.themeTextColor,
-                  fontWeight: FontWeight.w600,
-                ),
-              )
-            ],
+                _itemRowWith('Order Number :', _orderInfo!.loanOrderNo),
+                _itemRowWith('Loan Amount : ', '₹ ${_orderInfo!.loanAmount}'),
+                _itemRowWith('Apply date :', _orderInfo!.loanApplyDate),
+                if (type == OrderDetailPageType.repaiedOverdue)
+                  _itemRowWith(
+                      'Overdue Charge : ', '₹ ${_orderInfo!.overdueAmount}'),
+                if (type == OrderDetailPageType.repaiedOverdue)
+                  _itemRowWith(
+                      'Overdue Days :', '${_orderInfo!.overdueDays ?? 0}'),
+                _itemRowWith(
+                    'Received Amount : ', '₹ ${_orderInfo!.loanPayAmount}'),
+                _itemRowWith(
+                    'Date of loan received : ', _orderInfo!.loanPayDate ?? ''),
+                _itemRowWith(
+                    'Repayment Amount : ', '₹ ${_orderInfo!.loanRepayAmount}'),
+                _itemRowWith(
+                    'Repayment Date :', _orderInfo!.loanRepayDate ?? ''),
+              ],
+            ),
           ),
-          _itemRowWith('Order Number :', _orderInfo!.loanOrderNo),
-          _itemRowWith('Loan Amount : ', '₹ ${_orderInfo!.loanAmount}'),
-          _itemRowWith('Apply date :', _orderInfo!.loanApplyDate),
-          if (type == OrderDetailPageType.repaiedOverdue)
-            _itemRowWith('Overdue Charge : ', '₹ ${_orderInfo!.overdueAmount}'),
-          if (type == OrderDetailPageType.repaiedOverdue)
-            _itemRowWith('Overdue Days :', '${_orderInfo!.overdueDays ?? 0}'),
-          _itemRowWith('Received Amount : ', '₹ ${_orderInfo!.loanPayAmount}'),
-          _itemRowWith(
-              'Date of loan received : ', _orderInfo!.loanPayDate ?? ''),
-          _itemRowWith(
-              'Repayment Amount : ', '₹ ${_orderInfo!.loanRepayAmount}'),
-          _itemRowWith('Repayment Date :', _orderInfo!.loanRepayDate ?? ''),
           Expanded(
             child: productListView(),
           )
@@ -478,8 +489,7 @@ class _OrderDetailPageState extends State<OrderDetailPage>
     if (model == null) return;
     if (model.spaceStatus == 2) {
       if (context.mounted) {
-        Navigator.pushNamed(context, '/productDetail',
-            arguments: model.loanProduct);
+        Navigator.pushNamed(context, '/productDetail', arguments: {'product' : model.loanProduct, 'isRecommend': false});
       }
     } else {
       if (context.mounted) {

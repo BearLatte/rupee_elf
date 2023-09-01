@@ -67,8 +67,22 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           onRefresh: loadData,
           child: ListView(
             children: [
-              const CommonImage(
-                  src: 'static/images/home_not_certified_head_img.png'),
+              Container(
+                padding: const EdgeInsets.only(
+                  left: 12.0,
+                  right: 12.0,
+                  bottom: 14.0,
+                ),
+                child: _isCerified
+                    ? const CommonImage(
+                        src: 'static/images/home_certified_head_img.png',
+                        fit: BoxFit.fill,
+                      )
+                    : const CommonImage(
+                        src: 'static/images/home_not_certified_head_img.png',
+                        fit: BoxFit.fill,
+                      ),
+              ),
               HomeMenuWidget(
                 isCertified: _isCerified,
                 bankCardChangeOnTap: () {
