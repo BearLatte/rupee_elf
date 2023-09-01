@@ -134,13 +134,17 @@ class _OrderDetailPageState extends State<OrderDetailPage>
     RepayModel? model = await NetworkService.fetchRepayPath(
         _orderInfo!.loanOrderNo, 'all', _orderInfo!.loanPayDate!);
 
-    if (model != null) {
-      if (await canLaunchUrlString(model.repayPath)) {
-        await launchUrlString(model.repayPath,
-            mode: LaunchMode.externalApplication);
-      } else {
-        await CommonToast.showToast('Can not open the repay address!');
-      }
+    if (model == null) return;
+
+    if (await canLaunchUrlString(model.repayPath)) {
+      await launchUrlString(
+        model.repayPath,
+        mode: model.webviewType == 1
+            ? LaunchMode.inAppWebView
+            : LaunchMode.externalApplication,
+      );
+    } else {
+      await CommonToast.showToast('Can not open the repay address!');
     }
   }
 
@@ -489,7 +493,8 @@ class _OrderDetailPageState extends State<OrderDetailPage>
     if (model == null) return;
     if (model.spaceStatus == 2) {
       if (context.mounted) {
-        Navigator.pushNamed(context, '/productDetail', arguments: {'product' : model.loanProduct, 'isRecommend': false});
+        Navigator.pushNamed(context, '/productDetail',
+            arguments: {'product': model.loanProduct, 'isRecommend': false});
       }
     } else {
       if (context.mounted) {

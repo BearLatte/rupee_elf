@@ -10,6 +10,7 @@ import 'package:rupee_elf/util/adjust_track_tool.dart';
 import 'package:rupee_elf/util/common_alert.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/global.dart';
+import 'package:rupee_elf/util/route_observer.dart';
 import 'package:rupee_elf/widgets/base_view_widget.dart';
 import 'package:rupee_elf/widgets/home_menu/home_menu_widget.dart';
 
@@ -20,7 +21,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+class _HomePageState extends State<HomePage>
+    with WidgetsBindingObserver, RouteAware {
   var isShowMenu = false;
   List<ProductModel> _products = [];
   bool _isSendedFirstLaunchRequest = false;
@@ -36,9 +38,22 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    AppRouteObserver().routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    AppRouteObserver().routeObserver.unsubscribe(this);
     super.dispose();
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    loadData();
   }
 
   @override
@@ -114,26 +129,18 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   void bankCardChangeItemClicked(BuildContext context) {
     ADJustTrackTool.trackWith('nnpu5i');
     if (Global.instance.isLogin) {
-      Navigator.of(context).pushNamed('/changeBankInfo').then((value) {
-        loadData();
-      });
+      Navigator.of(context).pushNamed('/changeBankInfo');
     } else {
-      Navigator.of(context).pushNamed('/login').then((value) {
-        loadData();
-      });
+      Navigator.of(context).pushNamed('/login');
     }
   }
 
   void orderItemClicked(BuildContext context) {
     ADJustTrackTool.trackWith('i1r2og');
     if (Global.instance.isLogin) {
-      Navigator.of(context).pushNamed('/order').then((value) {
-        loadData();
-      });
+      Navigator.of(context).pushNamed('/order');
     } else {
-      Navigator.of(context).pushNamed('/login').then((value) {
-        loadData();
-      });
+      Navigator.of(context).pushNamed('/login');
     }
   }
 
@@ -141,9 +148,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     if (!_isCerified) {
       ADJustTrackTool.trackWith('jgsfy8');
     }
-    Navigator.of(context).pushNamed('/profile').then((value) {
-      loadData();
-    });
+    Navigator.of(context).pushNamed('/profile');
   }
 
   void itemCellOnTap(String productId) async {
@@ -160,21 +165,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       } else {
         if (context.mounted) {
           Navigator.of(context)
-              .pushNamed('/orderDetail/${model.orderInfo?.loanOrderNo}')
-              .then((_) {
-            loadData();
-          });
+              .pushNamed('/orderDetail/${model.orderInfo?.loanOrderNo}');
         }
       }
     } else if (!Global.instance.isLogin) {
-      Navigator.of(context).pushNamed('/login').then((value) {
-        loadData();
-      });
+      Navigator.of(context).pushNamed('/login');
     } else {
       ADJustTrackTool.trackWith('3r5683');
-      Navigator.pushNamed(context, 'authFirst').then((value) {
-        loadData();
-      });
+      Navigator.pushNamed(context, 'authFirst');
     }
   }
 

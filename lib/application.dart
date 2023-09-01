@@ -7,6 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:rupee_elf/router_manager/index.dart';
 import 'package:rupee_elf/util/constants.dart';
 import 'package:rupee_elf/util/navigator_key.dart';
+import 'package:rupee_elf/util/route_observer.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
@@ -26,6 +27,7 @@ class Application extends StatelessWidget {
       ),
       builder: EasyLoading.init(),
       navigatorKey: NavigatorKey.navKey,
+      navigatorObservers: [AppRouteObserver().routeObserver],
     );
   }
 
