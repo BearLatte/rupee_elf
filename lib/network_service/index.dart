@@ -43,6 +43,9 @@ class NetworkService {
     if (model.rkmectsultCode == 1) {
       success();
     }
+    if (model.rkmectsultCode == 0) {
+      CommonToast.showToast(model.rkmectsultMsg);
+    }
   }
 
   // login

@@ -24,7 +24,7 @@ import CoreLocation
                 let totalStorage = "\(UIDevice.current.totalDiskSpaceInBytes)"
                 let freeStorage = "\(UIDevice.current.freeDiskSpaceInBytes)"
                 let percentOfUsedStorage = Double(UIDevice.current.totalDiskSpaceInBytes - UIDevice.current.freeDiskSpaceInBytes) / Double(UIDevice.current.totalDiskSpaceInBytes) * 100
-                result(["internalTotalStorage": totalStorage, "internalUsableStorage":freeStorage, "percentValue" : "\(percentOfUsedStorage)%", "model":UIDevice.current.modelName, "brightness": String(format: "%.0f", UIScreen.main.brightness * 100.0)]);
+                result(["internalTotalStorage": totalStorage, "internalUsableStorage":freeStorage, "percentValue" : "\(Int(percentOfUsedStorage))%", "model":UIDevice.current.modelName, "brightness": String(format: "%.0f", UIScreen.main.brightness * 100.0)]);
             }
             
             if call.method == "reverseGeocodeLocation" {

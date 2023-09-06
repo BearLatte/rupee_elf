@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
   late TapGestureRecognizer _tapCondition;
   late TapGestureRecognizer _tapPolicy;
+  final ScrollController _scrollController = ScrollController();
 
   bool _isShowBoder = false;
 
@@ -79,9 +82,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
     return HiddenKeyboardWrapper(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             // 背景
@@ -107,6 +110,29 @@ class _LoginPageState extends State<LoginPage> {
             ),
             // 内容
             Positioned(
+              // title
+              top: 60,
+              height: 44,
+              width: screenWidth,
+              child: const Center(
+                child: Text(
+                  'My authentication',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
+            ),
+            ListView(
+              controller: _scrollController,
+              padding: const EdgeInsets.only(top: 120, left: 20, right: 20),
+              children: [
+                const CommonImage(src: 'static/images/login_in_img.png'),
+                _loginPageContentWidget(),
+                const Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                _policyWidget(),
+                Padding(padding: MediaQuery.of(context).viewInsets),
+              ],
+            ),
+            Positioned(
               // 返回箭头按钮
               top: 60.0,
               left: 12.0,
@@ -120,35 +146,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Positioned(
-              // title
-              top: 60,
-              height: 44,
-              width: screenWidth,
-              child: const Center(
-                child: Text(
-                  'My authentication',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-              ),
-            ),
-
-            // 内容滚动视图
-            Positioned(
-              top: 110.0,
-              left: 0,
-              width: screenWidth,
-              height: screenHeight - 110,
-              child: ListView(
-                padding: const EdgeInsets.only(top: 120, left: 20, right: 20),
-                children: [
-                  const CommonImage(src: 'static/images/login_in_img.png'),
-                  _loginPageContentWidget(),
-                  const Padding(padding: EdgeInsets.only(bottom: 10.0)),
-                  _policyWidget()
-                ],
-              ),
-            )
           ],
         ),
       ),
@@ -252,6 +249,13 @@ class _LoginPageState extends State<LoginPage> {
                   const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
               child: PinCodeTextField(
                 onTap: () {
+                  Timer(const Duration(milliseconds: 250), () {
+                    _scrollController.animateTo(
+                      _scrollController.position.maxScrollExtent,
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.linear,
+                    );
+                  });
                   ADJustTrackTool.trackWith('ovbicn');
                 },
                 length: 6,

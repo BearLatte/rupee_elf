@@ -420,7 +420,6 @@ class _OrderDetailPageState extends State<OrderDetailPage>
           if (type == OrderDetailPageType.overdue)
             _itemRowWith('Overdue Days :', '${_orderInfo!.overdueDays ?? 0}'),
           _itemRowWith('Received Amount : ', '₹ ${_orderInfo!.loanPayAmount}'),
-          _itemRowWith('Received Amount : ', '₹ ${_orderInfo!.loanPayAmount}'),
           _itemRowWith(
               'Date of loan received : ', _orderInfo!.loanPayDate ?? ''),
           _itemRowWith(

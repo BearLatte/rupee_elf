@@ -67,13 +67,14 @@ class _OrderItemListPageState extends State<OrderItemListPage> {
                 onTap: () {
                   ADJustTrackTool.trackWith('9zq922');
                   Navigator.of(context)
-                      .pushNamed('/orderDetail/${order.loanOrderNo}');
+                      .pushNamed('/orderDetail/${order.loanOrderNo}')
+                      .then((value) => _getOrders());
                 },
                 iconOnPressed: () {
                   Navigator.of(context).pushNamed('/addFeedback', arguments: {
                     'feedbackTypes': _feedbackTypes,
                     'orderInfo': order
-                  });
+                  }).then((value) => _getOrders());
                 },
               ),
             )

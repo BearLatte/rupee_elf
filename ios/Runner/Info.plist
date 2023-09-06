@@ -55,12 +55,12 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>You did not allow us to access the Photo Library, which will help you obtain a loan. Would you like to set up authorization.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>You did not allow us to access the Microphone, which will help you obtain a loan. Would you like to set up authorization.</string>
-    <key>FacebookAppID</key>
-    <string></string>
-    <key>FacebookClientToken</key>
-    <string></string>
-    <key>FacebookDisplayName</key>
-    <string>Rupee Elf</string>
+	<string>Face recognition authentication function requires microphone permission, which will help you obtain a loan. Would you like to set up authorization.</string>
+	<key>FacebookAppID</key>
+	<string>827908375543146</string>
+	<key>FacebookClientToken</key>
+	<string>f12e9ba272c17435b486b2eaab680fc1</string>
+	<key>FacebookDisplayName</key>
+	<string>Rupee Elf</string>
 </dict>
 </plist>

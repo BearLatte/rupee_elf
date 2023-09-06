@@ -68,7 +68,9 @@ class _ExtensionRepayPageState extends State<ExtensionRepayPage>
     if (model != null) {
       if (await canLaunchUrlString(model.repayPath)) {
         await launchUrlString(model.repayPath,
-            mode: LaunchMode.externalApplication);
+            mode: model.webviewType == 1
+                ? LaunchMode.inAppWebView
+                : LaunchMode.externalApplication);
       } else {
         await CommonToast.showToast('Can not open the repay address!');
       }

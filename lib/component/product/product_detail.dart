@@ -333,13 +333,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       var ratio = MediaQuery.of(context).devicePixelRatio;
       MediaQueryData? data = MediaQuery.maybeOf(context).nonEmptySizeOrNull();
 
-      userDevice['screenWidth'] = screenSize.width;
-      userDevice['screenHeight'] = screenSize.height;
+      userDevice['screenWidth'] = screenSize.width.toInt();
+      userDevice['screenHeight'] = screenSize.height.toInt();
       userDevice['resolution'] =
-          '${screenSize.width * ratio} * ${screenSize.height * ratio}';
+          '${(screenSize.width * ratio).toInt()} * ${(screenSize.height * ratio).toInt()}';
       double deviceWidth = data?.size.width ?? 0;
       double deviceHeight = data?.size.height ?? 0;
-      userDevice['physicalSize'] = '$deviceWidth*$deviceHeight';
+      userDevice['physicalSize'] =
+          '${deviceWidth.toInt()}*${deviceHeight.toInt()}';
     }
 
     userDevice['isPhone'] = Global.instance.allDeviceInfo.model == 'iPhone';

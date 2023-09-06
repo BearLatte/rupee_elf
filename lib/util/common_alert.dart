@@ -203,79 +203,77 @@ Future<bool> _showTipsAlert(BuildContext context, String? message) async {
 Future<bool> _showDisbursingFailAlert(
     BuildContext context, UserInfoModel model) async {
   var response = await showCupertinoDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          child: Container(
-            padding: const EdgeInsets.only(
-              top: 20.0,
-              left: 10.0,
-              bottom: 20.0,
-              right: 10.0,
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    ClipOval(
-                      child: CommonImage(
-                        src: model.payFailLogo ?? '',
-                        width: 40.0,
-                        height: 40.0,
-                      ),
-                    ),
-                    const Padding(padding: EdgeInsets.only(right: 14.0)),
-                    Text(
-                      model.payFailLoanName!,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Constants.themeTextColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Order Number :',
-                      style: TextStyle(
-                        color: Constants.seconaryTextColor,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                    Text(
-                      model.payFailLoanNo!,
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Constants.themeTextColor,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  'Tips\n${model.payFailContent}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Constants.themeTextColor,
-                  ),
-                ),
-                ThemeButton(
-                  width: 140.0,
-                  height: 52.0,
-                  title: 'Ok',
-                  onPressed: () {
-                    Navigator.of(context).pop('ok');
-                  },
-                )
-              ],
-            ),
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
           ),
-        );
-      });
+        ),
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipOval(
+                    child: CommonImage(
+                      src: model.payFailLogo ?? '',
+                      width: 40.0,
+                      height: 40.0,
+                    ),
+                  ),
+                  const Padding(padding: EdgeInsets.only(right: 14.0)),
+                  Text(
+                    model.payFailLoanName!,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Constants.themeTextColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              const Padding(padding: EdgeInsets.only(bottom: 10.0)),
+              Row(
+                children: [
+                  Text(
+                    'Order Number :',
+                    style: TextStyle(
+                        color: Constants.seconaryTextColor, fontSize: 16.0),
+                  ),
+                  Text(
+                    model.payFailLoanNo!,
+                    style: TextStyle(
+                        fontSize: 16.0, color: Constants.themeTextColor),
+                  ),
+                ],
+              ),
+              const Padding(padding: EdgeInsets.only(bottom: 20.0)),
+              Text(
+                'Tips\n${model.payFailContent}',
+                textAlign: TextAlign.center,
+                style:
+                    TextStyle(fontSize: 16.0, color: Constants.themeTextColor),
+              ),
+              const Padding(padding: EdgeInsets.only(bottom: 16.0)),
+              ThemeButton(
+                width: 140.0,
+                height: 52.0,
+                title: 'Ok',
+                onPressed: () {
+                  Navigator.of(context).pop('ok');
+                },
+              )
+            ],
+          ),
+        ),
+      );
+    },
+  );
 
   return response == 'ok';
 }
